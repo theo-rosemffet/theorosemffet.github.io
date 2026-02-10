@@ -15,7 +15,7 @@
             overflow: hidden; /* No scrolling */
         }
 
-        /* VIDEO BACKGROUND (Consistent across pages) */
+        /* VIDEO BACKGROUND */
         #video-bg {
             position: fixed;
             top: 0; left: 0;
@@ -59,16 +59,19 @@
             display: inline-block;
         }
 
-        /* STROBE EFFECT ON HOVER */
+        /* UPDATED STROBE EFFECT (Matches Bio) */
         nav a:hover {
             animation: strobe 0.1s steps(2) infinite;
             padding-left: 10px;
+            background: none; /* Keeps video background visible */
         }
 
         @keyframes strobe {
-            0% { color: #fff; background: #000; }
-            50% { color: #000; background: #fff; }
-            100% { color: #fff; background: #000; }
+            0% { color: #fff; }
+            49% { color: #fff; }
+            50% { color: #000; } /* Text "disappears" against the dark overlay */
+            99% { color: #000; }
+            100% { color: #fff; }
         }
 
         /* CONTENT AREA */
@@ -82,23 +85,10 @@
             padding: 40px;
         }
 
-        section h2 {
-            font-size: clamp(3rem, 10vw, 5rem);
-            margin-bottom: 20px;
-            text-transform: uppercase;
-        }
-
-        section p {
-            font-size: 1.5rem;
-            font-weight: 400;
-            line-height: 1.4;
-            color: #ddd;
-            max-width: 600px;
-        }
-
         @media (max-width: 768px) {
             .sidebar { position: relative; width: 100%; height: auto; }
             .content { margin-left: 0; height: auto; }
+            body { overflow: auto; } /* Allow scroll on mobile if header is tall */
         }
     </style>
 </head>
