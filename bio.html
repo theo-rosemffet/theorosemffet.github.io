@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bio | Theo Rosemffet</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { 
+            background: #000; /* Solid Black Background */
+            color: #fff; 
+            font-family: 'Helvetica', 'Arial', sans-serif; 
+            font-weight: 900; 
+            overflow: hidden; 
+        }
+
+        /* SIDEBAR (Matches Landing Page) */
+        .sidebar {
+            position: fixed; 
+            top: 0; left: 0;
+            z-index: 10;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 40px;
+            width: 400px;
+        }
+
+        header { margin-bottom: 60px; }
+        h1 { font-size: 2.5rem; text-transform: uppercase; line-height: 1; letter-spacing: -1px; }
+        header a { text-decoration: none; color: inherit; }
+        .tagline { font-size: 1.2rem; text-transform: none; font-weight: 400; color: #eee; margin-top: 5px; }
+
+        nav ul { list-style: none; }
+        nav li { margin-bottom: 20px; }
+        nav a { 
+            color: #fff; 
+            text-decoration: none; 
+            font-size: 2.5rem; 
+            text-transform: uppercase; 
+            display: inline-block;
+        }
+
+        /* STROBE EFFECT */
+        nav a:hover {
+            animation: strobe 0.1s steps(2) infinite;
+            padding-left: 10px;
+        }
+
+        @keyframes strobe {
+            0% { color: #fff; background: #000; }
+            50% { color: #000; background: #fff; }
+            100% { color: #fff; background: #000; }
+        }
+
+        /* BIO CONTENT AREA */
+        .content {
+            margin-left: 400px; /* Offset for sidebar */
+            height: 100vh;
+            display: flex;
+            align-items: center; /* Vertical center */
+            justify-content: flex-start; /* Keeps text to the left of the remaining space */
+            padding: 40px;
+        }
+
+        .bio-text {
+            max-width: 800px;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .bio-text h2 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .bio-text p {
+            font-size: 1.8rem;
+            font-weight: 400;
+            line-height: 1.3;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateX(20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        /* Responsive for mobile */
+        @media (max-width: 768px) {
+            .sidebar { position: relative; width: 100%; height: auto; padding: 20px; }
+            .content { margin-left: 0; height: auto; padding: 20px; }
+            .bio-text p { font-size: 1.4rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="sidebar">
+        <header>
+            <a href="index.html">
+                <h1>Theo Rosemffet</h1>
+            </a>
+            <p class="tagline">Visual & Technical Artist</p>
+        </header>
+
+        <nav>
+            <ul>
+                <li><a href="bio.html">BIO</a></li>
+                <li><a href="works.html">WORKS</a></li>
+                <li><a href="contact.html">CONTACT</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <main class="content">
+        <section class="bio-text">
+            <h2>Hi, I’m Theo!</h2>
+            <p>I specialize in creative coding and the development of audio-reactive, real-time generative media for high-end live shows and installations.</p>
+            <p>My background spans the full technical and creative spectrum: from creating and operating video content at large-scale festivals to directing tour visuals, as well as doing LED setup and programming complex environments.</p>
+        </section>
+    </main>
+    
+</body>
+</html>
