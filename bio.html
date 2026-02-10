@@ -38,15 +38,26 @@
         nav li { margin-bottom: 20px; }
         nav a { color: #fff; text-decoration: none; font-size: 2.5rem; text-transform: uppercase; display: inline-block; }
         
+        /* NAVIGATION HOVER */
         nav a:hover {
             animation: strobe 0.1s steps(2) infinite;
             padding-left: 10px;
+            background: none; 
         }
 
+        /* SKILL TITLE HOVER */
+        .skill-item:hover .skill-title {
+            animation: strobe 0.1s steps(2) infinite;
+            background: none; 
+        }
+
+        /* THE INTERNAL STROBE KEYFRAMES */
         @keyframes strobe {
-            0% { color: #fff; background: #000; }
-            50% { color: #000; background: #fff; }
-            100% { color: #fff; background: #000; }
+            0% { color: #fff; }
+            49% { color: #fff; }
+            50% { color: #000; } /* Text disappears into black background */
+            99% { color: #000; }
+            100% { color: #fff; }
         }
 
         /* 3. CONTENT WRAPPER */
@@ -83,7 +94,7 @@
         .bio-text h2 { font-size: 3rem; margin-bottom: 20px; text-transform: uppercase; }
         .bio-text p { font-size: 1.6rem; font-weight: 400; line-height: 1.4; color: #ccc; margin-bottom: 20px; }
 
-        /* THE ARROW - Adjusted for better centering within the content area */
+        /* THE ARROW */
         .scroll-link {
             position: absolute;
             bottom: 40px;
@@ -107,7 +118,7 @@
         #skills {
             flex-direction: column;
             border-top: 1px solid #333;
-            justify-content: flex-start; /* Ensure it starts from top */
+            justify-content: flex-start;
         }
 
         .skills-header {
@@ -145,12 +156,8 @@
             line-height: 1.6;
         }
 
-        .skill-item:hover .skill-title {
-            animation: strobe 0.1s steps(2) infinite;
-        }
-
         .skill-item:hover .skill-detail {
-            max-height: 800px; /* Increased to ensure no text is clipped */
+            max-height: 800px; /* Accommodates "Others" section height */
             margin-top: 20px;
         }
 
