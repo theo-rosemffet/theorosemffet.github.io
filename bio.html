@@ -42,7 +42,7 @@
             display: inline-block;
         }
 
-        /* STROBE EFFECT ON HOVER */
+        /* STROBE EFFECT */
         nav a:hover {
             animation: strobe 0.1s steps(2) infinite;
             padding-left: 10px;
@@ -54,7 +54,7 @@
             100% { color: #fff; background: #000; }
         }
 
-        /* FLEX CONTAINER FOR VIDEO + TEXT */
+        /* CONTENT */
         .content {
             margin-left: 400px; 
             height: 100vh;
@@ -62,15 +62,15 @@
             align-items: center; 
             justify-content: flex-start;
             padding: 60px;
-            gap: 60px; /* Generous gap between video and text */
+            gap: 60px; 
         }
 
-        /* 4:5 VIDEO CONTAINER (1080 x 1350) */
+        /* 4:5 VIDEO CONTAINER */
         .bio-video-wrapper {
             aspect-ratio: 4 / 5;
-            height: 70vh; /* Set height to 70% of viewport, text will match */
+            height: 70vh; 
             background: #111;
-            flex-shrink: 0; /* Prevents the video from squishing */
+            flex-shrink: 0; 
         }
 
         .bio-video-wrapper video {
@@ -103,13 +103,12 @@
             margin-bottom: 20px;
         }
 
-        /* Mobile Breakpoint */
         @media (max-width: 1100px) {
             .content { 
                 flex-direction: column; 
                 margin-left: 0; 
                 height: auto; 
-                padding-top: 180px; /* Offset for sidebar title */
+                padding-top: 180px; 
                 align-items: center;
                 overflow-y: auto;
             }
@@ -140,7 +139,8 @@
     <main class="content">
         <div class="bio-video-wrapper">
             <video autoplay muted loop playsinline>
-                <source src="https://res.cloudinary.com/dgsufjhl9/video/upload/v1770739977/Self_Portrait_privjb.mov" type="video/mp4">
+                <source src="https://res.cloudinary.com/dgsufjhl9/video/upload/f_auto,q_auto/v1770739977/Self_Portrait_privjb.mp4" type="video/mp4">
+                Your browser does not support the video tag.
             </video>
         </div>
 
