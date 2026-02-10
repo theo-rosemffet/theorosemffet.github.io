@@ -32,104 +32,49 @@
             z-index: 0;
         }
 
-        /* Main Container */
-        .main-layout {
-            position: relative;
-            z-index: 10;
-            display: flex;
-            height: 100vh;
-            padding: 40px;
-        }
-
         /* Sidebar Navigation */
         .sidebar {
+            position: relative;
+            z-index: 10;
+            height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
-            min-width: 300px;
+            padding: 40px;
         }
 
-        header { margin-bottom: 40px; }
+        header { margin-bottom: 60px; }
 
-        h1 { 
-            font-size: 1.8rem; 
+        /* Unified Typography: H1 and Nav Links now identical */
+        h1, nav a { 
+            font-size: 2.5rem; 
             text-transform: uppercase; 
             line-height: 1; 
-            letter-spacing: -0.5px; 
+            letter-spacing: -1px; 
             font-weight: 900; 
         }
 
         .tagline { 
-            font-size: 0.9rem; 
+            font-size: 1.2rem; 
             text-transform: none; 
             font-weight: 400; 
-            color: #bbb; 
+            color: #eee; 
             margin-top: 5px; 
         }
 
         nav ul { list-style: none; }
-        nav li { margin-bottom: 15px; }
+        nav li { margin-bottom: 20px; }
         
         nav a { 
             color: #fff; 
             text-decoration: none; 
-            font-size: 1.8rem; /* Matches Header Size */
-            font-weight: 900; /* Matches Header Weight */
-            text-transform: uppercase; 
-            transition: 0.2s ease;
-            letter-spacing: -0.5px;
+            transition: 0.3s;
             display: inline-block;
         }
 
         nav a:hover { 
             color: #00ffcc; 
-            transform: translateX(8px);
-        }
-
-        /* Content Pop-out (Glassmorphism) */
-        .content-container {
-            margin-left: 60px;
-            margin-top: 5px;
-            flex-grow: 1;
-        }
-
-        .content-section {
-            display: none; 
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 30px;
-            border-radius: 2px;
-            max-width: 500px;
-            animation: fadeIn 0.4s ease forwards;
-        }
-
-        .content-section.active { display: block; }
-
-        h3 { 
-            text-transform: uppercase; 
-            font-size: 0.8rem; 
-            letter-spacing: 2px; 
-            margin-bottom: 20px; 
-            color: #00ffcc; 
-        }
-
-        p { 
-            font-weight: 400; 
-            line-height: 1.6; 
-            font-size: 1rem; 
-            color: #eee; 
-        }
-
-        .project-list { list-style: none; margin-top: 10px; }
-        .project-list li { margin-bottom: 12px; font-weight: 400; }
-        .project-list a { color: #fff; text-decoration: none; border-bottom: 1px solid #555; transition: 0.3s; }
-        .project-list a:hover { color: #00ffcc; border-color: #00ffcc; }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateX(-10px); }
-            to { opacity: 1; transform: translateX(0); }
+            padding-left: 10px; 
         }
 
     </style>
@@ -141,64 +86,20 @@
     </video>
     <div class="overlay"></div>
 
-    <div class="main-layout">
-        <div class="sidebar">
-            <header>
-                <h1>Theo Rosemffet</h1>
-                <p class="tagline">Visual & Technical Artist</p>
-            </header>
+    <div class="sidebar">
+        <header>
+            <h1>Theo Rosemffet</h1>
+            <p class="tagline">Visual & Technical Artist</p>
+        </header>
 
-            <nav>
-                <ul>
-                    <li><a href="#" onclick="showSection('bio')">BIO</a></li>
-                    <li><a href="#" onclick="showSection('works')">WORKS</a></li>
-                    <li><a href="#" onclick="showSection('contact')">CONTACT</a></li>
-                </ul>
-            </nav>
-        </div>
-
-        <div class="content-container">
-            <div id="bio" class="content-section">
-                <h3>Background</h3>
-                <p>Multidisciplinary Creative Technologist & Video Specialist. I bridge the gap between engineering and performance, developing custom GPU-accelerated tools and high-impact visuals for live environments.</p>
-            </div>
-
-            <div id="works" class="content-section">
-                <h3>Selected Projects</h3>
-                <ul class="project-list">
-                    <li><a href="#">→ Sala Marte Permanent Installation</a></li>
-                    <li><a href="#">→ Cyril Kamer Tour Visuals</a></li>
-                    <li><a href="#">→ Custom VJ Deck (TouchDesigner)</a></li>
-                    <li><a href="#">→ 4-Channel Position Generators</a></li>
-                </ul>
-            </div>
-
-            <div id="contact" class="content-section">
-                <h3>Connect</h3>
-                <p>Available for worldwide projects.</p>
-                <ul class="project-list" style="margin-top:15px;">
-                    <li>Email: theorosemffet@gmail.com</li>
-                    <li>IG: @theorosemffet</li>
-                </ul>
-            </div>
-        </div>
+        <nav>
+            <ul>
+                <li><a href="#bio">BIO</a></li>
+                <li><a href="#works">WORKS</a></li>
+                <li><a href="#contact">CONTACT</a></li>
+            </ul>
+        </nav>
     </div>
-
-    <script>
-        function showSection(sectionId) {
-            // Hide all sections
-            const sections = document.querySelectorAll('.content-section');
-            sections.forEach(section => {
-                section.classList.remove('active');
-            });
-
-            // Show the specific section
-            const activeSection = document.getElementById(sectionId);
-            if (activeSection) {
-                activeSection.classList.add('active');
-            }
-        }
-    </script>
 
 </body>
 </html>
