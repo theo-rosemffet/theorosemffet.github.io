@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Theo Rosemffet | Creative Technologist</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: #000; color: #fff; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+
+        /* Fullscreen Video Background */
+        #video-bg {
+            position: fixed;
+            top: 50%; left: 50%;
+            min-width: 100%; min-height: 100%;
+            width: auto; height: auto;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+            filter: brightness(0.5); /* Makes text easier to read */
+        }
+
+        /* Content Overlay */
+        .container { max-width: 900px; margin: 100px auto; padding: 20px; position: relative; }
+
+        header { margin-bottom: 80px; }
+        h1 { font-size: 4rem; text-transform: uppercase; letter-spacing: -2px; }
+        p.subtitle { font-size: 1.2rem; color: #aaa; }
+
+        .skills-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+            gap: 40px; 
+            margin-top: 50px;
+        }
+
+        .skill-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: 0.3s;
+        }
+
+        .skill-card:hover { border-color: #00ffcc; transform: translateY(-5px); }
+        h3 { color: #00ffcc; margin-bottom: 10px; text-transform: uppercase; font-size: 0.9rem; }
+        .skill-text { font-size: 1rem; line-height: 1.5; color: #ddd; }
+
+        @media (max-width: 600px) { h1 { font-size: 2.5rem; } }
+    </style>
+</head>
+<body>
+
+    <video autoplay muted loop playsinline id="video-bg">
+        <source src="hero-bg.mp4" type="video/mp4">
+    </video>
+
+    <div class="container">
+        <header>
+            <h1>Theo Rosemffet</h1>
+            <p class="subtitle">Creative Technologist & Video Specialist</p>
+        </header>
+
+        <section class="skills-grid">
+            <div class="skill-card">
+                <h3>TouchDesigner Specialist</h3>
+                <p class="skill-text">+5 years building custom tools via Python and GLSL for GPU-accelerated workflows.</p>
+            </div>
+            
+            <div class="skill-card">
+                <h3>Technical Artist</h3>
+                <p class="skill-text">Developer of custom UIs, data pipelines, and performance tools (VJ decks, 4-channel generators).</p>
+            </div>
+
+            <div class="skill-card">
+                <h3>Video Operator / VJ</h3>
+                <p class="skill-text">8 years of live performance at major venues (Apolo, Razzmatazz) and festivals (OffWeek, Zevra).</p>
+            </div>
+            </section>
+    </div>
+
+</body>
+</html>
