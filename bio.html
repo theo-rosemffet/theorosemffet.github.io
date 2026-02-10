@@ -15,6 +15,7 @@
             font-weight: 900;
             min-height: 100%;
             scroll-behavior: smooth;
+            overflow-x: hidden; /* Prevent horizontal jitter */
         }
 
         /* 2. SIDEBAR - FIXED ON LEFT */
@@ -52,6 +53,7 @@
         .content-wrapper { 
             margin-left: 400px; 
             width: calc(100% - 400px);
+            position: relative;
         }
 
         section {
@@ -59,6 +61,7 @@
             padding: 80px;
             display: flex;
             position: relative;
+            width: 100%;
         }
 
         /* BIO SECTION */
@@ -80,7 +83,7 @@
         .bio-text h2 { font-size: 3rem; margin-bottom: 20px; text-transform: uppercase; }
         .bio-text p { font-size: 1.6rem; font-weight: 400; line-height: 1.4; color: #ccc; margin-bottom: 20px; }
 
-        /* THE ARROW */
+        /* THE ARROW - Adjusted for better centering within the content area */
         .scroll-link {
             position: absolute;
             bottom: 40px;
@@ -90,17 +93,21 @@
             text-decoration: none;
             color: #fff;
             animation: bounce 2s infinite;
+            display: flex;
+            justify-content: center;
         }
 
         @keyframes bounce {
             0%, 20%, 50%, 80%, 100% { transform: translate(-50%, 0); }
-            40% { transform: translate(-50%, -10px); }
+            40% { transform: translate(-50%, -12px); }
+            60% { transform: translate(-50%, -6px); }
         }
 
         /* SKILLS SECTION */
         #skills {
             flex-direction: column;
             border-top: 1px solid #333;
+            justify-content: flex-start; /* Ensure it starts from top */
         }
 
         .skills-header {
@@ -143,7 +150,7 @@
         }
 
         .skill-item:hover .skill-detail {
-            max-height: 600px; /* Increased to accommodate longer text */
+            max-height: 800px; /* Increased to ensure no text is clipped */
             margin-top: 20px;
         }
 
@@ -153,7 +160,8 @@
             .content-wrapper { margin-left: 0; width: 100%; }
             #bio { flex-direction: column; height: auto; padding: 40px; }
             .scroll-link { display: none; }
-            .skill-detail { max-height: none; margin-top: 15px; }
+            .skill-detail { max-height: none; margin-top: 15px; padding-bottom: 20px; }
+            .skill-item { border-bottom: 1px solid #333; }
         }
     </style>
 </head>
