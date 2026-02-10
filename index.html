@@ -38,19 +38,25 @@
         }
 
         header { margin-bottom: 60px; }
-        h1 { font-size: 2.5rem; text-transform: uppercase; line-height: 1; letter-spacing: -1px; }
-        .tagline { font-size: 1.2rem; text-transform: none; font-weight: 400; color: #eee; margin-top: 5px; }
-
-        nav ul { list-style: none; }
-        nav li { margin-bottom: 20px; }
-        nav a { 
-            color: #fff; 
-            text-decoration: none; 
-            font-size: 2.5rem;
-            font-weight: 400;
+        /* Update h1 to ensure it stays bold and sharp */
+        h1 { 
+            font-size: 2.5rem; 
             text-transform: uppercase; 
+            line-height: 1; 
+            letter-spacing: -1px;
+            font-weight: 900; /* Explicitly set */
+            }
+
+        /* Adjust nav a to match the weight of the name */
+        nav a {  
+            color: #fff;  
+            text-decoration: none;  
+            font-size: 2.5rem;  
+            text-transform: uppercase;  
             transition: 0.3s;
-        }
+            font-weight: 800; /* Dropping slightly to 800 often makes it visually match a header's 900 */
+            display: inline-block; /* Helps with consistent rendering */
+            }
         nav a:hover { color: #00ffcc; padding-left: 10px; }
 
     </style>
