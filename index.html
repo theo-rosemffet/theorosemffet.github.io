@@ -5,117 +5,138 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Theo Rosemffet | Creative Technologist</title>
     <style>
-    /* 1. RESET Y BASE */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    
-    body { 
-        background: #000; 
-        color: #fff; 
-        font-family: 'Helvetica', 'Arial', sans-serif; 
-        font-weight: 900; 
-        /* Cambiamos 'hidden' por 'auto' para poder bajar a ver el contenido */
-        overflow-y: auto; 
-        overflow-x: hidden; 
-    }
+        /* 1. RESET Y BASE */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        html {
+            scroll-behavior: smooth; /* Hace que el movimiento sea fluido */
+        }
 
-    /* 2. VIDEO Y FONDO */
-    #video-bg {
-        position: fixed;
-        top: 0; left: 0;
-        width: 100%; height: 100%;
-        object-fit: cover;
-        z-index: -1;
-    }
+        body { 
+            background: #000; 
+            color: #fff; 
+            font-family: 'Helvetica', 'Arial', sans-serif; 
+            font-weight: 900; 
+            overflow-y: auto; 
+            overflow-x: hidden; 
+        }
 
-    .overlay {
-        position: fixed;
-        top: 0; left: 0;
-        width: 100%; height: 100%;
-        background: rgba(0, 0, 0, 0.4); /* Un poco más oscuro para leer mejor */
-        z-index: 0;
-        /* Efecto opcional: desenfoca un poco el video detrás del texto */
-        backdrop-filter: blur(2px); 
-    }
+        /* 2. VIDEO Y FONDO */
+        #video-bg {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
 
-    /* 3. SIDEBAR (FIJA A LA IZQUIERDA) */
-    .sidebar {
-        position: fixed; /* La dejamos fija para que no se mueva al hacer scroll */
-        top: 0; left: 0;
-        z-index: 10;
-        height: 100vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        padding: 40px;
-        width: 400px;
-    }
+        .overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.4); 
+            z-index: 0;
+            backdrop-filter: blur(2px); 
+        }
 
-    header { margin-bottom: 60px; }
-    h1 { font-size: 2.5rem; text-transform: uppercase; line-height: 1; letter-spacing: -1px; }
-    .tagline { font-size: 1.2rem; text-transform: none; font-weight: 400; color: #eee; margin-top: 5px; }
+        /* 3. SIDEBAR (FIJA) */
+        .sidebar {
+            position: fixed; 
+            top: 0; left: 0;
+            z-index: 10;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            padding: 40px;
+            width: 400px;
+            pointer-events: none; /* Permite que el click pase a través si es necesario */
+        }
 
-    nav ul { list-style: none; }
-    nav li { margin-bottom: 20px; }
-    nav a { 
-        color: #fff; 
-        text-decoration: none; 
-        font-size: 2.5rem; 
-        text-transform: uppercase; 
-        transition: 0.3s;
-    }
-    nav a:hover { color: #00ffcc; padding-left: 10px; }
+        .sidebar header, .sidebar nav {
+            pointer-events: auto; /* Reactiva los clicks para los links */
+        }
 
-    /* 4. CONTENIDO Y SECCIONES (A LA DERECHA) */
-    .content {
-        position: relative;
-        z-index: 5;
-        margin-left: 450px; /* Desplazamos el texto para que no choque con la sidebar */
-        padding: 40px;
-    }
+        header { margin-bottom: 60px; }
+        h1 { font-size: 2.5rem; text-transform: uppercase; line-height: 1; letter-spacing: -1px; }
+        .tagline { font-size: 1.2rem; text-transform: none; font-weight: 400; color: #eee; margin-top: 5px; }
 
-    section {
-        min-height: 100vh; /* Cada sección ocupa toda la pantalla */
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        max-width: 800px;
-    }
+        nav ul { list-style: none; }
+        nav li { margin-bottom: 20px; }
+        nav a { 
+            color: #fff; 
+            text-decoration: none; 
+            font-size: 2.5rem; 
+            text-transform: uppercase; 
+            transition: 0.3s;
+        }
+        nav a:hover { color: #00ffcc; padding-left: 10px; }
 
-    section h2 {
-        font-size: 5rem;
-        margin-bottom: 20px;
-        color: #00ffcc;
-        text-transform: uppercase;
-    }
+        /* 4. CONTENIDO Y SECCIONES */
+        .content {
+            position: relative;
+            z-index: 5;
+            margin-left: 400px; /* Alineado con el ancho de la sidebar */
+        }
 
-    section p {
-        font-size: 1.5rem;
-        font-weight: 400;
-        line-height: 1.4;
-        color: #ddd;
-    }
+        /* Esta sección crea el espacio de landing */
+        #hero {
+            height: 100vh;
+            background: transparent;
+        }
 
-    /* 5. ANIMACIÓN FADE-IN */
-    .fade-in {
-        opacity: 0;
-        transform: translateY(50px);
-        transition: opacity 1s ease-out, transform 1s ease-out;
-    }
+        section {
+            min-height: 100vh; 
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 40px;
+            max-width: 900px;
+        }
 
-    .fade-in.visible {
-        opacity: 1;
-        transform: translateY(0);
-    }
-</style>
+        section h2 {
+            font-size: clamp(3rem, 10vw, 5rem); /* Tamaño fluido */
+            margin-bottom: 20px;
+            color: #00ffcc;
+            text-transform: uppercase;
+        }
+
+        section p {
+            font-size: 1.5rem;
+            font-weight: 400;
+            line-height: 1.4;
+            color: #ddd;
+        }
+
+        /* 5. ANIMACIÓN FADE-IN */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Ajuste para móviles básicos */
+        @media (max-width: 768px) {
+            .sidebar { position: relative; width: 100%; height: auto; }
+            .content { margin-left: 0; }
+            #hero { height: 50vh; }
+        }
+    </style>
 </head>
 <body>
 
     <video autoplay muted loop playsinline id="video-bg">
         <source src="https://res.cloudinary.com/dgsufjhl9/video/upload/q_auto,f_auto/v1770731106/Post_Razzmataz_PERGO_ANL_cut_piq2z4.mp4" type="video/mp4">
     </video>
+    
     <div class="overlay"></div>
 
-<div class="sidebar">
+    <div class="sidebar">
         <header>
             <h1>Theo Rosemffet</h1>
             <p class="tagline">Visual & Technical Artist</p>
@@ -132,47 +153,45 @@
 
     <main class="content">
         
-        <section id="hero">
-        </section>
+        <section id="hero"></section>
 
         <section id="bio" class="fade-in">
             <h2>BIO</h2>
-            <p>I specialize in **creative coding** and the development of **audio-reactive, real-time generative media** for high-end live shows and installations.
-                My background spans the full technical and creative spectrum: from creating and operating video content at large-scale festivals to directing tour visuals, as well as doing LED setup and programming complex environments.</p>
+            <p>I specialize in <strong>creative coding</strong> and the development of <strong>audio-reactive, real-time generative media</strong> for high-end live shows and installations. My background spans the full technical and creative spectrum: from creating and operating video content at large-scale festivals to directing tour visuals, as well as doing LED setup and programming complex environments.</p>
         </section>
 
         <section id="works" class="fade-in">
             <h2>WORKS</h2>
             <div class="project-grid">
-                <p>Proyecto 1: Instalación Inmersiva</p>
-                <p>Proyecto 2: Shader Art en GLSL</p>
+                <p><strong>> Razzmatazz Pergo</strong> - Visual Content & Operation</p>
+                <p><strong>> Generative Visuals</strong> - TouchDesigner & GLSL</p>
             </div>
         </section>
 
         <section id="contact" class="fade-in">
             <h2>CONTACT</h2>
-            <p>¿Tienes un proyecto en mente? Escríbeme a: tu-email@ejemplo.com</p>
+            <p>Ready to build something immersive? <br>
+               Reach out at: <a href="mailto:tu-email@ejemplo.com" style="color: #00ffcc;">tu-email@ejemplo.com</a></p>
         </section>
     </main>
 
-<script>
-    const observerOptions = {
-        threshold: 0.2 // El efecto dispara cuando el 20% de la sección es visible
-    };
+    <script>
+        const observerOptions = {
+            threshold: 0.1
+        };
 
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-            }
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(section => {
+            observer.observe(section);
         });
-    }, observerOptions);
-
-    // Seleccionamos todas las secciones con la clase fade-in para observarlas
-    document.querySelectorAll('.fade-in').forEach(section => {
-        observer.observe(section);
-    });
-</script>
+    </script>
     
 </body>
 </html>
