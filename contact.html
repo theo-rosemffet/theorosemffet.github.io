@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | Theo Rosemffet</title>
+    <style>
+        /* 1. CORE STYLES (Matching Portfolio Architecture) */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { 
+            background: #000; color: #fff; 
+            font-family: 'Helvetica', 'Arial', sans-serif; font-weight: 900;
+            overflow-x: hidden;
+        }
+
+        /* 2. SIDEBAR */
+        .sidebar {
+            position: fixed; top: 0; left: 0;
+            height: 100vh; width: 400px;
+            padding: 40px; background: #000; z-index: 100;
+        }
+        header { margin-bottom: 60px; }
+        h1 { font-size: 2.5rem; text-transform: uppercase; line-height: 1; letter-spacing: -1px; }
+        header a { text-decoration: none; color: inherit; }
+        .tagline { font-size: 1.2rem; text-transform: none; font-weight: 400; color: #eee; margin-top: 5px; }
+        nav ul { list-style: none; }
+        nav li { margin-bottom: 20px; }
+        nav a { color: #fff; text-decoration: none; font-size: 2.5rem; text-transform: uppercase; display: inline-block; }
+        
+        nav a:hover { animation: strobe 0.1s steps(2) infinite; padding-left: 10px; }
+
+        @keyframes strobe {
+            0%, 49% { color: #fff; }
+            50%, 99% { color: #000; }
+            100% { color: #fff; }
+        }
+
+        /* 3. CONTENT WRAPPER */
+        .content-wrapper { 
+            margin-left: 400px; 
+            width: calc(100% - 400px); 
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 80px;
+        }
+
+        .contact-container {
+            width: 100%;
+            max-width: 900px;
+        }
+
+        .contact-header {
+            font-size: 1.2rem;
+            font-weight: 400;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-bottom: 20px;
+        }
+
+        .contact-link-item {
+            display: block;
+            font-size: clamp(3rem, 8vw, 6rem);
+            text-transform: uppercase;
+            text-decoration: none;
+            color: #fff;
+            line-height: 1.1;
+            margin-bottom: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .contact-link-item:hover {
+            animation: strobe 0.1s steps(2) infinite;
+            transform: translateX(20px);
+        }
+
+        .location-tag {
+            margin-top: 60px;
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: #555;
+        }
+
+        /* MOBILE FIX */
+        @media (max-width: 1100px) {
+            .sidebar { position: relative; width: 100%; height: auto; }
+            .content-wrapper { margin-left: 0; width: 100%; padding: 40px; align-items: flex-start; }
+            .contact-link-item { font-size: 3rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="sidebar">
+        <header>
+            <a href="index.html"><h1>Theo Rosemffet</h1></a>
+            <p class="tagline">Visual & Technical Artist</p>
+        </header>
+        <nav>
+            <ul>
+                <li><a href="bio.html">BIO</a></li>
+                <li><a href="works.html">WORKS</a></li>
+                <li><a href="contact.html">CONTACT</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="content-wrapper">
+        <div class="contact-container">
+            <p class="contact-header">Get in touch</p>
+            
+            <a href="mailto:theo.ros.kiedis@gmail.com" class="contact-link-item">Email</a>
+            <a href="https://www.instagram.com/theo.rosemffet/" target="_blank" class="contact-link-item">Instagram</a>
+
+            <div class="location-tag">
+                Based in Barcelona, Spain. <br> Available worldwide.
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
