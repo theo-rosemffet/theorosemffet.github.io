@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bio | Theo Rosemffet</title>
+    <title>Bio & Skills | Theo Rosemffet</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
@@ -12,19 +12,22 @@
             color: #fff; 
             font-family: 'Helvetica', 'Arial', sans-serif; 
             font-weight: 900; 
-            overflow: hidden; 
+            overflow-x: hidden;
+            overflow-y: auto;
+            scroll-behavior: smooth;
         }
 
-        /* SIDEBAR */
+        /* SIDEBAR (STAYS FIXED) */
         .sidebar {
             position: fixed; 
             top: 0; left: 0;
-            z-index: 10;
+            z-index: 20;
             height: 100vh;
             display: flex;
             flex-direction: column;
             padding: 40px;
             width: 400px;
+            background: #000;
         }
 
         header { margin-bottom: 60px; }
@@ -34,15 +37,8 @@
 
         nav ul { list-style: none; }
         nav li { margin-bottom: 20px; }
-        nav a { 
-            color: #fff; 
-            text-decoration: none; 
-            font-size: 2.5rem; 
-            text-transform: uppercase; 
-            display: inline-block;
-        }
-
-        /* STROBE EFFECT */
+        nav a { color: #fff; text-decoration: none; font-size: 2.5rem; text-transform: uppercase; display: inline-block; }
+        
         nav a:hover {
             animation: strobe 0.1s steps(2) infinite;
             padding-left: 10px;
@@ -54,66 +50,121 @@
             100% { color: #fff; background: #000; }
         }
 
-        /* CONTENT */
-        .content {
-            margin-left: 400px; 
-            height: 100vh;
-            display: flex;
-            align-items: center; 
-            justify-content: flex-start;
-            padding: 60px;
-            gap: 60px; 
+        /* SCROLL ARROW */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+            cursor: pointer;
+            z-index: 10;
         }
 
-        /* 4:5 VIDEO CONTAINER */
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translate(-50%, 0); }
+            40% { transform: translate(-50%, -10px); }
+            60% { transform: translate(-50%, -5px); }
+        }
+
+        /* LAYOUT */
+        .content-wrapper { margin-left: 400px; }
+
+        section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 80px 60px;
+            position: relative;
+        }
+
+        /* BIO SECTION */
+        #bio { gap: 60px; }
         .bio-video-wrapper {
             aspect-ratio: 4 / 5;
             height: 70vh; 
             background: #111;
             flex-shrink: 0; 
         }
+        .bio-video-wrapper video { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .bio-text { max-width: 600px; }
+        .bio-text h2 { font-size: 2.8rem; margin-bottom: 20px; text-transform: uppercase; }
+        .bio-text p { font-size: 1.5rem; font-weight: 400; line-height: 1.4; color: #ccc; margin-bottom: 20px; }
 
-        .bio-video-wrapper video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
+        /* SKILLS SECTION */
+        #skills {
+            flex-direction: column;
+            justify-content: flex-start;
+            border-top: 1px solid #222;
         }
 
-        /* TEXT SECTION */
-        .bio-text {
-            max-width: 600px; 
+        .skills-header {
+            font-size: 5rem;
+            text-transform: uppercase;
+            margin-bottom: 60px;
+            letter-spacing: -2px;
+            width: 100%;
+        }
+
+        .skills-container {
+            width: 100%;
+            max-width: 1000px;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            gap: 2px;
+            background: #222; /* Line color */
         }
 
-        .bio-text h2 {
-            font-size: 2.8rem;
-            margin-bottom: 20px;
+        .skill-item {
+            background: #000;
+            padding: 30px;
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+
+        .skill-main {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .skill-title {
+            font-size: 2rem;
             text-transform: uppercase;
-            line-height: 1;
+            transition: color 0.3s;
         }
 
-        .bio-text p {
-            font-size: 1.5rem;
+        .skill-detail {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease, margin-top 0.3s ease;
+            color: #aaa;
             font-weight: 400;
-            line-height: 1.4;
-            color: #ccc;
-            margin-bottom: 20px;
+            font-size: 1.2rem;
+            line-height: 1.5;
         }
 
+        /* HOVER REVEAL LOGIC */
+        .skill-item:hover {
+            background: #050505;
+        }
+
+        .skill-item:hover .skill-title {
+            animation: strobe 0.1s steps(2) infinite;
+        }
+
+        .skill-item:hover .skill-detail {
+            max-height: 500px;
+            margin-top: 20px;
+        }
+
+        /* MOBILE FIXES */
         @media (max-width: 1100px) {
-            .content { 
-                flex-direction: column; 
-                margin-left: 0; 
-                height: auto; 
-                padding-top: 180px; 
-                align-items: center;
-                overflow-y: auto;
-            }
-            .sidebar { position: absolute; height: auto; width: 100%; }
-            .bio-video-wrapper { height: 50vh; }
+            .sidebar { position: relative; width: 100%; height: auto; }
+            .content-wrapper { margin-left: 0; }
+            #bio { flex-direction: column; height: auto; }
+            .skills-header { font-size: 3rem; }
+            .skill-detail { max-height: none; margin-top: 15px; } /* Always show on mobile */
         }
     </style>
 </head>
@@ -121,12 +172,9 @@
 
     <div class="sidebar">
         <header>
-            <a href="index.html">
-                <h1>Theo Rosemffet</h1>
-            </a>
+            <a href="index.html"><h1>Theo Rosemffet</h1></a>
             <p class="tagline">Visual & Technical Artist</p>
         </header>
-
         <nav>
             <ul>
                 <li><a href="bio.html">BIO</a></li>
@@ -136,20 +184,80 @@
         </nav>
     </div>
 
-    <main class="content">
-        <div class="bio-video-wrapper">
-            <video autoplay muted loop playsinline preload="auto">
-                <source src="https://res.cloudinary.com/dgsufjhl9/video/upload/q_auto/v1770739977/Self_Portrait_privjb.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-        </div>
+    <div class="content-wrapper">
+        <section id="bio">
+            <div class="bio-video-wrapper">
+                <video autoplay muted loop playsinline preload="auto">
+                    <source src="https://res.cloudinary.com/dgsufjhl9/video/upload/q_auto/v1770739977/Self_Portrait_privjb.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="bio-text">
+                <h2>Hi, I’m Theo!</h2>
+                <p>I specialize in creative coding and the development of audio-reactive, real-time generative media for high-end live shows and installations.</p>
+                <p>My background spans the full technical and creative spectrum: from creating and operating video content at large-scale festivals to directing tour visuals, as well as doing LED setup and programming complex environments.</p>
+            </div>
 
-        <section class="bio-text">
-            <h2>Hi, I’m Theo!</h2>
-            <p>I specialize in creative coding and the development of audio-reactive, real-time generative media for high-end live shows and installations.</p>
-            <p>My background spans the full technical and creative spectrum: from creating and operating video content at large-scale festivals to directing tour visuals, as well as doing LED setup and programming complex environments.</p>
+            <div class="scroll-indicator" onclick="document.getElementById('skills').scrollIntoView()">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="square" stroke-linejoin="arcs">
+                    <path d="M7 13l5 5 5-5M7 6l5 5 5-5"/>
+                </svg>
+            </div>
         </section>
-    </main>
-    
+
+        <section id="skills">
+            <h2 class="skills-header">Skills &<br>Software</h2>
+            
+            <div class="skills-container">
+                <div class="skill-item">
+                    <div class="skill-main"><span class="skill-title">TouchDesigner</span></div>
+                    <div class="skill-detail">
+                        +5 years of experience in live VJ performance and installations. Proficient in building custom tools via Python and GLSL for GPU-accelerated workflows.
+                    </div>
+                </div>
+
+                <div class="skill-item">
+                    <div class="skill-main"><span class="skill-title">Video Operator</span></div>
+                    <div class="skill-detail">
+                        8 years of experience as a VJ for high-capacity venues and international festivals. Extensive track record at locations including Apolo, Razzmatazz, and Input, with festival performances at OffWeek, Zevra, and TramunFest.
+                    </div>
+                </div>
+
+                <div class="skill-item">
+                    <div class="skill-main"><span class="skill-title">Video Technician</span></div>
+                    <div class="skill-detail">
+                        2 years of experience in LED assembly and technical production. Proficient in the configuration and operation of NovaStar hardware and NovaLCT software for large-scale displays.
+                    </div>
+                </div>
+
+                <div class="skill-item">
+                    <div class="skill-main"><span class="skill-title">Direction & Editing</span></div>
+                    <div class="skill-detail">
+                        Creative Direction and Editing for artist tour visuals, including Cyril Kamer and 3DNAN. Specialized in developing versatile content designed to adapt seamlessly across diverse display configurations and stage layouts.
+                    </div>
+                </div>
+
+                <div class="skill-item">
+                    <div class="skill-main"><span class="skill-title">Installations</span></div>
+                    <div class="skill-detail">
+                        Creative & Technical Direction for immersive installations, managing projects from conceptual design to physical execution. Notable work includes the permanent lighting system at Sala Marte (Malaga) and custom anamorphic installations.
+                    </div>
+                </div>
+
+                <div class="skill-item">
+                    <div class="skill-main"><span class="skill-title">Technical Artist</span></div>
+                    <div class="skill-detail">
+                        Developer of custom tools, UIs, and data pipelines. Expert in building high-performance systems including bespoke VJ decks, automated printing scripts, and advanced reprojection tools.
+                    </div>
+                </div>
+
+                <div class="skill-item">
+                    <div class="skill-main"><span class="skill-title">Teaching</span></div>
+                    <div class="skill-detail">
+                        Instructor and Speaker focused on TouchDesigner and creative coding. Organizer for the TouchDesigner Barcelona community, hosting workshops and technical presentations.
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
 </body>
 </html>
