@@ -8,14 +8,14 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body { 
-            background: #000; /* Solid Black Background */
+            background: #000; 
             color: #fff; 
             font-family: 'Helvetica', 'Arial', sans-serif; 
             font-weight: 900; 
             overflow: hidden; 
         }
 
-        /* SIDEBAR (Matches Landing Page) */
+        /* SIDEBAR */
         .sidebar {
             position: fixed; 
             top: 0; left: 0;
@@ -42,7 +42,7 @@
             display: inline-block;
         }
 
-        /* STROBE EFFECT */
+        /* STROBE EFFECT ON HOVER */
         nav a:hover {
             animation: strobe 0.1s steps(2) infinite;
             padding-left: 10px;
@@ -54,45 +54,67 @@
             100% { color: #fff; background: #000; }
         }
 
-        /* BIO CONTENT AREA */
+        /* FLEX CONTAINER FOR VIDEO + TEXT */
         .content {
-            margin-left: 400px; /* Offset for sidebar */
+            margin-left: 400px; 
             height: 100vh;
             display: flex;
-            align-items: center; /* Vertical center */
-            justify-content: flex-start; /* Keeps text to the left of the remaining space */
-            padding: 40px;
+            align-items: center; 
+            justify-content: flex-start;
+            padding: 60px;
+            gap: 60px; /* Generous gap between video and text */
         }
 
+        /* 4:5 VIDEO CONTAINER (1080 x 1350) */
+        .bio-video-wrapper {
+            aspect-ratio: 4 / 5;
+            height: 70vh; /* Set height to 70% of viewport, text will match */
+            background: #111;
+            flex-shrink: 0; /* Prevents the video from squishing */
+        }
+
+        .bio-video-wrapper video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* TEXT SECTION */
         .bio-text {
-            max-width: 800px;
-            animation: fadeIn 0.8s ease-out;
+            max-width: 600px; 
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
         .bio-text h2 {
-            font-size: 3rem;
+            font-size: 2.8rem;
             margin-bottom: 20px;
             text-transform: uppercase;
+            line-height: 1;
         }
 
         .bio-text p {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             font-weight: 400;
-            line-height: 1.3;
-            color: #fff;
+            line-height: 1.4;
+            color: #ccc;
             margin-bottom: 20px;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateX(20px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-
-        /* Responsive for mobile */
-        @media (max-width: 768px) {
-            .sidebar { position: relative; width: 100%; height: auto; padding: 20px; }
-            .content { margin-left: 0; height: auto; padding: 20px; }
-            .bio-text p { font-size: 1.4rem; }
+        /* Mobile Breakpoint */
+        @media (max-width: 1100px) {
+            .content { 
+                flex-direction: column; 
+                margin-left: 0; 
+                height: auto; 
+                padding-top: 180px; /* Offset for sidebar title */
+                align-items: center;
+                overflow-y: auto;
+            }
+            .sidebar { position: absolute; height: auto; width: 100%; }
+            .bio-video-wrapper { height: 50vh; }
         }
     </style>
 </head>
@@ -116,6 +138,12 @@
     </div>
 
     <main class="content">
+        <div class="bio-video-wrapper">
+            <video autoplay muted loop playsinline>
+                <source src="https://res.cloudinary.com/dgsufjhl9/video/upload/v1770739977/Self_Portrait_privjb.mov" type="video/mp4">
+            </video>
+        </div>
+
         <section class="bio-text">
             <h2>Hi, I’m Theo!</h2>
             <p>I specialize in creative coding and the development of audio-reactive, real-time generative media for high-end live shows and installations.</p>
