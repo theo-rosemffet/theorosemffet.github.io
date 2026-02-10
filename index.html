@@ -5,54 +5,108 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Theo Rosemffet | Creative Technologist</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background: #000; color: #fff; font-family: 'Helvetica', 'Arial', sans-serif; font-weight: 900; overflow: hidden; }
+    /* 1. RESET Y BASE */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body { 
+        background: #000; 
+        color: #fff; 
+        font-family: 'Helvetica', 'Arial', sans-serif; 
+        font-weight: 900; 
+        /* Cambiamos 'hidden' por 'auto' para poder bajar a ver el contenido */
+        overflow-y: auto; 
+        overflow-x: hidden; 
+    }
 
-        /* Fullscreen Video Background */
-        #video-bg {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            object-fit: cover;
-            z-index: -1;
-        }
+    /* 2. VIDEO Y FONDO */
+    #video-bg {
+        position: fixed;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        object-fit: cover;
+        z-index: -1;
+    }
 
-        /* Overlay for Readability */
-        .overlay {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.2); /* Subtle dimming */
-            z-index: 0;
-        }
+    .overlay {
+        position: fixed;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        background: rgba(0, 0, 0, 0.4); /* Un poco más oscuro para leer mejor */
+        z-index: 0;
+        /* Efecto opcional: desenfoca un poco el video detrás del texto */
+        backdrop-filter: blur(2px); 
+    }
 
-        /* Sidebar Navigation */
-        .sidebar {
-            position: relative;
-            z-index: 10;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            padding: 40px;
-        }
+    /* 3. SIDEBAR (FIJA A LA IZQUIERDA) */
+    .sidebar {
+        position: fixed; /* La dejamos fija para que no se mueva al hacer scroll */
+        top: 0; left: 0;
+        z-index: 10;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        padding: 40px;
+        width: 400px;
+    }
 
-        header { margin-bottom: 60px; }
-        h1 { font-size: 2.5rem; text-transform: uppercase; line-height: 1; letter-spacing: -1px; }
-        .tagline { font-size: 1.2rem; text-transform: none; font-weight: 400; color: #eee; margin-top: 5px; }
+    header { margin-bottom: 60px; }
+    h1 { font-size: 2.5rem; text-transform: uppercase; line-height: 1; letter-spacing: -1px; }
+    .tagline { font-size: 1.2rem; text-transform: none; font-weight: 400; color: #eee; margin-top: 5px; }
 
-        nav ul { list-style: none; }
-        nav li { margin-bottom: 20px; }
-        nav a { 
-            color: #fff; 
-            text-decoration: none; 
-            font-size: 2.5rem; 
-            text-transform: uppercase; 
-            transition: 0.3s;
-        }
-        nav a:hover { color: #00ffcc; padding-left: 10px; }
+    nav ul { list-style: none; }
+    nav li { margin-bottom: 20px; }
+    nav a { 
+        color: #fff; 
+        text-decoration: none; 
+        font-size: 2.5rem; 
+        text-transform: uppercase; 
+        transition: 0.3s;
+    }
+    nav a:hover { color: #00ffcc; padding-left: 10px; }
 
-    </style>
+    /* 4. CONTENIDO Y SECCIONES (A LA DERECHA) */
+    .content {
+        position: relative;
+        z-index: 5;
+        margin-left: 450px; /* Desplazamos el texto para que no choque con la sidebar */
+        padding: 40px;
+    }
+
+    section {
+        min-height: 100vh; /* Cada sección ocupa toda la pantalla */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        max-width: 800px;
+    }
+
+    section h2 {
+        font-size: 5rem;
+        margin-bottom: 20px;
+        color: #00ffcc;
+        text-transform: uppercase;
+    }
+
+    section p {
+        font-size: 1.5rem;
+        font-weight: 400;
+        line-height: 1.4;
+        color: #ddd;
+    }
+
+    /* 5. ANIMACIÓN FADE-IN */
+    .fade-in {
+        opacity: 0;
+        transform: translateY(50px);
+        transition: opacity 1s ease-out, transform 1s ease-out;
+    }
+
+    .fade-in.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+</style>
 </head>
 <body>
 
