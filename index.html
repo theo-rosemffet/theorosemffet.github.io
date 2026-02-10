@@ -5,23 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Theo Rosemffet | Creative Technologist</title>
     <style>
-        /* 1. RESET Y BASE */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
-        html {
-            scroll-behavior: smooth; /* Hace que el movimiento sea fluido */
-        }
-
         body { 
             background: #000; 
             color: #fff; 
             font-family: 'Helvetica', 'Arial', sans-serif; 
             font-weight: 900; 
-            overflow-y: auto; 
-            overflow-x: hidden; 
+            overflow: hidden; /* No scrolling */
         }
 
-        /* 2. VIDEO Y FONDO */
+        /* VIDEO BACKGROUND (Consistent across pages) */
         #video-bg {
             position: fixed;
             top: 0; left: 0;
@@ -39,7 +33,7 @@
             backdrop-filter: blur(2px); 
         }
 
-        /* 3. SIDEBAR (FIJA) */
+        /* SIDEBAR */
         .sidebar {
             position: fixed; 
             top: 0; left: 0;
@@ -47,14 +41,8 @@
             height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: flex-start;
             padding: 40px;
             width: 400px;
-            pointer-events: none; /* Permite que el click pase a través si es necesario */
-        }
-
-        .sidebar header, .sidebar nav {
-            pointer-events: auto; /* Reactiva los clicks para los links */
         }
 
         header { margin-bottom: 60px; }
@@ -68,36 +56,35 @@
             text-decoration: none; 
             font-size: 2.5rem; 
             text-transform: uppercase; 
-            transition: 0.3s;
+            display: inline-block;
         }
-        nav a:hover { color: #00ffcc; padding-left: 10px; }
 
-        /* 4. CONTENIDO Y SECCIONES */
+        /* STROBE EFFECT ON HOVER */
+        nav a:hover {
+            animation: strobe 0.1s steps(2) infinite;
+            padding-left: 10px;
+        }
+
+        @keyframes strobe {
+            0% { color: #fff; background: #000; }
+            50% { color: #000; background: #fff; }
+            100% { color: #fff; background: #000; }
+        }
+
+        /* CONTENT AREA */
         .content {
             position: relative;
             z-index: 5;
-            margin-left: 400px; /* Alineado con el ancho de la sidebar */
-        }
-
-        /* Esta sección crea el espacio de landing */
-        #hero {
+            margin-left: 400px;
             height: 100vh;
-            background: transparent;
-        }
-
-        section {
-            min-height: 100vh; 
             display: flex;
-            flex-direction: column;
-            justify-content: center;
+            align-items: center;
             padding: 40px;
-            max-width: 900px;
         }
 
         section h2 {
-            font-size: clamp(3rem, 10vw, 5rem); /* Tamaño fluido */
+            font-size: clamp(3rem, 10vw, 5rem);
             margin-bottom: 20px;
-            color: #00ffcc;
             text-transform: uppercase;
         }
 
@@ -106,25 +93,12 @@
             font-weight: 400;
             line-height: 1.4;
             color: #ddd;
+            max-width: 600px;
         }
 
-        /* 5. ANIMACIÓN FADE-IN */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(50px);
-            transition: opacity 1s ease-out, transform 1s ease-out;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Ajuste para móviles básicos */
         @media (max-width: 768px) {
             .sidebar { position: relative; width: 100%; height: auto; }
-            .content { margin-left: 0; }
-            #hero { height: 50vh; }
+            .content { margin-left: 0; height: auto; }
         }
     </style>
 </head>
@@ -138,61 +112,23 @@
 
     <div class="sidebar">
         <header>
-            <h1>Theo Rosemffet</h1>
+            <a href="index.html" style="text-decoration: none; color: inherit;">
+                <h1>Theo Rosemffet</h1>
+            </a>
             <p class="tagline">Visual & Technical Artist</p>
         </header>
 
         <nav>
             <ul>
-                <li><a href="#bio">BIO</a></li>
-                <li><a href="#works">WORKS</a></li>
-                <li><a href="#contact">CONTACT</a></li>
+                <li><a href="bio.html">BIO</a></li>
+                <li><a href="works.html">WORKS</a></li>
+                <li><a href="contact.html">CONTACT</a></li>
             </ul>
         </nav>
     </div>
 
     <main class="content">
-        
-        <section id="hero"></section>
-
-        <section id="bio" class="fade-in">
-            <h2>BIO</h2>
-            <p>I specialize in <strong>creative coding</strong> and the development of <strong>audio-reactive, real-time generative media</strong> for high-end live shows and installations.<br><br>
-                My background spans the full technical and creative spectrum: from creating and operating video content at large-scale festivals to directing tour visuals, as well as doing LED setup and programming complex environments.</p>
-        </section>
-
-        <section id="works" class="fade-in">
-            <h2>WORKS</h2>
-            <div class="project-grid">
-                <p><strong>> Razzmatazz Pergo</strong> - Visual Content & Operation</p>
-                <p><strong>> Generative Visuals</strong> - TouchDesigner & GLSL</p>
-            </div>
-        </section>
-
-        <section id="contact" class="fade-in">
-            <h2>CONTACT</h2>
-            <p>Ready to build something immersive? <br>
-               Reach out at: <a href="mailto:tu-email@ejemplo.com" style="color: #00ffcc;">tu-email@ejemplo.com</a></p>
-        </section>
-    </main>
-
-    <script>
-        const observerOptions = {
-            threshold: 0.1
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.fade-in').forEach(section => {
-            observer.observe(section);
-        });
-    </script>
+        </main>
     
 </body>
 </html>
