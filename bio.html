@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bio & Skills | Theo Rosemffet</title>
     <style>
-        /* 1. THE BASICS - REMOVE ALL OVERFLOW RESTRICTIONS */
+        /* 1. THE BASICS */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         html, body { 
@@ -55,7 +55,7 @@
         }
 
         section {
-            min-height: 100vh; /* This ensures each section fills the screen */
+            min-height: 100vh;
             padding: 80px;
             display: flex;
             position: relative;
@@ -80,7 +80,7 @@
         .bio-text h2 { font-size: 3rem; margin-bottom: 20px; text-transform: uppercase; }
         .bio-text p { font-size: 1.6rem; font-weight: 400; line-height: 1.4; color: #ccc; margin-bottom: 20px; }
 
-        /* THE ARROW (Minimal & Sharp) */
+        /* THE ARROW */
         .scroll-link {
             position: absolute;
             bottom: 40px;
@@ -143,7 +143,7 @@
         }
 
         .skill-item:hover .skill-detail {
-            max-height: 300px;
+            max-height: 600px; /* Increased to accommodate longer text */
             margin-top: 20px;
         }
 
@@ -195,12 +195,12 @@
         </section>
 
         <section id="skills">
-            <h2 class="skills-header">Skills &<br>Software</h2>
+            <h2 class="skills-header">Skills</h2>
             
             <div class="skills-container">
                 <div class="skill-item">
                     <span class="skill-title">TouchDesigner</span>
-                    <div class="skill-detail">+5 years of experience in live VJ performance and installations. Proficient in building custom tools via Python and GLSL for GPU-accelerated workflows.</div>
+                    <div class="skill-detail">+5 years of experience in live VJ performance and installations.<br>Proficient in building custom tools via Python and GLSL for GPU-accelerated workflows.</div>
                 </div>
 
                 <div class="skill-item">
@@ -210,27 +210,36 @@
 
                 <div class="skill-item">
                     <span class="skill-title">Video Technician</span>
-                    <div class="skill-detail">2 years of experience in LED assembly and technical production. Proficient in the configuration and operation of NovaStar hardware and NovaLCT software for large-scale displays.</div>
+                    <div class="skill-detail">2 years of experience in LED assembly and technical production.<br>Proficient in the configuration and operation of NovaStar hardware and NovaLCT software for large-scale displays.</div>
                 </div>
 
                 <div class="skill-item">
                     <span class="skill-title">Direction & Editing</span>
-                    <div class="skill-detail">Creative Direction and Editing for artist tour visuals, including Cyril Kamer and 3DNAN. Specialized in developing versatile content designed to adapt seamlessly across diverse display configurations</div>
+                    <div class="skill-detail">Creative Direction and Editing for artist tour visuals, including Cyril Kamer and 3DNAN.<br>Specialized in developing versatile content designed to adapt seamlessly across diverse display configurations.</div>
                 </div>
 
                 <div class="skill-item">
                     <span class="skill-title">Installations</span>
-                    <div class="skill-detail">Creative & Technical Direction for immersive installations, managing projects from conceptual design to physical execution. Notable work includes the permanent lighting system at Sala Marte (Malaga), a custom anamorphic installation in Sottoboscco (Cabrils), and community-driven projects with TouchDesigner Barcelona.</div>
+                    <div class="skill-detail">Creative & Technical Direction for immersive installations, managing projects from conceptual design to physical execution.<br>Notable work includes the permanent lighting system at Sala Marte (Malaga), a custom anamorphic installation in Sottoboscco (Cabrils), and community-driven projects with TouchDesigner Barcelona.</div>
                 </div>
 
                 <div class="skill-item">
                     <span class="skill-title">Technical Artist</span>
-                    <div class="skill-detail">Developer of custom tools, UIs, and data pipelines for live environments. Expertise in building high-performance systems in TouchDesigner, including multi-channel position generators, bespoke VJ decks, automated printing scripts, and advanced reprojection tools for complex surfaces.</div>
+                    <div class="skill-detail">Developer of custom tools, UIs, and data pipelines for live environments.<br>Expertise in building high-performance systems in TouchDesigner, including multi-channel position generators, bespoke VJ decks, automated printing scripts, and advanced reprojection tools for complex surfaces.</div>
                 </div>
 
                 <div class="skill-item">
                     <span class="skill-title">Teaching</span>
-                    <div class="skill-detail">Instructor and Speaker with a focus on TouchDesigner and creative coding. Organizer for the TouchDesigner Barcelona community, hosting workshops and technical presentations. Strong multilingual communicator experienced in breaking down complex generative workflows for diverse audiences.</div>
+                    <div class="skill-detail">Instructor and Speaker with a focus on TouchDesigner and creative coding.<br>Organizer for the TouchDesigner Barcelona community, hosting workshops and technical presentations.<br>Strong multilingual communicator experienced in breaking down complex generative workflows for diverse audiences.</div>
+                </div>
+
+                <div class="skill-item">
+                    <span class="skill-title">Technical Production</span>
+                    <div class="skill-detail">
+                        Multi-camera production assembly and live mixing.<br>
+                        Management of protocols such as NDI and advanced IP network configuration.<br>
+                        Execution of immersive mappings with anamorphosis and complex timecode integration.
+                    </div>
                 </div>
             </div>
         </section>
