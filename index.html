@@ -1,105 +1,123 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Theo Rosemffet | Creative Technologist</title>
+
     <style>
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body { 
-            background: #000; 
-            color: #fff; 
-            font-family: 'Helvetica', 'Arial', sans-serif; 
-            overflow: hidden; 
-        }
+
+        body { background: #000; color: #fff; font-family: 'Helvetica', 'Arial', sans-serif; font-weight: 900; overflow: hidden; }
+
+
 
         /* Fullscreen Video Background */
+
         #video-bg {
+
             position: fixed;
+
             top: 0; left: 0;
+
             width: 100%; height: 100%;
+
             object-fit: cover;
+
             z-index: -1;
+
         }
+
+
 
         /* Overlay for Readability */
+
         .overlay {
+
             position: fixed;
+
             top: 0; left: 0;
+
             width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.2); 
+
+            background: rgba(0, 0, 0, 0.2); /* Subtle dimming */
+
             z-index: 0;
+
         }
 
+
+
         /* Sidebar Navigation */
+
         .sidebar {
+
             position: relative;
+
             z-index: 10;
+
             height: 100vh;
+
             display: flex;
+
             flex-direction: column;
+
             justify-content: flex-start;
+
             padding: 40px;
+
         }
+
+
 
         header { margin-bottom: 60px; }
 
-        /* Unified Typography: H1 and Nav Links now identical */
-        h1, nav a { 
-            font-size: 2.5rem; 
-            text-transform: uppercase; 
-            line-height: 1; 
-            letter-spacing: -1px; 
-            font-weight: 900; 
-        }
+        h1 { font-size: 2.5rem; text-transform: uppercase; line-height: 1; letter-spacing: -1px; }
 
-        .tagline { 
-            font-size: 1.2rem; 
-            text-transform: none; 
-            font-weight: 400; 
-            color: #eee; 
-            margin-top: 5px; 
-        }
+        .tagline { font-size: 1.2rem; text-transform: none; font-weight: 400; color: #eee; margin-top: 5px; }
+
+
 
         nav ul { list-style: none; }
+
         nav li { margin-bottom: 20px; }
-        
+
         nav a { 
+
             color: #fff; 
+
             text-decoration: none; 
+
+            font-size: 2.5rem; 
+
+            text-transform: uppercase; 
+
             transition: 0.3s;
-            display: inline-block;
+
         }
 
-        nav a:hover { 
-            color: #00ffcc; 
-            padding-left: 10px; 
-        }
+        nav a:hover { color: #00ffcc; padding-left: 10px; }
+
+
 
     </style>
+
 </head>
+
 <body>
 
+
+
     <video autoplay muted loop playsinline id="video-bg">
+
         <source src="https://res.cloudinary.com/dgsufjhl9/video/upload/v1770731106/Post_Razzmataz_PERGO_ANL_cut_piq2z4.mp4" type="video/mp4">
+
     </video>
+
     <div class="overlay"></div>
-
-    <div class="sidebar">
-        <header>
-            <h1>Theo Rosemffet</h1>
-            <p class="tagline">Visual & Technical Artist</p>
-        </header>
-
-        <nav>
-            <ul>
-                <li><a href="#bio">About Me</a></li>
-                <li><a href="#works">Works</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-    </div>
-
-</body>
-</html>
