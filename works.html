@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Works | Theo Rosemffet</title>
+    <style>
+        /* 1. CORE STYLES (Matching Bio) */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { 
+            background: #000; color: #fff; 
+            font-family: 'Helvetica', 'Arial', sans-serif; font-weight: 900;
+            scroll-behavior: smooth; overflow-x: hidden;
+        }
+
+        /* 2. SIDEBAR */
+        .sidebar {
+            position: fixed; top: 0; left: 0;
+            height: 100vh; width: 400px;
+            padding: 40px; background: #000; z-index: 100;
+        }
+        header { margin-bottom: 60px; }
+        h1 { font-size: 2.5rem; text-transform: uppercase; line-height: 1; letter-spacing: -1px; }
+        header a { text-decoration: none; color: inherit; }
+        .tagline { font-size: 1.2rem; text-transform: none; font-weight: 400; color: #eee; margin-top: 5px; }
+        nav ul { list-style: none; }
+        nav li { margin-bottom: 20px; }
+        nav a { color: #fff; text-decoration: none; font-size: 2.5rem; text-transform: uppercase; display: inline-block; }
+        
+        nav a:hover { animation: strobe 0.1s steps(2) infinite; padding-left: 10px; }
+
+        @keyframes strobe {
+            0%, 49% { color: #fff; }
+            50%, 99% { color: #000; }
+            100% { color: #fff; }
+        }
+
+        /* 3. CONTENT WRAPPER */
+        .content-wrapper { margin-left: 400px; width: calc(100% - 400px); }
+
+        /* FEATURED PROJECT SECTIONS */
+        .project-section {
+            min-height: 100vh;
+            padding: 80px;
+            border-bottom: 1px solid #222;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .project-header { margin-bottom: 40px; }
+        .project-title { font-size: 4rem; text-transform: uppercase; line-height: 0.9; margin-bottom: 10px; }
+        .project-role { font-size: 1.2rem; font-weight: 400; color: #888; text-transform: uppercase; letter-spacing: 2px; }
+
+        .project-media-main {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background: #111;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+        .project-media-main video, .project-media-main img {
+            width: 100%; height: 100%; object-fit: cover;
+        }
+
+        .project-desc {
+            max-width: 700px;
+            font-size: 1.4rem;
+            font-weight: 400;
+            line-height: 1.5;
+            color: #ccc;
+        }
+
+        /* GALLERY GRID */
+        #gallery { padding: 80px; }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+        .gallery-item {
+            aspect-ratio: 1;
+            background: #111;
+            cursor: pointer;
+            overflow: hidden;
+            transition: filter 0.3s;
+        }
+        .gallery-item:hover { filter: brightness(1.2); }
+        .gallery-item img, .gallery-item video {
+            width: 100%; height: 100%; object-fit: cover;
+        }
+
+        /* LIGHTBOX SYSTEM */
+        #lightbox {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.95);
+            display: none; justify-content: center; align-items: center;
+            z-index: 1000; padding: 40px;
+        }
+        #lightbox.active { display: flex; }
+        #lightbox img, #lightbox video { max-width: 90%; max-height: 90%; box-shadow: 0 0 50px rgba(255,255,255,0.1); }
+        .close-lightbox { position: absolute; top: 40px; right: 40px; font-size: 2rem; cursor: pointer; }
+
+        /* MOBILE FIX */
+        @media (max-width: 1100px) {
+            .sidebar { position: relative; width: 100%; height: auto; }
+            .content-wrapper { margin-left: 0; width: 100%; }
+            .project-section, #gallery { padding: 40px; }
+            .project-title { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="sidebar">
+        <header>
+            <a href="index.html"><h1>Theo Rosemffet</h1></a>
+            <p class="tagline">Visual & Technical Artist</p>
+        </header>
+        <nav>
+            <ul>
+                <li><a href="bio.html">BIO</a></li>
+                <li><a href="works.html">WORKS</a></li>
+                <li><a href="contact.html">CONTACT</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="content-wrapper">
+        
+        <section class="project-section" id="tramunfest">
+            <div class="project-header">
+                <h2 class="project-title">TramunFest 2025</h2>
+                <p class="project-role">Creative Direction • Video Operator</p>
+            </div>
+            <div class="project-media-main">
+                <video autoplay muted loop playsinline src="your-video-link.mp4"></video>
+            </div>
+            <p class="project-desc">Creative Direction and Video Operation for the Unlocked Stage. Designed a high-impact visual atmosphere that integrated seamlessly with the stage's architectural lighting.</p>
+        </section>
+
+        <section class="project-section" id="cyril-kamer">
+            <div class="project-header">
+                <h2 class="project-title">Cyril Kamer Tour</h2>
+                <p class="project-role">Direction • Editing • VJ</p>
+            </div>
+            <div class="project-media-main">
+                <img src="your-image-link.jpg" alt="Cyril Kamer Tour">
+            </div>
+            <p class="project-desc">Direction & Editing of Tour Visuals for the 2025 Spanish Tour. Developed a versatile content package and operated video on-site for all major tour dates.</p>
+        </section>
+
+        <section class="project-section" id="sala-marte">
+            <div class="project-header">
+                <h2 class="project-title">Sala Marte</h2>
+                <p class="project-role">Technical Direction • Creative Coding</p>
+            </div>
+            <div class="project-media-main">
+                <video autoplay muted loop playsinline src="your-video-link.mp4"></video>
+            </div>
+            <p class="project-desc">Permanent lighting installation in Malaga. Created a generative audio-responsive system and a bespoke remote control interface for house technicians.</p>
+        </section>
+
+        <section class="project-section" id="postergen">
+            <div class="project-header">
+                <h2 class="project-title">Poster[GEN].v0</h2>
+                <p class="project-role">Interactive Installation • TouchDesigner</p>
+            </div>
+            <div class="project-media-main">
+                <img src="your-image-link.jpg" alt="PosterGEN">
+            </div>
+            <p class="project-desc">Interactive installation developed for TouchDesigner Barcelona. Users manipulate 3D scenes in real-time to generate and print unique generative posters.</p>
+        </section>
+
+        <section id="gallery">
+            <h2 class="project-title">Archive</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item" onclick="openLightbox(this)">
+                    <img src="https://via.placeholder.com/600" alt="Work 1">
+                </div>
+                <div class="gallery-item" onclick="openLightbox(this)">
+                    <img src="https://via.placeholder.com/600" alt="Work 2">
+                </div>
+                <div class="gallery-item" onclick="openLightbox(this)">
+                    <video muted loop src="your-video-link.mp4"></video>
+                </div>
+                </div>
+        </section>
+
+    </div>
+
+    <div id="lightbox">
+        <span class="close-lightbox" onclick="closeLightbox()">&times;</span>
+        <div id="lightbox-content"></div>
+    </div>
+
+    <script>
+        function openLightbox(element) {
+            const lightbox = document.getElementById('lightbox');
+            const content = document.getElementById('lightbox-content');
+            lightbox.classList.add('active');
+            
+            // Clone the image or video clicked into the lightbox
+            const clone = element.children[0].cloneNode(true);
+            if(clone.tagName === 'VIDEO') clone.controls = true;
+            content.innerHTML = '';
+            content.appendChild(clone);
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+        }
+    </script>
+
+</body>
+</html>
