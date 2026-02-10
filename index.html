@@ -150,5 +150,24 @@
         </section>
     </main>
 
+<script>
+    const observerOptions = {
+        threshold: 0.2 // El efecto dispara cuando el 20% de la sección es visible
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, observerOptions);
+
+    // Seleccionamos todas las secciones con la clase fade-in para observarlas
+    document.querySelectorAll('.fade-in').forEach(section => {
+        observer.observe(section);
+    });
+</script>
+    
 </body>
 </html>
