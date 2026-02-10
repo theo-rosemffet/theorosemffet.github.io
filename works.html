@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Works | Theo Rosemffet</title>
     <style>
-        /* 1. CORE STYLES (Matching Bio) */
+        /* 1. CORE STYLES */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html, body { 
             background: #000; color: #fff; 
@@ -38,7 +38,6 @@
         /* 3. CONTENT WRAPPER */
         .content-wrapper { margin-left: 400px; width: calc(100% - 400px); }
 
-        /* FEATURED PROJECT SECTIONS */
         .project-section {
             min-height: 100vh;
             padding: 80px;
@@ -59,9 +58,7 @@
             margin-bottom: 30px;
             overflow: hidden;
         }
-        .project-media-main video, .project-media-main img {
-            width: 100%; height: 100%; object-fit: cover;
-        }
+        .project-media-main video { width: 100%; height: 100%; object-fit: cover; }
 
         .project-desc {
             max-width: 700px;
@@ -84,12 +81,10 @@
             background: #111;
             cursor: pointer;
             overflow: hidden;
-            transition: filter 0.3s;
+            transition: transform 0.3s ease, filter 0.3s ease;
         }
-        .gallery-item:hover { filter: brightness(1.2); }
-        .gallery-item img, .gallery-item video {
-            width: 100%; height: 100%; object-fit: cover;
-        }
+        .gallery-item:hover { filter: brightness(1.2); transform: scale(1.02); }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; }
 
         /* LIGHTBOX SYSTEM */
         #lightbox {
@@ -99,8 +94,8 @@
             z-index: 1000; padding: 40px;
         }
         #lightbox.active { display: flex; }
-        #lightbox img, #lightbox video { max-width: 90%; max-height: 90%; box-shadow: 0 0 50px rgba(255,255,255,0.1); }
-        .close-lightbox { position: absolute; top: 40px; right: 40px; font-size: 2rem; cursor: pointer; }
+        #lightbox img { max-width: 100%; max-height: 90vh; object-fit: contain; }
+        .close-lightbox { position: absolute; top: 40px; right: 40px; font-size: 3rem; cursor: pointer; color: #fff; line-height: 1; }
 
         /* MOBILE FIX */
         @media (max-width: 1100px) {
@@ -135,7 +130,7 @@
                 <p class="project-role">Creative Direction • Content Creation • VJ </p>
             </div>
             <div class="project-media-main">
-                <video autoplay muted loop playsinline src="https://res.cloudinary.com/dgsufjhl9/video/upload/q_auto,f_mp4/v1770747383/TRAMUN_TEASER_uiczn2.mov"></video>
+                <video autoplay muted loop playsinline src="https://res.cloudinary.com/dgsufjhl9/video/upload/q_auto,f_auto/v1770747383/TRAMUN_TEASER_uiczn2.mp4"></video>
             </div>
             <p class="project-desc">Creative Direction and Video Operation for the Unlocked Stage. Designed a variety of high-impact visual atmospheres that integrated seamlessly with the stage's screens.</p>
         </section>
@@ -157,7 +152,7 @@
                 <p class="project-role">Technical Direction • Creative Coding</p>
             </div>
             <div class="project-media-main">
-                <video autoplay muted loop playsinline src="https://res.cloudinary.com/dgsufjhl9/video/upload/q_auto,f_auto/v1770750159/Sala_Marte_Final_cht6ae.mov"></video>
+                <video autoplay muted loop playsinline src="https://res.cloudinary.com/dgsufjhl9/video/upload/q_auto,f_auto/v1770750159/Sala_Marte_Final_cht6ae.mp4"></video>
             </div>
             <p class="project-desc">Permanent lighting installation in Sala Marte, Malaga.<br>Created a generative audio-responsive system and a bespoke remote control interface for house technicians.</p>
         </section>
@@ -176,16 +171,54 @@
         <section id="gallery">
             <h2 class="project-title">Archive</h2>
             <div class="gallery-grid">
+                
                 <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="https://via.placeholder.com/600" alt="Work 1">
-                </div>
-                <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="https://via.placeholder.com/600" alt="Work 2">
+                    <img src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751971/DSC08434-Mejorado-NR_kejjob.jpg" alt="Theo Work">
                 </div>
                 <div class="gallery-item" onclick="openLightbox(this)">
-                    <video muted loop src="your-video-link.mp4"></video>
+                    <img src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751972/ckss_im7ndy.png" alt="Cyril Kamer Stage">
                 </div>
+                <div class="gallery-item" onclick="openLightbox(this)">
+                    <img src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751971/ckssjamesharden_mnzaga.png" alt="Tour Visuals">
                 </div>
+                <div class="gallery-item" onclick="openLightbox(this)">
+                    <img src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751970/HR_Sottobosco_EKP_2025_-101179_jujggh.jpg" alt="Sottobosco Installation">
+                </div>
+                <div class="gallery-item" onclick="openLightbox(this)">
+                    <img src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751970/HR_Sottobosco_EKP_2025_-101220_qd1b1z.jpg" alt="Sottobosco Installation Close-up">
+                </div>
+                <div class="gallery-item" onclick="openLightbox(this)">
+                    <img src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751969/DSC07878-Mejorado-NR_lucsi6.jpg" alt="Live Visuals">
+                </div>
+                <div class="gallery-item" onclick="openLightbox(this)">
+                    <img src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751970/HR_Sottobosco_EKP_2025_-101193_hz3hhd.jpg" alt="Light Mapping">
+                </div>
+                <div class="gallery-item" onclick="openLightbox(this)">
+                    <img src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751970/HR_Sottobosco_EKP_2025_-101222_p0hcx9.jpg" alt="Generative Art">
+                </div>
+                <div class="gallery-item" onclick="openLightbox(this)">
+                    <img src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751966/20240903_003532_efiaw9.jpg" alt="Technical Setup">
+                </div>
+                <div class="gallery-item" onclick="openLightbox(this)">
+                    <img src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751966/20241221_221643_qjtm7k.jpg" alt="Live Event">
+                </div>
+                <div class="gallery-item" onclick="openLightbox(this)">
+                    <img src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751966/UNLOCKED_XL-28_ulnja9.jpg" alt="Unlocked Stage">
+                </div>
+                <div class="gallery-item" onclick="openLightbox(this)">
+                    <img src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751966/TDMeetupTest.1_mm9ta1.jpg" alt="TouchDesigner Meetup">
+                </div>
+                <div class="gallery-item" onclick="openLightbox(this)">
+                    <img src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751965/UNLOCKED_XL-12_fzbt38.jpg" alt="Unlocked Crowd">
+                </div>
+                <div class="gallery-item" onclick="openLightbox(this)">
+                    <img src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751965/UNLOCKED_XL-1_eybd5c.jpg" alt="Unlocked Visuals">
+                </div>
+                <div class="gallery-item" onclick="openLightbox(this)">
+                    <img src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751965/UNLOCKED_XL-55_uaulx0.jpg" alt="Unlocked Atmosphere">
+                </div>
+
+            </div>
         </section>
 
     </div>
@@ -201,7 +234,6 @@
             const content = document.getElementById('lightbox-content');
             lightbox.classList.add('active');
             
-            // Clone the image or video clicked into the lightbox
             const clone = element.children[0].cloneNode(true);
             if(clone.tagName === 'VIDEO') clone.controls = true;
             content.innerHTML = '';
@@ -211,6 +243,11 @@
         function closeLightbox() {
             document.getElementById('lightbox').classList.remove('active');
         }
+
+        // Close lightbox on click outside the image
+        document.getElementById('lightbox').onclick = function(e) {
+            if (e.target.id === 'lightbox') closeLightbox();
+        };
     </script>
 
 </body>
