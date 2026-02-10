@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bio & Skills | Theo Rosemffet</title>
     <style>
+        /* 1. RESET & BASE */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body { 
@@ -13,15 +14,15 @@
             font-family: 'Helvetica', 'Arial', sans-serif; 
             font-weight: 900; 
             overflow-x: hidden;
-            overflow-y: auto;
+            overflow-y: scroll; /* Force scrollbar visibility */
             scroll-behavior: smooth;
         }
 
-        /* SIDEBAR (STAYS FIXED) */
+        /* 2. SIDEBAR - Stays on the left */
         .sidebar {
             position: fixed; 
             top: 0; left: 0;
-            z-index: 20;
+            z-index: 100; /* High z-index to stay on top */
             height: 100vh;
             display: flex;
             flex-direction: column;
@@ -50,36 +51,23 @@
             100% { color: #fff; background: #000; }
         }
 
-        /* SCROLL ARROW */
-        .scroll-indicator {
-            position: absolute;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            animation: bounce 2s infinite;
-            cursor: pointer;
-            z-index: 10;
+        /* 3. CONTENT AREA */
+        .content-wrapper { 
+            margin-left: 400px; /* Offset for sidebar width */
+            position: relative;
         }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translate(-50%, 0); }
-            40% { transform: translate(-50%, -10px); }
-            60% { transform: translate(-50%, -5px); }
-        }
-
-        /* LAYOUT */
-        .content-wrapper { margin-left: 400px; }
 
         section {
             min-height: 100vh;
             display: flex;
             align-items: center;
-            padding: 80px 60px;
+            padding: 100px 60px;
             position: relative;
+            width: 100%;
         }
 
         /* BIO SECTION */
-        #bio { gap: 60px; }
+        #bio { gap: 60px; display: flex; }
         .bio-video-wrapper {
             aspect-ratio: 4 / 5;
             height: 70vh; 
@@ -91,10 +79,31 @@
         .bio-text h2 { font-size: 2.8rem; margin-bottom: 20px; text-transform: uppercase; }
         .bio-text p { font-size: 1.5rem; font-weight: 400; line-height: 1.4; color: #ccc; margin-bottom: 20px; }
 
+        /* SCROLL ARROW - Fixed positioning issues */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+            cursor: pointer;
+            z-index: 50;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translate(-50%, 0); }
+            40% { transform: translate(-50%, -15px); }
+            60% { transform: translate(-50%, -7px); }
+        }
+
         /* SKILLS SECTION */
         #skills {
             flex-direction: column;
             justify-content: flex-start;
+            align-items: flex-start;
             border-top: 1px solid #222;
         }
 
@@ -104,6 +113,7 @@
             margin-bottom: 60px;
             letter-spacing: -2px;
             width: 100%;
+            line-height: 0.9;
         }
 
         .skills-container {
@@ -111,60 +121,46 @@
             max-width: 1000px;
             display: flex;
             flex-direction: column;
-            gap: 2px;
-            background: #222; /* Line color */
+            gap: 1px;
+            background: #333; /* The line color between items */
         }
 
         .skill-item {
             background: #000;
-            padding: 30px;
-            transition: all 0.3s ease;
-            cursor: default;
-        }
-
-        .skill-main {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            padding: 40px;
+            transition: background 0.3s;
         }
 
         .skill-title {
-            font-size: 2rem;
+            font-size: 2.2rem;
             text-transform: uppercase;
-            transition: color 0.3s;
+            display: block;
         }
 
         .skill-detail {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.5s ease, margin-top 0.3s ease;
-            color: #aaa;
+            transition: max-height 0.4s ease, margin-top 0.3s ease;
+            color: #888;
             font-weight: 400;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             line-height: 1.5;
         }
 
-        /* HOVER REVEAL LOGIC */
-        .skill-item:hover {
-            background: #050505;
-        }
+        /* Hover Interaction */
+        .skill-item:hover { background: #0a0a0a; }
+        .skill-item:hover .skill-title { animation: strobe 0.1s steps(2) infinite; }
+        .skill-item:hover .skill-detail { max-height: 400px; margin-top: 20px; }
 
-        .skill-item:hover .skill-title {
-            animation: strobe 0.1s steps(2) infinite;
-        }
-
-        .skill-item:hover .skill-detail {
-            max-height: 500px;
-            margin-top: 20px;
-        }
-
-        /* MOBILE FIXES */
+        /* Responsive */
         @media (max-width: 1100px) {
             .sidebar { position: relative; width: 100%; height: auto; }
             .content-wrapper { margin-left: 0; }
             #bio { flex-direction: column; height: auto; }
+            .bio-video-wrapper { height: 50vh; width: auto; }
             .skills-header { font-size: 3rem; }
-            .skill-detail { max-height: none; margin-top: 15px; } /* Always show on mobile */
+            .skill-detail { max-height: none; margin-top: 20px; }
+            .scroll-indicator { display: none; }
         }
     </style>
 </head>
@@ -185,6 +181,7 @@
     </div>
 
     <div class="content-wrapper">
+        
         <section id="bio">
             <div class="bio-video-wrapper">
                 <video autoplay muted loop playsinline preload="auto">
@@ -197,8 +194,8 @@
                 <p>My background spans the full technical and creative spectrum: from creating and operating video content at large-scale festivals to directing tour visuals, as well as doing LED setup and programming complex environments.</p>
             </div>
 
-            <div class="scroll-indicator" onclick="document.getElementById('skills').scrollIntoView()">
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="square" stroke-linejoin="arcs">
+            <div class="scroll-indicator" onclick="document.getElementById('skills').scrollIntoView({behavior: 'smooth'})">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
                     <path d="M7 13l5 5 5-5M7 6l5 5 5-5"/>
                 </svg>
             </div>
@@ -209,49 +206,49 @@
             
             <div class="skills-container">
                 <div class="skill-item">
-                    <div class="skill-main"><span class="skill-title">TouchDesigner</span></div>
+                    <span class="skill-title">TouchDesigner</span>
                     <div class="skill-detail">
                         +5 years of experience in live VJ performance and installations. Proficient in building custom tools via Python and GLSL for GPU-accelerated workflows.
                     </div>
                 </div>
 
                 <div class="skill-item">
-                    <div class="skill-main"><span class="skill-title">Video Operator</span></div>
+                    <span class="skill-title">Video Operator</span>
                     <div class="skill-detail">
                         8 years of experience as a VJ for high-capacity venues and international festivals. Extensive track record at locations including Apolo, Razzmatazz, and Input, with festival performances at OffWeek, Zevra, and TramunFest.
                     </div>
                 </div>
 
                 <div class="skill-item">
-                    <div class="skill-main"><span class="skill-title">Video Technician</span></div>
+                    <span class="skill-title">Video Technician</span>
                     <div class="skill-detail">
                         2 years of experience in LED assembly and technical production. Proficient in the configuration and operation of NovaStar hardware and NovaLCT software for large-scale displays.
                     </div>
                 </div>
 
                 <div class="skill-item">
-                    <div class="skill-main"><span class="skill-title">Direction & Editing</span></div>
+                    <span class="skill-title">Direction & Editing</span>
                     <div class="skill-detail">
                         Creative Direction and Editing for artist tour visuals, including Cyril Kamer and 3DNAN. Specialized in developing versatile content designed to adapt seamlessly across diverse display configurations and stage layouts.
                     </div>
                 </div>
 
                 <div class="skill-item">
-                    <div class="skill-main"><span class="skill-title">Installations</span></div>
+                    <span class="skill-title">Installations</span>
                     <div class="skill-detail">
                         Creative & Technical Direction for immersive installations, managing projects from conceptual design to physical execution. Notable work includes the permanent lighting system at Sala Marte (Malaga) and custom anamorphic installations.
                     </div>
                 </div>
 
                 <div class="skill-item">
-                    <div class="skill-main"><span class="skill-title">Technical Artist</span></div>
+                    <span class="skill-title">Technical Artist</span>
                     <div class="skill-detail">
                         Developer of custom tools, UIs, and data pipelines. Expert in building high-performance systems including bespoke VJ decks, automated printing scripts, and advanced reprojection tools.
                     </div>
                 </div>
 
                 <div class="skill-item">
-                    <div class="skill-main"><span class="skill-title">Teaching</span></div>
+                    <span class="skill-title">Teaching</span>
                     <div class="skill-detail">
                         Instructor and Speaker focused on TouchDesigner and creative coding. Organizer for the TouchDesigner Barcelona community, hosting workshops and technical presentations.
                     </div>
