@@ -27,9 +27,9 @@
         nav ul { list-style: none; }
         nav li { margin-bottom: 20px; }
         nav a { color: #fff; text-decoration: none; font-size: 2.5rem; text-transform: uppercase; display: inline-block; }
-        nav a:hover { animation: strobe 0.1s steps(2) infinite; padding-left: 10px; }
+        nav a:hover { animation: strobeText 0.1s steps(2) infinite; padding-left: 10px; }
 
-        @keyframes strobe {
+        @keyframes strobeText {
             0%, 49% { color: #fff; }
             50%, 99% { color: #000; }
             100% { color: #fff; }
@@ -72,21 +72,40 @@
         #gallery { padding: 80px; }
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(3, 1fr); /* Force 3 columns for better control */
             gap: 20px;
             margin-top: 40px;
             overflow: hidden;
             transition: max-height 0.8s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .gallery-grid.collapsed { max-height: 400px; } /* Shows roughly 1 row */
-        .gallery-grid.expanded { max-height: 5000px; }
+        
+        /* Adjusted height to show exactly one row */
+        .gallery-grid.collapsed { max-height: 31vw; } 
+        .gallery-grid.expanded { max-height: 10000px; }
 
+        /* STROBE BUTTON STYLE */
         .expand-btn {
-            background: none; border: 1px solid #fff; color: #fff;
-            padding: 8px 20px; cursor: pointer; font-family: inherit;
-            font-size: 1rem; text-transform: uppercase; transition: 0.3s;
+            background: #fff; 
+            border: none; 
+            color: #000;
+            padding: 10px 25px; 
+            cursor: pointer; 
+            font-family: inherit;
+            font-size: 1rem; 
+            text-transform: uppercase;
+            font-weight: 900;
         }
-        .expand-btn:hover { background: #fff; color: #000; }
+        
+        /* The whole button strobes on hover */
+        .expand-btn:hover {
+            animation: fullStrobe 0.1s steps(2) infinite;
+        }
+
+        @keyframes fullStrobe {
+            0%, 49% { background: #fff; color: #000; }
+            50%, 99% { background: #000; color: #fff; }
+            100% { background: #fff; color: #000; }
+        }
 
         .gallery-item {
             aspect-ratio: 1;
@@ -122,7 +141,7 @@
             font-size: 2rem; font-weight: 900; text-transform: uppercase;
             color: #444; white-space: nowrap; transition: color 0.2s ease;
         }
-        .collab-item:hover { color: #fff; animation: strobe 0.1s steps(2) infinite; }
+        .collab-item:hover { color: #fff; animation: strobeText 0.1s steps(2) infinite; }
         @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-100%); } }
 
         /* MOBILE FIX */
@@ -132,6 +151,8 @@
             .project-section, #gallery, #collaborators { padding: 40px; }
             .project-title { font-size: 2.5rem; }
             .collab-item { font-size: 1.5rem; }
+            .gallery-grid.collapsed { max-height: 90vw; } /* Adjusted for single col on mobile */
+            .gallery-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
