@@ -105,6 +105,37 @@
             .project-section, #gallery { padding: 40px; }
             .project-title { font-size: 2.5rem; }
         }
+        /* COLLABORATORS SECTION */
+        #collaborators {
+            padding: 80px;
+            background: #000;
+        }
+        
+        .collab-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px 40px; /* Vertical and horizontal spacing */
+            margin-top: 40px;
+        }
+        
+        .collab-item {
+            font-size: 1.8rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            color: #444; /* Muted by default */
+            transition: color 0.2s ease;
+            cursor: default;
+        }
+        
+        .collab-item:hover {
+            color: #fff; /* Highlights on hover */
+            animation: strobe 0.1s steps(2) infinite;
+        }
+        
+        @media (max-width: 1100px) {
+            #collaborators { padding: 40px; }
+            .collab-item { font-size: 1.2rem; }
+        }
     </style>
 </head>
 <body>
@@ -219,6 +250,35 @@
                     <img src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751965/UNLOCKED_XL-55_uaulx0.jpg" alt="Unlocked Atmosphere">
                 </div>
 
+            </div>
+        </section>
+        <section id="collaborators" style="padding-bottom: 160px;">
+            <h2 class="project-title">Collaborators</h2>
+            <div class="collab-list">
+                <span class="collab-item">999999999</span>
+                <span class="collab-item">6ejou</span>
+                <span class="collab-item">Adrian Mills</span>
+                <span class="collab-item">CARV</span>
+                <span class="collab-item">Chris Stussy</span>
+                <span class="collab-item">Cyril Kamer</span>
+                <span class="collab-item">DJ Gigola</span>
+                <span class="collab-item">East End Dubs</span>
+                <span class="collab-item">Estella Boersma</span>
+                <span class="collab-item">Fantasm</span>
+                <span class="collab-item">Funk Tribu</span>
+                <span class="collab-item">IH8Models</span>
+                <span class="collab-item">Insane Teknology</span>
+                <span class="collab-item">Jamie Jones</span>
+                <span class="collab-item">Joseph Capriati</span>
+                <span class="collab-item">Kander</span>
+                <span class="collab-item">Marlon Hoffstadt</span>
+                <span class="collab-item">MEATBODIES</span>
+                <span class="collab-item">OnlyNumbers</span>
+                <span class="collab-item">PAWSA</span>
+                <span class="collab-item">Patrick Mason</span>
+                <span class="collab-item">Shlømo</span>
+                <span class="collab-item">Vendex</span>
+                <span class="collab-item">Viviana Casanova</span>
             </div>
         </section>
 
