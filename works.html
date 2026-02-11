@@ -68,27 +68,15 @@
             color: #ccc;
         }
 
-        /* GALLERY GRID & EXPAND LOGIC - FINAL FIX */
+        /* 4. GALLERY GRID */
         #gallery { padding: 80px; }
         
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            /* REMOVED grid-template-rows to stop the squishing */
             gap: 20px;
             margin-top: 40px;
-            overflow: hidden;
-            transition: max-height 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        /* Use a precise max-height for 1 row. 
-           On desktop with 3 columns, roughly 25vw-30vw works well. */
-        .gallery-grid.collapsed { 
-            max-height: 300px; 
-        } 
-        
-        .gallery-grid.expanded { 
-            max-height: 5000px; 
+            transition: opacity 0.5s ease;
         }
         
         .gallery-item {
@@ -98,8 +86,15 @@
             cursor: pointer;
             overflow: hidden;
             transition: transform 0.3s ease, filter 0.3s ease;
+            /* Fade in animation for lazy injection */
+            animation: fadeIn 0.5s ease forwards;
         }
         
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         .gallery-item:hover { 
             filter: brightness(1.2); 
             transform: scale(1.02); 
@@ -109,25 +104,13 @@
             width: 100%; 
             height: 100%; 
             object-fit: cover; 
-            display: block; /* Removes tiny bottom gaps */
+            display: block;
         }
-        
-        /* Updated Mobile Fix to prevent squishing on small screens */
-        @media (max-width: 1100px) {
-            .sidebar { position: relative; width: 100%; height: auto; }
-            .content-wrapper { margin-left: 0; width: 100%; }
-            .project-section, #gallery, #collaborators { padding: 40px; }
-            .gallery-grid { grid-template-columns: 1fr; }
-            
-            /* On mobile (1 column), max-height needs to be larger to show 1 full image */
-            .gallery-grid.collapsed { 
-                max-height: 85vw; 
-            }
-        }
+
         /* STROBE BUTTON STYLE */
         .expand-btn {
-            background: transparent; /* Stealth by default */
-            border: none; 
+            background: transparent;
+            border: 1px solid #fff; 
             color: #fff;
             padding: 10px 25px; 
             cursor: pointer; 
@@ -137,7 +120,6 @@
             font-weight: 900;
         }
         
-        /* The whole button strobes on hover */
         .expand-btn:hover {
             animation: fullStrobe 0.1s steps(2) infinite;
         }
@@ -147,16 +129,6 @@
             50%, 99% { background: #000; color: #fff; }
             100% { background: #fff; color: #000; }
         }
-
-        .gallery-item {
-            aspect-ratio: 1;
-            background: #111;
-            cursor: pointer;
-            overflow: hidden;
-            transition: transform 0.3s ease, filter 0.3s ease;
-        }
-        .gallery-item:hover { filter: brightness(1.2); transform: scale(1.02); }
-        .gallery-item img { width: 100%; height: 100%; object-fit: cover; }
 
         /* LIGHTBOX SYSTEM */
         #lightbox {
@@ -192,7 +164,6 @@
             .project-section, #gallery, #collaborators { padding: 40px; }
             .project-title { font-size: 2.5rem; }
             .collab-item { font-size: 1.5rem; }
-            .gallery-grid.collapsed { height: 90vw; } 
             .gallery-grid { grid-template-columns: 1fr; }
         }
     </style>
@@ -223,40 +194,7 @@
             <div class="project-media-main">
                 <video autoplay muted loop playsinline src="https://res.cloudinary.com/dgsufjhl9/video/upload/q_auto,f_auto/v1770747383/TRAMUN_TEASER_uiczn2.mp4"></video>
             </div>
-            <p class="project-desc">Creative Direction and Video Operation for the Unlocked Stage. Designed a variety of high-impact visual atmospheres that integrated seamlessly with the stage's screens.</p>
-        </section>
-
-        <section class="project-section" id="cyril-kamer">
-            <div class="project-header">
-                <h2 class="project-title">Cyril Kamer Tour</h2>
-                <p class="project-role">Direction • Editing • VJ</p>
-            </div>
-            <div class="project-media-main">
-                <video autoplay muted loop playsinline src="https://res.cloudinary.com/dgsufjhl9/video/upload/q_auto,f_auto/v1770749368/CKweb_cut_jvh91d.mp4"></video>
-            </div>
-            <p class="project-desc">Direction & Editing of Tour Visuals for the 2025 Spanish Tour.<br>Developed a versatile content package and operated video on-site for all major tour dates.</p>
-        </section>
-
-        <section class="project-section" id="sala-marte">
-            <div class="project-header">
-                <h2 class="project-title">Sala Marte</h2>
-                <p class="project-role">Technical Direction • Creative Coding</p>
-            </div>
-            <div class="project-media-main">
-                <video autoplay muted loop playsinline src="https://res.cloudinary.com/dgsufjhl9/video/upload/q_auto,f_auto/v1770750159/Sala_Marte_Final_cht6ae.mp4"></video>
-            </div>
-            <p class="project-desc">Permanent lighting installation in Sala Marte, Malaga.<br>Created a generative audio-responsive system and a bespoke remote control interface for house technicians.</p>
-        </section>
-
-        <section class="project-section" id="postergen">
-            <div class="project-header">
-                <h2 class="project-title">Poster[GEN].v0</h2>
-                <p class="project-role">Interactive Installation • TouchDesigner</p>
-            </div>
-            <div class="project-media-main">
-                <video autoplay muted loop playsinline src="https://res.cloudinary.com/dgsufjhl9/video/upload/q_auto,f_auto/v1770750908/Demo_Post_cut_jv83xc.mp4"></video>
-            </div>
-            <p class="project-desc">Interactive installation developed for TouchDesigner Barcelona.<br>Users manipulate a 3D scene in real-time to generate and print unique generative posters.</p>
+            <p class="project-desc">Creative Direction and Video Operation for the Unlocked Stage.</p>
         </section>
 
         <section id="gallery">
@@ -264,40 +202,11 @@
                 <h2 class="project-title" style="margin-bottom: 0;">Archive</h2>
                 <button id="expand-btn" class="expand-btn" onclick="toggleArchive()">[ Expand ]</button>
             </div>
-            <div id="archive-grid" class="gallery-grid collapsed">
-                <div class="gallery-item" onclick="openLightbox(this)"><img src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751971/DSC08434-Mejorado-NR_kejjob.jpg" alt="Theo Work"></div>
-                <div class="gallery-item" onclick="openLightbox(this)"><img src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751972/ckss_im7ndy.png" alt="Cyril Kamer Stage"></div>
-                <div class="gallery-item" onclick="openLightbox(this)"><img src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751971/ckssjamesharden_mnzaga.png" alt="Tour Visuals"></div>
-                <div class="gallery-item" onclick="openLightbox(this)"><img src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751970/HR_Sottobosco_EKP_2025_-101179_jujggh.jpg" alt="Sottobosco Installation"></div>
-                <div class="gallery-item" onclick="openLightbox(this)"><img src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751970/HR_Sottobosco_EKP_2025_-101220_qd1b1z.jpg" alt="Sottobosco Installation Close-up"></div>
-                <div class="gallery-item" onclick="openLightbox(this)"><img src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751969/DSC07878-Mejorado-NR_lucsi6.jpg" alt="Live Visuals"></div>
-                <div class="gallery-item" onclick="openLightbox(this)"><img src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751970/HR_Sottobosco_EKP_2025_-101193_hz3hhd.jpg" alt="Light Mapping"></div>
-                <div class="gallery-item" onclick="openLightbox(this)"><img src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751970/HR_Sottobosco_EKP_2025_-101222_p0hcx9.jpg" alt="Generative Art"></div>
-                <div class="gallery-item" onclick="openLightbox(this)"><img src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751966/20240903_003532_efiaw9.jpg" alt="Technical Setup"></div>
-                <div class="gallery-item" onclick="openLightbox(this)"><img src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751966/20241221_221643_qjtm7k.jpg" alt="Live Event"></div>
-                <div class="gallery-item" onclick="openLightbox(this)"><img src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751966/UNLOCKED_XL-28_ulnja9.jpg" alt="Unlocked Stage"></div>
-                <div class="gallery-item" onclick="openLightbox(this)"><img src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751966/TDMeetupTest.1_mm9ta1.jpg" alt="TouchDesigner Meetup"></div>
-                <div class="gallery-item" onclick="openLightbox(this)"><img src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751965/UNLOCKED_XL-12_fzbt38.jpg" alt="Unlocked Crowd"></div>
-                <div class="gallery-item" onclick="openLightbox(this)"><img src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751965/UNLOCKED_XL-1_eybd5c.jpg" alt="Unlocked Visuals"></div>
-                <div class="gallery-item" onclick="openLightbox(this)"><img src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751965/UNLOCKED_XL-55_uaulx0.jpg" alt="Unlocked Atmosphere"></div>
-                <div class="gallery-item" onclick="openLightbox(this)"><img src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770805229/unnamed_2_bdn6gw.png" alt="Visual Work Archive 1"></div>
-                <div class="gallery-item" onclick="openLightbox(this)"><img src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770805229/unnamed_1_luytuk.png" alt="Visual Work Archive 2"></div>
-                <div class="gallery-item" onclick="openLightbox(this)"><img src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770805228/unnamed_3_au8uqr.png" alt="Visual Work Archive 3"></div>
-                <div class="gallery-item" onclick="openLightbox(this)"><img src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770805228/unnamed_wmyxvi.png" alt="Visual Work Archive 4"></div>
-                <div class="gallery-item" onclick="openLightbox(this)"><img src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770805228/20250327_tramunfest_mbamrp.jpg" alt="Tramunfest 2025 Live"></div>
-                <div class="gallery-item" onclick="openLightbox(this)"><img src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770805228/unnamed_1_o0sfuw.jpg" alt="Visual Work Archive 5"></div>
-            </div>
+            <div id="archive-grid" class="gallery-grid">
+                </div>
         </section>
 
-        <section id="collaborators" style="padding-bottom: 160px;">
-            <h2 class="project-title">Artists featuring my visuals</h2>
-            <div class="collab-container">
-                <div class="collab-list">
-                    <span class="collab-item">3DNAN</span><span class="collab-item">753</span><span class="collab-item">6ejou</span><span class="collab-item">AC2</span><span class="collab-item">Adrián Mills</span><span class="collab-item">Afem Syko</span><span class="collab-item">AK61</span><span class="collab-item">Alba Franch</span><span class="collab-item">Ale De Tuglie</span><span class="collab-item">Alex Stein</span><span class="collab-item">AMBAM</span><span class="collab-item">Andy The Core</span><span class="collab-item">Angy Kore</span><span class="collab-item">Anna Jevills</span><span class="collab-item">Anomik.Warp</span><span class="collab-item">Arcex</span><span class="collab-item">Art Of Fighters</span><span class="collab-item">Bapho999</span><span class="collab-item">Barbara Lago</span><span class="collab-item">Bastian Bux</span><span class="collab-item">Basswell</span><span class="collab-item">Candy Cox</span><span class="collab-item">Carnada</span><span class="collab-item">CARV</span><span class="collab-item">Cera Khin</span><span class="collab-item">Charlie Sparks</span><span class="collab-item">Chloe Robinson</span><span class="collab-item">Chris Main</span><span class="collab-item">Chris Stussy</span><span class="collab-item">Clandestine</span><span class="collab-item">Clap Kent</span><span class="collab-item">Cleopard2000</span><span class="collab-item">Cool Jumpers</span><span class="collab-item">Cristobal Pesce</span><span class="collab-item">CriticalError404</span><span class="collab-item">Cyril Kamer</span><span class="collab-item">Daniella DaSilva</span><span class="collab-item">Danny Avila</span><span class="collab-item">David Moleon</span><span class="collab-item">Dave Decibel</span><span class="collab-item">Dave.It</span><span class="collab-item">Davyboi</span><span class="collab-item">DBBD</span><span class="collab-item">Dex Phase</span><span class="collab-item">Diëk</span><span class="collab-item">Diøn</span><span class="collab-item">DJ Gigola</span><span class="collab-item">DJ Guestlist</span><span class="collab-item">DJ Sandwich</span><span class="collab-item">DJ Sisu</span><span class="collab-item">DJ Sonic</span><span class="collab-item">Doruksen</span><span class="collab-item">Drazzit</span><span class="collab-item">DXPE</span><span class="collab-item">Eargasm God</span><span class="collab-item">East End Dubs</span><span class="collab-item">Eastel</span><span class="collab-item">Ekka</span><span class="collab-item">Electric Monolith</span><span class="collab-item">Erik Blaze</span><span class="collab-item">Estella Boersma</span><span class="collab-item">Euyinn</span><span class="collab-item">Evil Activities</span><span class="collab-item">Fantasm</span><span class="collab-item">Fhiga</span><span class="collab-item">Fractal</span><span class="collab-item">Frazi.Er</span><span class="collab-item">Funk Tribu</span><span class="collab-item">Furiouscris</span><span class="collab-item">Gabriel Padrevita</span><span class="collab-item">Gaston Zani</span><span class="collab-item">Giusseppi</span><span class="collab-item">GNRØ</span><span class="collab-item">Guille Placencia</span><span class="collab-item">Hades</span><span class="collab-item">Hitmilow</span><span class="collab-item">I Hate Models</span><span class="collab-item">In Verruf</span><span class="collab-item">Inexxstable</span><span class="collab-item">Infeed</span><span class="collab-item">Insane Teknology</span><span class="collab-item">Jaess & The Robots</span><span class="collab-item">Jamie Jones</span><span class="collab-item">Jan Vercauteren</span><span class="collab-item">Joanna Cohelo</span><span class="collab-item">Johannes Schutter</span><span class="collab-item">Jon Peña</span><span class="collab-item">Joseph Capriati</span><span class="collab-item">Karah</span><span class="collab-item">Ketting</span><span class="collab-item">Keyklau</span><span class="collab-item">Kimmy</span><span class="collab-item">King Of Pain</span><span class="collab-item">KØ:LAB</span><span class="collab-item">KRL MRX</span><span class="collab-item">La Penderie Noire</span><span class="collab-item">Laura SN</span><span class="collab-item">Laure Croft</span><span class="collab-item">Lee Ann Roberts</span><span class="collab-item">Lokier</span><span class="collab-item">Loocee O</span><span class="collab-item">Luciid</span><span class="collab-item">Luckysansano</span><span class="collab-item">Lukas</span><span class="collab-item">Markos13</span><span class="collab-item">Marlon Hoffstadt</span><span class="collab-item">Matrakk</span><span class="collab-item">Matt P.</span><span class="collab-item">MEATBODIES</span><span class="collab-item">Metralla</span><span class="collab-item">Mika Heggemann</span><span class="collab-item">MVGRI</span><span class="collab-item">Nahoomie</span><span class="collab-item">Nahum Korm</span><span class="collab-item">Neon Graveyard</span><span class="collab-item">Newcetox</span><span class="collab-item">Nivax</span><span class="collab-item">Niz</span><span class="collab-item">Noise Mafia</span><span class="collab-item">Ody.ssey</span><span class="collab-item">Odymel</span><span class="collab-item">Oguz</span><span class="collab-item">Onlynumbers</span><span class="collab-item">Øtta</span><span class="collab-item">Oxiyd</span><span class="collab-item">Paralich</span><span class="collab-item">Parallx</span><span class="collab-item">Patrick Mason</span><span class="collab-item">Pau Guilera</span><span class="collab-item">Paulix</span><span class="collab-item">PAWSA</span><span class="collab-item">Pegassi</span><span class="collab-item">Pergo</span><span class="collab-item">PLX</span><span class="collab-item">PRADA2000</span><span class="collab-item">Raxeller</span><span class="collab-item">ReStyle</span><span class="collab-item">Rocco.Fx</span><span class="collab-item">Roxy Delgado</span><span class="collab-item">Sante Sansone</span><span class="collab-item">Santi Aranya</span><span class="collab-item">Sara Krin</span><span class="collab-item">Shlømo</span><span class="collab-item">Silvie Loto</span><span class="collab-item">Sita Bellan</span><span class="collab-item">Somewhen</span><span class="collab-item">Sonic Anaconda</span><span class="collab-item">Skryption</span><span class="collab-item">Skryos</span><span class="collab-item">Skudero</span><span class="collab-item">Sonora</span><span class="collab-item">Stan Christ</span><span class="collab-item">Tarkno</span><span class="collab-item">The Unborn Child</span><span class="collab-item">Tieum</span><span class="collab-item">Toxic Machinery</span><span class="collab-item">Trancemaster Krause</span><span class="collab-item">VCL</span><span class="collab-item">Vendex</span><span class="collab-item">Vera Grace</span><span class="collab-item">Victor Ruiz</span><span class="collab-item">Vidaloca</span><span class="collab-item">Viviana Casanova</span><span class="collab-item">Vivay</span><span class="collab-item">Weed.Fyx</span><span class="collab-item">WHEATS</span>
-                </div>
-            </div>
-        </section>
-    </div>
+        </div>
 
     <div id="lightbox">
         <span class="close-lightbox" onclick="closeLightbox()">&times;</span>
@@ -305,19 +214,66 @@
     </div>
 
     <script>
+        // Store all archive images here so they don't load until requested
+        const archiveImages = [
+            { src: "https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751971/DSC08434-Mejorado-NR_kejjob.jpg", alt: "Theo Work" },
+            { src: "https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751972/ckss_im7ndy.png", alt: "Cyril Kamer Stage" },
+            { src: "https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751971/ckssjamesharden_mnzaga.png", alt: "Tour Visuals" },
+            { src: "https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751970/HR_Sottobosco_EKP_2025_-101179_jujggh.jpg", alt: "Sottobosco Installation" },
+            { src: "https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751970/HR_Sottobosco_EKP_2025_-101220_qd1b1z.jpg", alt: "Sottobosco" },
+            { src: "https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751969/DSC07878-Mejorado-NR_lucsi6.jpg", alt: "Live Visuals" },
+            { src: "https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751970/HR_Sottobosco_EKP_2025_-101193_hz3hhd.jpg", alt: "Light Mapping" },
+            { src: "https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751970/HR_Sottobosco_EKP_2025_-101222_p0hcx9.jpg", alt: "Generative Art" },
+            { src: "https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751966/20240903_003532_efiaw9.jpg", alt: "Technical Setup" },
+            { src: "https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751966/20241221_221643_qjtm7k.jpg", alt: "Live Event" },
+            { src: "https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751966/UNLOCKED_XL-28_ulnja9.jpg", alt: "Unlocked Stage" },
+            { src: "https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751966/TDMeetupTest.1_mm9ta1.jpg", alt: "TouchDesigner Meetup" },
+            { src: "https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751965/UNLOCKED_XL-12_fzbt38.jpg", alt: "Unlocked Crowd" },
+            { src: "https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751965/UNLOCKED_XL-1_eybd5c.jpg", alt: "Unlocked Visuals" },
+            { src: "https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751965/UNLOCKED_XL-55_uaulx0.jpg", alt: "Unlocked Atmosphere" },
+            { src: "https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770805229/unnamed_2_bdn6gw.png", alt: "Archive 1" },
+            { src: "https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770805229/unnamed_1_luytuk.png", alt: "Archive 2" },
+            { src: "https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770805228/unnamed_3_au8uqr.png", alt: "Archive 3" },
+            { src: "https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770805228/unnamed_wmyxvi.png", alt: "Archive 4" },
+            { src: "https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770805228/20250327_tramunfest_mbamrp.jpg", alt: "Tramunfest 2025" },
+            { src: "https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770805228/unnamed_1_o0sfuw.jpg", alt: "Archive 5" }
+        ];
+
+        let isExpanded = false;
+        const grid = document.getElementById('archive-grid');
+        const btn = document.getElementById('expand-btn');
+
+        // Initial Load: Show only first 3
+        function initGallery() {
+            renderItems(archiveImages.slice(0, 3));
+        }
+
+        function renderItems(items) {
+            items.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'gallery-item';
+                div.onclick = function() { openLightbox(this); };
+                
+                // Using loading="lazy" for better performance
+                div.innerHTML = `<img src="${item.src}" alt="${item.alt}" loading="lazy">`;
+                grid.appendChild(div);
+            });
+        }
+
         function toggleArchive() {
-            const grid = document.getElementById('archive-grid');
-            const btn = document.getElementById('expand-btn');
-            
-            if (grid.classList.contains('collapsed')) {
-                grid.classList.remove('collapsed');
-                grid.classList.add('expanded');
+            if (!isExpanded) {
+                // Load the rest
+                const remaining = archiveImages.slice(3);
+                renderItems(remaining);
                 btn.innerHTML = "[ Contract ]";
+                isExpanded = true;
             } else {
-                grid.classList.remove('expanded');
-                grid.classList.add('collapsed');
+                // Remove the extra items and keep only first 3
+                while (grid.children.length > 3) {
+                    grid.removeChild(grid.lastChild);
+                }
                 btn.innerHTML = "[ Expand ]";
-                // Only scroll if we are actually collapsing
+                isExpanded = false;
                 document.getElementById('gallery').scrollIntoView({ behavior: 'smooth' });
             }
         }
@@ -326,17 +282,21 @@
             const lightbox = document.getElementById('lightbox');
             const content = document.getElementById('lightbox-content');
             lightbox.classList.add('active');
-            const clone = element.children[0].cloneNode(true);
-            if(clone.tagName === 'VIDEO') clone.controls = true;
+            const clone = element.querySelector('img').cloneNode(true);
             content.innerHTML = '';
             content.appendChild(clone);
         }
+
         function closeLightbox() {
             document.getElementById('lightbox').classList.remove('active');
         }
+
         document.getElementById('lightbox').onclick = function(e) {
             if (e.target.id === 'lightbox') closeLightbox();
         };
+
+        // Initialize on load
+        window.onload = initGallery;
     </script>
 </body>
 </html>
