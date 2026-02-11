@@ -68,32 +68,29 @@
             color: #ccc;
         }
 
-        /* GALLERY GRID & EXPAND LOGIC - REFIXED */
+        /* GALLERY GRID & EXPAND LOGIC - FINAL FIX */
         #gallery { padding: 80px; }
         
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            /* Define the row height explicitly to prevent squishing */
-            grid-template-rows: repeat(auto-fill, minmax(0, 1fr)); 
+            /* REMOVED grid-template-rows to stop the squishing */
             gap: 20px;
             margin-top: 40px;
             overflow: hidden;
-            align-content: start; /* Keeps items at the top */
             transition: max-height 0.8s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
-        /* Use a fixed height for collapsed to show exactly 1 row without compression */
+        /* Use a precise max-height for 1 row. 
+           On desktop with 3 columns, roughly 25vw-30vw works well. */
         .gallery-grid.collapsed { 
-            /* This calculation accounts for the 1:1 aspect ratio of the items */
-            max-height: 25vw; 
+            max-height: 300px; 
         } 
         
         .gallery-grid.expanded { 
-            max-height: 6000px; /* High enough to show all rows */
+            max-height: 5000px; 
         }
         
-        /* Ensure items maintain their square shape */
         .gallery-item {
             aspect-ratio: 1 / 1;
             width: 100%;
@@ -102,7 +99,31 @@
             overflow: hidden;
             transition: transform 0.3s ease, filter 0.3s ease;
         }
-
+        
+        .gallery-item:hover { 
+            filter: brightness(1.2); 
+            transform: scale(1.02); 
+        }
+        
+        .gallery-item img { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+            display: block; /* Removes tiny bottom gaps */
+        }
+        
+        /* Updated Mobile Fix to prevent squishing on small screens */
+        @media (max-width: 1100px) {
+            .sidebar { position: relative; width: 100%; height: auto; }
+            .content-wrapper { margin-left: 0; width: 100%; }
+            .project-section, #gallery, #collaborators { padding: 40px; }
+            .gallery-grid { grid-template-columns: 1fr; }
+            
+            /* On mobile (1 column), max-height needs to be larger to show 1 full image */
+            .gallery-grid.collapsed { 
+                max-height: 85vw; 
+            }
+        }
         /* STROBE BUTTON STYLE */
         .expand-btn {
             background: transparent; /* Stealth by default */
