@@ -98,18 +98,11 @@
         #lightbox img { max-width: 100%; max-height: 90vh; object-fit: contain; }
         .close-lightbox { position: absolute; top: 40px; right: 40px; font-size: 3rem; cursor: pointer; color: #fff; line-height: 1; }
 
-        /* MOBILE FIX */
-        @media (max-width: 1100px) {
-            .sidebar { position: relative; width: 100%; height: auto; }
-            .content-wrapper { margin-left: 0; width: 100%; }
-            .project-section, #gallery { padding: 40px; }
-            .project-title { font-size: 2.5rem; }
-        }
         /* COLLABORATORS SECTION - MOVING VERSION */
         #collaborators {
             padding: 80px;
             background: #000;
-            overflow: hidden; /* Hides the names as they slide out */
+            overflow: hidden;
         }
         
         .collab-container {
@@ -126,10 +119,9 @@
             align-items: center;
             justify-content: space-around;
             min-width: 100%;
-            animation: scroll 40s linear infinite; /* Speed of the movement */
+            animation: scroll 40s linear infinite;
         }
         
-        /* Pause on hover so people can actually read a name */
         .collab-container:hover .collab-list {
             animation-play-state: paused;
         }
@@ -139,7 +131,7 @@
             font-weight: 900;
             text-transform: uppercase;
             color: #444;
-            white-space: nowrap; /* Keeps names on one line */
+            white-space: nowrap;
             transition: color 0.2s ease;
         }
         
@@ -152,11 +144,16 @@
             from { transform: translateX(0); }
             to { transform: translateX(-100%); }
         }
-        
+
+        /* MOBILE FIX */
         @media (max-width: 1100px) {
-            #collaborators { padding: 40px; }
+            .sidebar { position: relative; width: 100%; height: auto; }
+            .content-wrapper { margin-left: 0; width: 100%; }
+            .project-section, #gallery, #collaborators { padding: 40px; }
+            .project-title { font-size: 2.5rem; }
             .collab-item { font-size: 1.5rem; }
         }
+    </style>
 </head>
 <body>
 
@@ -223,111 +220,32 @@
         <section id="gallery">
             <h2 class="project-title">Archive</h2>
             <div class="gallery-grid">
-                
-                <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751971/DSC08434-Mejorado-NR_kejjob.jpg" alt="Theo Work">
-                </div>
-                <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751972/ckss_im7ndy.png" alt="Cyril Kamer Stage">
-                </div>
-                <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751971/ckssjamesharden_mnzaga.png" alt="Tour Visuals">
-                </div>
-                <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751970/HR_Sottobosco_EKP_2025_-101179_jujggh.jpg" alt="Sottobosco Installation">
-                </div>
-                <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751970/HR_Sottobosco_EKP_2025_-101220_qd1b1z.jpg" alt="Sottobosco Installation Close-up">
-                </div>
-                <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751969/DSC07878-Mejorado-NR_lucsi6.jpg" alt="Live Visuals">
-                </div>
-                <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751970/HR_Sottobosco_EKP_2025_-101193_hz3hhd.jpg" alt="Light Mapping">
-                </div>
-                <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751970/HR_Sottobosco_EKP_2025_-101222_p0hcx9.jpg" alt="Generative Art">
-                </div>
-                <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751966/20240903_003532_efiaw9.jpg" alt="Technical Setup">
-                </div>
-                <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751966/20241221_221643_qjtm7k.jpg" alt="Live Event">
-                </div>
-                <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751966/UNLOCKED_XL-28_ulnja9.jpg" alt="Unlocked Stage">
-                </div>
-                <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751966/TDMeetupTest.1_mm9ta1.jpg" alt="TouchDesigner Meetup">
-                </div>
-                <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751965/UNLOCKED_XL-12_fzbt38.jpg" alt="Unlocked Crowd">
-                </div>
-                <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751965/UNLOCKED_XL-1_eybd5c.jpg" alt="Unlocked Visuals">
-                </div>
-                <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751965/UNLOCKED_XL-55_uaulx0.jpg" alt="Unlocked Atmosphere">
-                </div>
-
+                <div class="gallery-item" onclick="openLightbox(this)"><img src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751971/DSC08434-Mejorado-NR_kejjob.jpg" alt="Theo Work"></div>
+                <div class="gallery-item" onclick="openLightbox(this)"><img src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751972/ckss_im7ndy.png" alt="Cyril Kamer Stage"></div>
+                <div class="gallery-item" onclick="openLightbox(this)"><img src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751971/ckssjamesharden_mnzaga.png" alt="Tour Visuals"></div>
+                <div class="gallery-item" onclick="openLightbox(this)"><img src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751970/HR_Sottobosco_EKP_2025_-101179_jujggh.jpg" alt="Sottobosco Installation"></div>
+                <div class="gallery-item" onclick="openLightbox(this)"><img src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751970/HR_Sottobosco_EKP_2025_-101220_qd1b1z.jpg" alt="Sottobosco Installation Close-up"></div>
+                <div class="gallery-item" onclick="openLightbox(this)"><img src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751969/DSC07878-Mejorado-NR_lucsi6.jpg" alt="Live Visuals"></div>
+                <div class="gallery-item" onclick="openLightbox(this)"><img src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751970/HR_Sottobosco_EKP_2025_-101193_hz3hhd.jpg" alt="Light Mapping"></div>
+                <div class="gallery-item" onclick="openLightbox(this)"><img src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751970/HR_Sottobosco_EKP_2025_-101222_p0hcx9.jpg" alt="Generative Art"></div>
+                <div class="gallery-item" onclick="openLightbox(this)"><img src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751966/20240903_003532_efiaw9.jpg" alt="Technical Setup"></div>
+                <div class="gallery-item" onclick="openLightbox(this)"><img src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751966/20241221_221643_qjtm7k.jpg" alt="Live Event"></div>
+                <div class="gallery-item" onclick="openLightbox(this)"><img src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751966/UNLOCKED_XL-28_ulnja9.jpg" alt="Unlocked Stage"></div>
+                <div class="gallery-item" onclick="openLightbox(this)"><img src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751966/TDMeetupTest.1_mm9ta1.jpg" alt="TouchDesigner Meetup"></div>
+                <div class="gallery-item" onclick="openLightbox(this)"><img src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751965/UNLOCKED_XL-12_fzbt38.jpg" alt="Unlocked Crowd"></div>
+                <div class="gallery-item" onclick="openLightbox(this)"><img src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751965/UNLOCKED_XL-1_eybd5c.jpg" alt="Unlocked Visuals"></div>
+                <div class="gallery-item" onclick="openLightbox(this)"><img src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751965/UNLOCKED_XL-55_uaulx0.jpg" alt="Unlocked Atmosphere"></div>
             </div>
         </section>
+
         <section id="collaborators" style="padding-bottom: 160px;">
             <h2 class="project-title">Collaborators</h2>
-            
             <div class="collab-container">
                 <div class="collab-list">
-                    <span class="collab-item">999999999</span>
-                    <span class="collab-item">6ejou</span>
-                    <span class="collab-item">Adrian Mills</span>
-                    <span class="collab-item">CARV</span>
-                    <span class="collab-item">Chris Stussy</span>
-                    <span class="collab-item">Cyril Kamer</span>
-                    <span class="collab-item">DJ Gigola</span>
-                    <span class="collab-item">East End Dubs</span>
-                    <span class="collab-item">Estella Boersma</span>
-                    <span class="collab-item">Fantasm</span>
-                    <span class="collab-item">Funk Tribu</span>
-                    <span class="collab-item">IH8Models</span>
-                    <span class="collab-item">Insane Teknology</span>
-                    <span class="collab-item">Jamie Jones</span>
-                    <span class="collab-item">Joseph Capriati</span>
-                    <span class="collab-item">Kander</span>
-                    <span class="collab-item">Marlon Hoffstadt</span>
-                    <span class="collab-item">MEATBODIES</span>
-                    <span class="collab-item">OnlyNumbers</span>
-                    <span class="collab-item">PAWSA</span>
-                    <span class="collab-item">Patrick Mason</span>
-                    <span class="collab-item">Shlømo</span>
-                    <span class="collab-item">Vendex</span>
-                    <span class="collab-item">Viviana Casanova</span>
+                    <span class="collab-item">999999999</span><span class="collab-item">6ejou</span><span class="collab-item">Adrian Mills</span><span class="collab-item">CARV</span><span class="collab-item">Chris Stussy</span><span class="collab-item">Cyril Kamer</span><span class="collab-item">DJ Gigola</span><span class="collab-item">East End Dubs</span><span class="collab-item">Estella Boersma</span><span class="collab-item">Fantasm</span><span class="collab-item">Funk Tribu</span><span class="collab-item">IH8Models</span><span class="collab-item">Insane Teknology</span><span class="collab-item">Jamie Jones</span><span class="collab-item">Joseph Capriati</span><span class="collab-item">Kander</span><span class="collab-item">Marlon Hoffstadt</span><span class="collab-item">MEATBODIES</span><span class="collab-item">OnlyNumbers</span><span class="collab-item">PAWSA</span><span class="collab-item">Patrick Mason</span><span class="collab-item">Shlømo</span><span class="collab-item">Vendex</span><span class="collab-item">Viviana Casanova</span>
                 </div>
-                
                 <div class="collab-list" aria-hidden="true">
-                    <span class="collab-item">999999999</span>
-                    <span class="collab-item">6ejou</span>
-                    <span class="collab-item">Adrian Mills</span>
-                    <span class="collab-item">CARV</span>
-                    <span class="collab-item">Chris Stussy</span>
-                    <span class="collab-item">Cyril Kamer</span>
-                    <span class="collab-item">DJ Gigola</span>
-                    <span class="collab-item">East End Dubs</span>
-                    <span class="collab-item">Estella Boersma</span>
-                    <span class="collab-item">Fantasm</span>
-                    <span class="collab-item">Funk Tribu</span>
-                    <span class="collab-item">IH8Models</span>
-                    <span class="collab-item">Insane Teknology</span>
-                    <span class="collab-item">Jamie Jones</span>
-                    <span class="collab-item">Joseph Capriati</span>
-                    <span class="collab-item">Kander</span>
-                    <span class="collab-item">Marlon Hoffstadt</span>
-                    <span class="collab-item">MEATBODIES</span>
-                    <span class="collab-item">OnlyNumbers</span>
-                    <span class="collab-item">PAWSA</span>
-                    <span class="collab-item">Patrick Mason</span>
-                    <span class="collab-item">Shlømo</span>
-                    <span class="collab-item">Vendex</span>
-                    <span class="collab-item">Viviana Casanova</span>
+                    <span class="collab-item">999999999</span><span class="collab-item">6ejou</span><span class="collab-item">Adrian Mills</span><span class="collab-item">CARV</span><span class="collab-item">Chris Stussy</span><span class="collab-item">Cyril Kamer</span><span class="collab-item">DJ Gigola</span><span class="collab-item">East End Dubs</span><span class="collab-item">Estella Boersma</span><span class="collab-item">Fantasm</span><span class="collab-item">Funk Tribu</span><span class="collab-item">IH8Models</span><span class="collab-item">Insane Teknology</span><span class="collab-item">Jamie Jones</span><span class="collab-item">Joseph Capriati</span><span class="collab-item">Kander</span><span class="collab-item">Marlon Hoffstadt</span><span class="collab-item">MEATBODIES</span><span class="collab-item">OnlyNumbers</span><span class="collab-item">PAWSA</span><span class="collab-item">Patrick Mason</span><span class="collab-item">Shlømo</span><span class="collab-item">Vendex</span><span class="collab-item">Viviana Casanova</span>
                 </div>
             </div>
         </section>
@@ -343,22 +261,17 @@
             const lightbox = document.getElementById('lightbox');
             const content = document.getElementById('lightbox-content');
             lightbox.classList.add('active');
-            
             const clone = element.children[0].cloneNode(true);
             if(clone.tagName === 'VIDEO') clone.controls = true;
             content.innerHTML = '';
             content.appendChild(clone);
         }
-
         function closeLightbox() {
             document.getElementById('lightbox').classList.remove('active');
         }
-
-        // Close lightbox on click outside the image
         document.getElementById('lightbox').onclick = function(e) {
             if (e.target.id === 'lightbox') closeLightbox();
         };
     </script>
-
 </body>
 </html>
