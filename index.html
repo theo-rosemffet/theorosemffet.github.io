@@ -91,13 +91,43 @@
             .content { margin-left: 0; height: auto; }
             body { overflow: auto; } /* Allow scroll on mobile if header is tall */
         }
+
+        .audio-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+        }
+        
+        .audio-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: #fff;
+            transform: scale(1.1);
+        }
     </style>
 </head>
 <body>
 
     <video autoplay muted loop playsinline id="video-bg">
-        <source src="https://res.cloudinary.com/dgsufjhl9/video/upload/q_auto,f_auto/v1770731106/Post_Razzmataz_PERGO_ANL_cut_piq2z4.mp4" type="video/mp4">
+        <source src="https://res.cloudinary.com/dgsufjhl9/video/upload/v1771614720/Post_Razzmataz_PERGO_ANL_newnew_ks8pds.mp4" type="video/mp4">
     </video>
+    
+    <button id="music-toggle" class="audio-button">
+      <span id="speaker-icon">🔈</span>
+    </button>
     
     <div class="overlay"></div>
 
@@ -120,6 +150,22 @@
 
     <main class="content">
         </main>
+    <script>
+      const video = document.getElementById('video-bg');
+      const btn = document.getElementById('music-toggle');
+      const icon = document.getElementById('speaker-icon');
     
+      btn.addEventListener('click', () => {
+        if (video.muted) {
+          video.muted = false;
+          icon.innerText = '🔊'; // Sound On
+          // Some browsers require a .play() call after unmuting
+          video.play(); 
+        } else {
+          video.muted = true;
+          icon.innerText = '🔈'; // Muted
+        }
+      });
+    </script>    
 </body>
 </html>
