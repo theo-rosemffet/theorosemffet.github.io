@@ -8,12 +8,57 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
+        /* HIDE DEFAULT CURSOR */
+        html, body, a, button {
+            cursor: none !important;
+        }
+
         body { 
             background: #000; 
             color: #fff; 
             font-family: 'Helvetica', 'Arial', sans-serif; 
             font-weight: 900; 
             overflow: hidden; /* No scrolling */
+        }
+
+        /* CUSTOM SCOPE CURSOR */
+        .cursor-scope {
+            width: 32px;
+            height: 32px;
+            border: 2px solid white;
+            border-radius: 2px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 9999;
+            mix-blend-mode: difference;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            /* Centering + Rotation */
+            transform: translate(-50%, -50%) rotate(0deg);
+            /* Easing: width/height smooth, transform springy */
+            transition: 
+                width 0.3s ease, 
+                height 0.3s ease, 
+                transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        /* Center dot of the scope */
+        .cursor-scope::after {
+            content: '';
+            width: 4px;
+            height: 4px;
+            background: white;
+            border-radius: 50%;
+        }
+
+        /* Hover State: Rotates 45 degrees and grows */
+        .cursor-hover {
+            width: 48px;
+            height: 48px;
+            transform: translate(-50%, -50%) rotate(45deg);
         }
 
         /* VIDEO BACKGROUND */
@@ -60,17 +105,17 @@
             display: inline-block;
         }
 
-        /* UPDATED STROBE EFFECT (Matches Bio) */
+        /* UPDATED STROBE EFFECT */
         nav a:hover {
             animation: strobe 0.1s steps(2) infinite;
             padding-left: 10px;
-            background: none; /* Keeps video background visible */
+            background: none; 
         }
 
         @keyframes strobe {
             0% { color: #fff; }
             49% { color: #fff; }
-            50% { color: #000; } /* Text "disappears" against the dark overlay */
+            50% { color: #000; } 
             99% { color: #000; }
             100% { color: #fff; }
         }
@@ -89,7 +134,9 @@
         @media (max-width: 768px) {
             .sidebar { position: relative; width: 100%; height: auto; }
             .content { margin-left: 0; height: auto; }
-            body { overflow: auto; } /* Allow scroll on mobile if header is tall */
+            body { overflow: auto; }
+            .cursor-scope { display: none; } /* Custom cursors are bad on mobile */
+            * { cursor: auto !important; }
         }
 
         .audio-button {
@@ -102,7 +149,7 @@
             border-radius: 50%;
             width: 50px;
             height: 50px;
-            cursor: pointer;
+            cursor: none; /* Inherits from global, but explicit just in case */
             font-size: 20px;
             display: flex;
             align-items: center;
@@ -115,12 +162,13 @@
         .audio-button:hover {
             background: rgba(255, 255, 255, 0.2);
             border-color: #fff;
-            transform: scale(1.1);
         }
     </style>
 </head>
 <body>
 
+    <div class="cursor-scope"></div>
+    
     <video autoplay muted loop playsinline id="video-bg">
         <source src="https://res.cloudinary.com/dgsufjhl9/video/upload/v1771614720/Post_Razzmataz_PERGO_ANL_newnew_ks8pds.mp4" type="video/mp4">
     </video>
@@ -149,22 +197,37 @@
     </div>
 
     <main class="content">
-        </main>
+    </main>
+
     <script>
       const video = document.getElementById('video-bg');
       const btn = document.getElementById('music-toggle');
       const icon = document.getElementById('speaker-icon');
+      const cursor = document.querySelector('.cursor-scope');
     
+      // Audio Toggle Logic
       btn.addEventListener('click', () => {
         if (video.muted) {
           video.muted = false;
-          icon.innerText = '🔊'; // Sound On
-          // Some browsers require a .play() call after unmuting
+          icon.innerText = '🔊';
           video.play(); 
         } else {
           video.muted = true;
-          icon.innerText = '🔈'; // Muted
+          icon.innerText = '🔈';
         }
+      });
+
+      // Cursor Follow Logic
+      document.addEventListener('mousemove', (e) => {
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top = e.clientY + 'px';
+      });
+
+      // Cursor Hover Logic (Rotate & Expand)
+      const interactables = document.querySelectorAll('a, button');
+      interactables.forEach(item => {
+        item.addEventListener('mouseenter', () => cursor.classList.add('cursor-hover'));
+        item.addEventListener('mouseleave', () => cursor.classList.remove('cursor-hover'));
       });
     </script>    
 </body>
