@@ -6,12 +6,50 @@
     <link rel="icon" type="image/png" href="https://res.cloudinary.com/dgsufjhl9/image/upload/v1770753640/favicon_xy57kz.png">
     <title>Contact | Theo Rosemffet</title>
     <style>
-        /* 1. CORE STYLES (Matching Portfolio Architecture) */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        /* 1. CORE STYLES */
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none !important; }
+        
         html, body { 
             background: #000; color: #fff; 
             font-family: 'Helvetica', 'Arial', sans-serif; font-weight: 900;
             overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* CUSTOM SCOPE CURSOR */
+        .cursor-scope {
+            width: 32px;
+            height: 32px;
+            border: 2px solid white;
+            border-radius: 2px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 10001;
+            mix-blend-mode: difference;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform: translate(-50%, -50%) rotate(0deg);
+            transition: 
+                width 0.3s ease, 
+                height 0.3s ease, 
+                transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .cursor-scope::after {
+            content: '';
+            width: 4px;
+            height: 4px;
+            background: white;
+            border-radius: 50%;
+        }
+
+        .cursor-hover {
+            width: 48px;
+            height: 48px;
+            transform: translate(-50%, -50%) rotate(45deg);
         }
 
         /* 2. SIDEBAR */
@@ -88,10 +126,14 @@
             .sidebar { position: relative; width: 100%; height: auto; }
             .content-wrapper { margin-left: 0; width: 100%; padding: 40px; align-items: flex-start; }
             .contact-link-item { font-size: 3rem; }
+            .cursor-scope { display: none; }
+            * { cursor: auto !important; }
         }
     </style>
 </head>
 <body>
+
+    <div class="cursor-scope"></div>
 
     <div class="sidebar">
         <header>
@@ -120,5 +162,24 @@
         </div>
     </div>
 
+    <script>
+        const cursor = document.querySelector('.cursor-scope');
+        
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        // Trigger hover effect for all links
+        const links = document.querySelectorAll('a');
+        links.forEach(link => {
+            link.addEventListener('mouseenter', () => {
+                cursor.classList.add('cursor-hover');
+            });
+            link.addEventListener('mouseleave', () => {
+                cursor.classList.remove('cursor-hover');
+            });
+        });
+    </script>
 </body>
 </html>
