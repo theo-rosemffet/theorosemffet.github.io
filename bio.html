@@ -7,7 +7,7 @@
     <title>Bio | Theo Rosemffet</title>
     <style>
         /* 1. THE BASICS */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none !important; }
         
         html, body { 
             background: #000; 
@@ -16,10 +16,46 @@
             font-weight: 900;
             min-height: 100%;
             scroll-behavior: smooth;
-            overflow-x: hidden; /* Prevent horizontal jitter */
+            overflow-x: hidden;
         }
 
-        /* 2. SIDEBAR - FIXED ON LEFT */
+        /* CUSTOM SCOPE CURSOR */
+        .cursor-scope {
+            width: 32px;
+            height: 32px;
+            border: 2px solid white;
+            border-radius: 2px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 10001;
+            mix-blend-mode: difference;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform: translate(-50%, -50%) rotate(0deg);
+            transition: 
+                width 0.3s ease, 
+                height 0.3s ease, 
+                transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .cursor-scope::after {
+            content: '';
+            width: 4px;
+            height: 4px;
+            background: white;
+            border-radius: 50%;
+        }
+
+        .cursor-hover {
+            width: 48px;
+            height: 48px;
+            transform: translate(-50%, -50%) rotate(45deg);
+        }
+
+        /* 2. SIDEBAR */
         .sidebar {
             position: fixed; 
             top: 0; left: 0;
@@ -39,24 +75,19 @@
         nav li { margin-bottom: 20px; }
         nav a { color: #fff; text-decoration: none; font-size: 2.5rem; text-transform: uppercase; display: inline-block; }
         
-        /* NAVIGATION HOVER */
         nav a:hover {
             animation: strobe 0.1s steps(2) infinite;
             padding-left: 10px;
-            background: none; 
         }
 
-        /* SKILL TITLE HOVER */
         .skill-item:hover .skill-title {
             animation: strobe 0.1s steps(2) infinite;
-            background: none; 
         }
 
-        /* THE INTERNAL STROBE KEYFRAMES */
         @keyframes strobe {
             0% { color: #fff; }
             49% { color: #fff; }
-            50% { color: #000; } /* Text disappears into black background */
+            50% { color: #000; }
             99% { color: #000; }
             100% { color: #fff; }
         }
@@ -76,7 +107,6 @@
             width: 100%;
         }
 
-        /* BIO SECTION */
         #bio { 
             align-items: center; 
             justify-content: flex-start;
@@ -95,7 +125,6 @@
         .bio-text h2 { font-size: 3rem; margin-bottom: 20px; text-transform: uppercase; }
         .bio-text p { font-size: 1.6rem; font-weight: 400; line-height: 1.4; color: #ccc; margin-bottom: 20px; }
 
-        /* THE ARROW */
         .scroll-link {
             position: absolute;
             bottom: 40px;
@@ -115,7 +144,6 @@
             60% { transform: translate(-50%, -6px); }
         }
 
-        /* SKILLS SECTION */
         #skills {
             flex-direction: column;
             border-top: 1px solid #333;
@@ -143,7 +171,6 @@
         .skill-title {
             font-size: 2.2rem;
             text-transform: uppercase;
-            cursor: pointer;
             display: block;
         }
 
@@ -158,11 +185,10 @@
         }
 
         .skill-item:hover .skill-detail {
-            max-height: 800px; /* Accommodates "Others" section height */
+            max-height: 800px;
             margin-top: 20px;
         }
 
-        /* MOBILE FIX */
         @media (max-width: 1100px) {
             .sidebar { position: relative; width: 100%; height: auto; }
             .content-wrapper { margin-left: 0; width: 100%; }
@@ -170,10 +196,14 @@
             .scroll-link { display: none; }
             .skill-detail { max-height: none; margin-top: 15px; padding-bottom: 20px; }
             .skill-item { border-bottom: 1px solid #333; }
+            .cursor-scope { display: none; }
+            * { cursor: auto !important; }
         }
     </style>
 </head>
 <body>
+
+    <div class="cursor-scope"></div>
 
     <div class="sidebar">
         <header>
@@ -260,8 +290,27 @@
                 </div>
             </div>
         </section>
-
     </div>
 
+    <script>
+        const cursor = document.querySelector('.cursor-scope');
+        
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        // Handle hover states for all interactive elements
+        const targets = document.querySelectorAll('a, .skill-item');
+        
+        targets.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.classList.add('cursor-hover');
+            });
+            el.addEventListener('mouseleave', () => {
+                cursor.classList.remove('cursor-hover');
+            });
+        });
+    </script>
 </body>
 </html>
