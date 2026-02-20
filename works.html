@@ -7,11 +7,47 @@
     <title>Works | Theo Rosemffet</title>
     <style>
         /* 1. CORE STYLES */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none !important; }
         html, body { 
             background: #000; color: #fff; 
             font-family: 'Helvetica', 'Arial', sans-serif; font-weight: 900;
             scroll-behavior: smooth; overflow-x: hidden;
+        }
+
+        /* CUSTOM SCOPE CURSOR */
+        .cursor-scope {
+            width: 32px;
+            height: 32px;
+            border: 2px solid white;
+            border-radius: 2px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 10001; /* Higher than Lightbox */
+            mix-blend-mode: difference;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform: translate(-50%, -50%) rotate(0deg);
+            transition: 
+                width 0.3s ease, 
+                height 0.3s ease, 
+                transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .cursor-scope::after {
+            content: '';
+            width: 4px;
+            height: 4px;
+            background: white;
+            border-radius: 50%;
+        }
+
+        .cursor-hover {
+            width: 48px;
+            height: 48px;
+            transform: translate(-50%, -50%) rotate(45deg);
         }
 
         /* 2. SIDEBAR */
@@ -82,12 +118,10 @@
             aspect-ratio: 1 / 1;
             width: 100%;
             background: #111;
-            cursor: pointer;
             overflow: hidden;
             transition: transform 0.3s ease, filter 0.3s ease;
         }
 
-        /* Logic for hiding items via JS */
         .gallery-item.hidden { display: none; }
 
         .gallery-item:hover { 
@@ -108,7 +142,6 @@
             border: 1px solid #fff; 
             color: #fff;
             padding: 10px 25px; 
-            cursor: pointer; 
             font-family: inherit;
             font-size: 1rem; 
             text-transform: uppercase;
@@ -130,11 +163,11 @@
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.95);
             display: none; justify-content: center; align-items: center;
-            z-index: 1000; padding: 40px;
+            z-index: 10000; padding: 40px;
         }
         #lightbox.active { display: flex; }
         #lightbox img { max-width: 100%; max-height: 90vh; object-fit: contain; }
-        .close-lightbox { position: absolute; top: 40px; right: 40px; font-size: 3rem; cursor: pointer; color: #fff; line-height: 1; }
+        .close-lightbox { position: absolute; top: 40px; right: 40px; font-size: 3rem; color: #fff; line-height: 1; }
 
         /* COLLABORATORS SECTION */
         #collaborators { padding: 80px; background: #000; overflow: hidden; }
@@ -160,10 +193,14 @@
             .project-title { font-size: 2.5rem; }
             .collab-item { font-size: 1.5rem; }
             .gallery-grid { grid-template-columns: 1fr; }
+            .cursor-scope { display: none; }
+            * { cursor: auto !important; }
         }
     </style>
 </head>
 <body>
+
+    <div class="cursor-scope"></div>
 
     <div class="sidebar">
         <header>
@@ -259,7 +296,8 @@
             <h2 class="project-title">Artists featuring my visuals</h2>
             <div class="collab-container">
                 <div class="collab-list">
-                    <span class="collab-item">3DNAN</span><span class="collab-item">753</span><span class="collab-item">6ejou</span><span class="collab-item">AC2</span><span class="collab-item">Adrián Mills</span><span class="collab-item">Afem Syko</span><span class="collab-item">AK61</span><span class="collab-item">Alba Franch</span><span class="collab-item">Ale De Tuglie</span><span class="collab-item">Alex Stein</span><span class="collab-item">AMBAM</span><span class="collab-item">Andy The Core</span><span class="collab-item">Angy Kore</span><span class="collab-item">Anna Jevills</span><span class="collab-item">Anomik.Warp</span><span class="collab-item">Arcex</span><span class="collab-item">Art Of Fighters</span><span class="collab-item">Bapho999</span><span class="collab-item">Barbara Lago</span><span class="collab-item">Bastian Bux</span><span class="collab-item">Basswell</span><span class="collab-item">Candy Cox</span><span class="collab-item">Carnada</span><span class="collab-item">CARV</span><span class="collab-item">Cera Khin</span><span class="collab-item">Charlie Sparks</span><span class="collab-item">Chloe Robinson</span><span class="collab-item">Chris Main</span><span class="collab-item">Chris Stussy</span><span class="collab-item">Clandestine</span><span class="collab-item">Clap Kent</span><span class="collab-item">Cleopard2000</span><span class="collab-item">Cool Jumpers</span><span class="collab-item">Cristobal Pesce</span><span class="collab-item">CriticalError404</span><span class="collab-item">Cyril Kamer</span><span class="collab-item">Daniella DaSilva</span><span class="collab-item">Danny Avila</span><span class="collab-item">David Moleon</span><span class="collab-item">Dave Decibel</span><span class="collab-item">Dave.It</span><span class="collab-item">Davyboi</span><span class="collab-item">DBBD</span><span class="collab-item">Dex Phase</span><span class="collab-item">Dillom</span><span class="collab-item">Diëk</span><span class="collab-item">Diøn</span><span class="collab-item">DJ Gigola</span><span class="collab-item">DJ Guestlist</span><span class="collab-item">DJ Sandwich</span><span class="collab-item">DJ Sisu</span><span class="collab-item">DJ Sonic</span><span class="collab-item">Doruksen</span><span class="collab-item">Drazzit</span><span class="collab-item">DXPE</span><span class="collab-item">Eargasm God</span><span class="collab-item">East End Dubs</span><span class="collab-item">Eastel</span><span class="collab-item">Ekka</span><span class="collab-item">Electric Monolith</span><span class="collab-item">Erik Blaze</span><span class="collab-item">Estella Boersma</span><span class="collab-item">Euyinn</span><span class="collab-item">Evil Activities</span><span class="collab-item">Fantasm</span><span class="collab-item">Fhiga</span><span class="collab-item">Fractal</span><span class="collab-item">Frazi.Er</span><span class="collab-item">Funk Tribu</span><span class="collab-item">Furiouscris</span><span class="collab-item">Gabriel Padrevita</span><span class="collab-item">Gaston Zani</span><span class="collab-item">Giusseppi</span><span class="collab-item">GNRØ</span><span class="collab-item">Guille Placencia</span><span class="collab-item">Hades</span><span class="collab-item">Hitmilow</span><span class="collab-item">I Hate Models</span><span class="collab-item">In Verruf</span><span class="collab-item">Inexxstable</span><span class="collab-item">Infeed</span><span class="collab-item">Insane Teknology</span><span class="collab-item">Jaess & The Robots</span><span class="collab-item">Jamie Jones</span><span class="collab-item">Jan Vercauteren</span><span class="collab-item">Joanna Cohelo</span><span class="collab-item">Johannes Schutter</span><span class="collab-item">Jon Peña</span><span class="collab-item">Joseph Capriati</span><span class="collab-item">Kander</span><span class="collab-item">Karah</span><span class="collab-item">Ketting</span><span class="collab-item">Keyklau</span><span class="collab-item">Kimmy</span><span class="collab-item">King Of Pain</span><span class="collab-item">KØ:LAB</span><span class="collab-item">KRL MRX</span><span class="collab-item">La Penderie Noire</span><span class="collab-item">Laura SN</span><span class="collab-item">Laure Croft</span><span class="collab-item">Lee Ann Roberts</span><span class="collab-item">Lokier</span><span class="collab-item">Looce Ø</span><span class="collab-item">Luciid</span><span class="collab-item">Luckysansano</span><span class="collab-item">Lukas</span><span class="collab-item">Markos13</span><span class="collab-item">Marlon Hoffstadt</span><span class="collab-item">Matrakk</span><span class="collab-item">Matt P.</span><span class="collab-item">MEATBODIES</span><span class="collab-item">Metralla</span><span class="collab-item">Mika Heggemann</span><span class="collab-item">MVGRI</span><span class="collab-item">Nahoomie</span><span class="collab-item">Nahum Korm</span><span class="collab-item">Neon Graveyard</span><span class="collab-item">Newcetox</span><span class="collab-item">Nivax</span><span class="collab-item">Niz</span><span class="collab-item">Noise Mafia</span><span class="collab-item">Ody.ssey</span><span class="collab-item">Odymel</span><span class="collab-item">Oguz</span><span class="collab-item">Onlynumbers</span><span class="collab-item">Øtta</span><span class="collab-item">Oxiyd</span><span class="collab-item">Paralich</span><span class="collab-item">Parallx</span><span class="collab-item">Patrick Mason</span><span class="collab-item">Pau Guilera</span><span class="collab-item">Paulix</span><span class="collab-item">PAWSA</span><span class="collab-item">Pegassi</span><span class="collab-item">Pergo</span><span class="collab-item">PLX</span><span class="collab-item">PRADA2000</span><span class="collab-item">Raxeller</span><span class="collab-item">ReStyle</span><span class="collab-item">Rocco.Fx</span><span class="collab-item">Roxy Delgado</span><span class="collab-item">Sante Sansone</span><span class="collab-item">Santi Aranya</span><span class="collab-item">Sara Krin</span><span class="collab-item">Shlømo</span><span class="collab-item">Silvie Loto</span><span class="collab-item">Sita Bellan</span><span class="collab-item">Somewhen</span><span class="collab-item">Sonic Anaconda</span><span class="collab-item">Skryption</span><span class="collab-item">Skryos</span><span class="collab-item">Skudero</span><span class="collab-item">Sonora</span><span class="collab-item">Stan Christ</span><span class="collab-item">Tarkno</span><span class="collab-item">The Unborn Child</span><span class="collab-item">Tieum</span><span class="collab-item">Toxic Machinery</span><span class="collab-item">Trancemaster Krause</span><span class="collab-item">VCL</span><span class="collab-item">Vendex</span><span class="collab-item">Vera Grace</span><span class="collab-item">Victor Ruiz</span><span class="collab-item">Vidaloca</span><span class="collab-item">Viviana Casanova</span><span class="collab-item">Vivay</span><span class="collab-item">Waterflower</span><span class="collab-item">Weed.Fyx</span><span class="collab-item">WHEATS</span>                </div>
+                    <span class="collab-item">3DNAN</span><span class="collab-item">753</span><span class="collab-item">6ejou</span><span class="collab-item">AC2</span><span class="collab-item">Adrián Mills</span><span class="collab-item">Afem Syko</span><span class="collab-item">AK61</span><span class="collab-item">Alba Franch</span><span class="collab-item">Ale De Tuglie</span><span class="collab-item">Alex Stein</span><span class="collab-item">AMBAM</span><span class="collab-item">Andy The Core</span><span class="collab-item">Angy Kore</span><span class="collab-item">Anna Jevills</span><span class="collab-item">Anomik.Warp</span><span class="collab-item">Arcex</span><span class="collab-item">Art Of Fighters</span><span class="collab-item">Bapho999</span><span class="collab-item">Barbara Lago</span><span class="collab-item">Bastian Bux</span><span class="collab-item">Basswell</span><span class="collab-item">Candy Cox</span><span class="collab-item">Carnada</span><span class="collab-item">CARV</span><span class="collab-item">Cera Khin</span><span class="collab-item">Charlie Sparks</span><span class="collab-item">Chloe Robinson</span><span class="collab-item">Chris Main</span><span class="collab-item">Chris Stussy</span><span class="collab-item">Clandestine</span><span class="collab-item">Clap Kent</span><span class="collab-item">Cleopard2000</span><span class="collab-item">Cool Jumpers</span><span class="collab-item">Cristobal Pesce</span><span class="collab-item">CriticalError404</span><span class="collab-item">Cyril Kamer</span><span class="collab-item">Daniella DaSilva</span><span class="collab-item">Danny Avila</span><span class="collab-item">David Moleon</span><span class="collab-item">Dave Decibel</span><span class="collab-item">Dave.It</span><span class="collab-item">Davyboi</span><span class="collab-item">DBBD</span><span class="collab-item">Dex Phase</span><span class="collab-item">Dillom</span><span class="collab-item">Diëk</span><span class="collab-item">Diøn</span><span class="collab-item">DJ Gigola</span><span class="collab-item">DJ Guestlist</span><span class="collab-item">DJ Sandwich</span><span class="collab-item">DJ Sisu</span><span class="collab-item">DJ Sonic</span><span class="collab-item">Doruksen</span><span class="collab-item">Drazzit</span><span class="collab-item">DXPE</span><span class="collab-item">Eargasm God</span><span class="collab-item">East End Dubs</span><span class="collab-item">Eastel</span><span class="collab-item">Ekka</span><span class="collab-item">Electric Monolith</span><span class="collab-item">Erik Blaze</span><span class="collab-item">Estella Boersma</span><span class="collab-item">Euyinn</span><span class="collab-item">Evil Activities</span><span class="collab-item">Fantasm</span><span class="collab-item">Fhiga</span><span class="collab-item">Fractal</span><span class="collab-item">Frazi.Er</span><span class="collab-item">Funk Tribu</span><span class="collab-item">Furiouscris</span><span class="collab-item">Gabriel Padrevita</span><span class="collab-item">Gaston Zani</span><span class="collab-item">Giusseppi</span><span class="collab-item">GNRØ</span><span class="collab-item">Guille Placencia</span><span class="collab-item">Hades</span><span class="collab-item">Hitmilow</span><span class="collab-item">I Hate Models</span><span class="collab-item">In Verruf</span><span class="collab-item">Inexxstable</span><span class="collab-item">Infeed</span><span class="collab-item">Insane Teknology</span><span class="collab-item">Jaess & The Robots</span><span class="collab-item">Jamie Jones</span><span class="collab-item">Jan Vercauteren</span><span class="collab-item">Joanna Cohelo</span><span class="collab-item">Johannes Schutter</span><span class="collab-item">Jon Peña</span><span class="collab-item">Joseph Capriati</span><span class="collab-item">Kander</span><span class="collab-item">Karah</span><span class="collab-item">Ketting</span><span class="collab-item">Keyklau</span><span class="collab-item">Kimmy</span><span class="collab-item">King Of Pain</span><span class="collab-item">KØ:LAB</span><span class="collab-item">KRL MRX</span><span class="collab-item">La Penderie Noire</span><span class="collab-item">Laura SN</span><span class="collab-item">Laure Croft</span><span class="collab-item">Lee Ann Roberts</span><span class="collab-item">Lokier</span><span class="collab-item">Looce Ø</span><span class="collab-item">Luciid</span><span class="collab-item">Luckysansano</span><span class="collab-item">Lukas</span><span class="collab-item">Markos13</span><span class="collab-item">Marlon Hoffstadt</span><span class="collab-item">Matrakk</span><span class="collab-item">Matt P.</span><span class="collab-item">MEATBODIES</span><span class="collab-item">Metralla</span><span class="collab-item">Mika Heggemann</span><span class="collab-item">MVGRI</span><span class="collab-item">Nahoomie</span><span class="collab-item">Nahum Korm</span><span class="collab-item">Neon Graveyard</span><span class="collab-item">Newcetox</span><span class="collab-item">Nivax</span><span class="collab-item">Niz</span><span class="collab-item">Noise Mafia</span><span class="collab-item">Ody.ssey</span><span class="collab-item">Odymel</span><span class="collab-item">Oguz</span><span class="collab-item">Onlynumbers</span><span class="collab-item">Øtta</span><span class="collab-item">Oxiyd</span><span class="collab-item">Paralich</span><span class="collab-item">Parallx</span><span class="collab-item">Patrick Mason</span><span class="collab-item">Pau Guilera</span><span class="collab-item">Paulix</span><span class="collab-item">PAWSA</span><span class="collab-item">Pegassi</span><span class="collab-item">Pergo</span><span class="collab-item">PLX</span><span class="collab-item">PRADA2000</span><span class="collab-item">Raxeller</span><span class="collab-item">ReStyle</span><span class="collab-item">Rocco.Fx</span><span class="collab-item">Roxy Delgado</span><span class="collab-item">Sante Sansone</span><span class="collab-item">Santi Aranya</span><span class="collab-item">Sara Krin</span><span class="collab-item">Shlømo</span><span class="collab-item">Silvie Loto</span><span class="collab-item">Sita Bellan</span><span class="collab-item">Somewhen</span><span class="collab-item">Sonic Anaconda</span><span class="collab-item">Skryption</span><span class="collab-item">Skryos</span><span class="collab-item">Skudero</span><span class="collab-item">Sonora</span><span class="collab-item">Stan Christ</span><span class="collab-item">Tarkno</span><span class="collab-item">The Unborn Child</span><span class="collab-item">Tieum</span><span class="collab-item">Toxic Machinery</span><span class="collab-item">Trancemaster Krause</span><span class="collab-item">VCL</span><span class="collab-item">Vendex</span><span class="collab-item">Vera Grace</span><span class="collab-item">Victor Ruiz</span><span class="collab-item">Vidaloca</span><span class="collab-item">Viviana Casanova</span><span class="collab-item">Vivay</span><span class="collab-item">Waterflower</span><span class="collab-item">Weed.Fyx</span><span class="collab-item">WHEATS</span>                    
+                </div>
             </div>
         </section>
     </div>
@@ -270,57 +308,46 @@
     </div>
 
     <script>
+        /* --- ARCHIVE LOGIC --- */
         const grid = document.getElementById('archive-grid');
         const items = grid.querySelectorAll('.gallery-item');
         const btn = document.getElementById('expand-btn');
         let isExpanded = false;
 
-        // 1. INITIAL SETUP: Only show first 3 and load their images
         function initArchive() {
             items.forEach((item, index) => {
                 const img = item.querySelector('img');
                 if (index < 3) {
-                    // Show first 3 immediately
                     item.classList.remove('hidden');
-                    if(img.dataset.src) {
-                        img.src = img.dataset.src;
-                    }
+                    if(img.dataset.src) img.src = img.dataset.src;
                 } else {
-                    // Hide the rest
                     item.classList.add('hidden');
                 }
             });
+            updateCursorTargets(); // Update cursor targets after initial load
         }
 
-        // 2. TOGGLE FUNCTION
         function toggleArchive() {
             if (!isExpanded) {
-                // EXPAND
                 items.forEach(item => {
                     item.classList.remove('hidden');
                     const img = item.querySelector('img');
-                    // Trigger load for images that haven't loaded yet
-                    if(img.dataset.src && !img.src) {
-                        img.src = img.dataset.src;
-                    }
+                    if(img.dataset.src && !img.src) img.src = img.dataset.src;
                 });
                 btn.innerHTML = "[ Hide ]";
                 isExpanded = true;
             } else {
-                // CONTRACT
                 items.forEach((item, index) => {
-                    if (index >= 3) {
-                        item.classList.add('hidden');
-                    }
+                    if (index >= 3) item.classList.add('hidden');
                 });
                 btn.innerHTML = "[ Expand ]";
                 isExpanded = false;
-                // Scroll back to top of gallery
                 document.getElementById('gallery').scrollIntoView({ behavior: 'smooth' });
             }
+            updateCursorTargets(); // Refresh listeners for new items
         }
 
-        // Lightbox Functions
+        /* --- LIGHTBOX LOGIC --- */
         function openLightbox(element) {
             const lightbox = document.getElementById('lightbox');
             const content = document.getElementById('lightbox-content');
@@ -337,8 +364,27 @@
             if (e.target.id === 'lightbox') closeLightbox();
         };
 
-        // Run on load
-        window.onload = initArchive;
+        /* --- CURSOR LOGIC --- */
+        const cursor = document.querySelector('.cursor-scope');
+        
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        function updateCursorTargets() {
+            // Include everything clickable: links, buttons, gallery items, collab text
+            const targets = document.querySelectorAll('a, button, .gallery-item, .collab-item, .close-lightbox');
+            targets.forEach(el => {
+                el.addEventListener('mouseenter', () => cursor.classList.add('cursor-hover'));
+                el.addEventListener('mouseleave', () => cursor.classList.remove('cursor-hover'));
+            });
+        }
+
+        window.onload = () => {
+            initArchive();
+            updateCursorTargets();
+        };
     </script>
 </body>
 </html>
