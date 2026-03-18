@@ -26,11 +26,23 @@
             transform: translate(-50%, -50%) rotate(0deg);
             transition: width 0.3s ease, height 0.3s ease, transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        .cursor-scope::after { content: ''; width: 4px; height: 4px; background: white; border-radius: 50%; }
-        .cursor-hover { width: 48px; height: 48px; transform: translate(-50%, -50%) rotate(45deg); }
+
+        .cursor-scope::after {
+            content: ''; width: 4px; height: 4px;
+            background: white; border-radius: 50%;
+        }
+
+        .cursor-hover {
+            width: 48px; height: 48px;
+            transform: translate(-50%, -50%) rotate(45deg);
+        }
 
         /* 2. SIDEBAR */
-        .sidebar { position: fixed; top: 0; left: 0; height: 100vh; width: 400px; padding: 40px; background: #000; z-index: 100; }
+        .sidebar {
+            position: fixed; top: 0; left: 0;
+            height: 100vh; width: 400px;
+            padding: 40px; background: #000; z-index: 100;
+        }
         header { margin-bottom: 60px; }
         h1 { font-size: 2.5rem; text-transform: uppercase; line-height: 1; letter-spacing: -1px; }
         header a { text-decoration: none; color: inherit; }
@@ -40,16 +52,26 @@
         nav a { color: #fff; text-decoration: none; font-size: 2.5rem; text-transform: uppercase; display: inline-block; }
         nav a:hover { animation: strobeText 0.1s steps(2) infinite; padding-left: 10px; }
 
-        @keyframes strobeText { 0%, 49% { color: #fff; } 50%, 99% { color: #000; } 100% { color: #fff; } }
+        @keyframes strobeText {
+            0%, 49% { color: #fff; }
+            50%, 99% { color: #000; }
+            100% { color: #fff; }
+        }
 
         /* 3. CONTENT WRAPPER */
         .content-wrapper { margin-left: 400px; width: calc(100% - 400px); }
-        .project-section { min-height: 100vh; padding: 80px; border-bottom: 1px solid #222; display: flex; flex-direction: column; justify-content: center; }
+
+        .project-section {
+            min-height: 100vh; padding: 80px;
+            border-bottom: 1px solid #222;
+            display: flex; flex-direction: column; justify-content: center;
+        }
+
         .project-header { margin-bottom: 40px; }
         .project-title { font-size: 4rem; text-transform: uppercase; line-height: 0.9; margin-bottom: 10px; }
         .project-role { font-size: 1.2rem; font-weight: 400; color: #888; text-transform: uppercase; letter-spacing: 2px; }
 
-        /* --- NEW SLIDER STYLES --- */
+        /* --- SLIDER SYSTEM STYLES --- */
         .project-media-wrapper {
             position: relative;
             width: 100%;
@@ -65,10 +87,10 @@
             height: 100%;
             overflow-x: auto;
             scroll-snap-type: x mandatory;
-            scrollbar-width: none; /* Hide scrollbar Firefox */
-            -ms-overflow-style: none; /* Hide scrollbar IE */
+            scrollbar-width: none; 
+            -ms-overflow-style: none;
         }
-        .slider-track::-webkit-scrollbar { display: none; } /* Hide scrollbar Chrome/Safari */
+        .slider-track::-webkit-scrollbar { display: none; }
 
         .slide {
             flex: 0 0 100%;
@@ -80,32 +102,34 @@
             background: #000;
         }
 
-        .slide video, .slide img {
+        .slide video, .slide img, .slide iframe {
             max-width: 100%;
             max-height: 100%;
-            object-fit: contain; /* Keeps ratio, fits inside the 16:9 box */
+            object-fit: contain; /* Best fit for different ratios */
+            display: block;
         }
 
-        /* Navigation Arrows */
         .nav-btn {
             position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(0,0,0,0.5);
-            color: white;
-            border: none;
-            width: 60px;
+            top: 0;
             height: 100%;
+            width: 80px;
+            background: rgba(0,0,0,0);
+            color: #fff;
+            border: none;
             font-size: 2rem;
-            opacity: 0;
-            transition: opacity 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             z-index: 10;
+            opacity: 0;
+            transition: opacity 0.3s ease, background 0.3s ease;
         }
         .project-media-wrapper:hover .nav-btn { opacity: 1; }
-        .prev-btn { left: 0; text-align: left; padding-left: 15px; }
-        .next-btn { right: 0; text-align: right; padding-right: 15px; }
+        .nav-btn:hover { background: rgba(255,255,255,0.1); }
+        .prev-btn { left: 0; }
+        .next-btn { right: 0; }
 
-        /* Pagination dots */
         .slider-dots {
             position: absolute;
             bottom: 20px;
@@ -115,45 +139,90 @@
             gap: 10px;
             z-index: 11;
         }
-        .dot { width: 8px; height: 8px; border: 1px solid white; border-radius: 50%; transition: 0.3s; }
-        .dot.active { background: white; width: 24px; border-radius: 4px; }
+        .dot { width: 8px; height: 8px; border: 1px solid white; border-radius: 50%; transition: 0.3s; opacity: 0.5; }
+        .dot.active { background: white; width: 20px; border-radius: 4px; opacity: 1; }
 
-        /* --- END SLIDER STYLES --- */
+        /* --- END SLIDER SYSTEM STYLES --- */
 
-        .project-desc { max-width: 700px; font-size: 1.4rem; font-weight: 400; line-height: 1.5; color: #ccc; }
+        .project-desc {
+            max-width: 700px; font-size: 1.4rem; font-weight: 400;
+            line-height: 1.5; color: #ccc;
+        }
 
-        /* ARCHIVE & LIGHTBOX (Same as before) */
+        /* 4. GALLERY GRID */
         #gallery { padding: 80px; }
-        .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 40px; }
-        .gallery-item { aspect-ratio: 1 / 1; width: 100%; background: #111; overflow: hidden; transition: transform 0.3s ease, filter 0.3s ease; }
+        .gallery-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            gap: 20px; margin-top: 40px;
+        }
+        .gallery-item {
+            aspect-ratio: 1 / 1; width: 100%;
+            background: #111; overflow: hidden;
+            transition: transform 0.3s ease, filter 0.3s ease;
+        }
         .gallery-item.hidden { display: none; }
         .gallery-item:hover { filter: brightness(1.2); transform: scale(1.02); }
         .gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
-        .expand-btn { background: transparent; border: 1px solid #fff; color: #fff; padding: 10px 25px; font-family: inherit; font-size: 1rem; text-transform: uppercase; font-weight: 900; }
+
+        /* BUTTON STYLE */
+        .expand-btn {
+            background: transparent; border: 1px solid #fff; 
+            color: #fff; padding: 10px 25px; 
+            font-family: inherit; font-size: 1rem; 
+            text-transform: uppercase; font-weight: 900;
+        }
         .expand-btn:hover { animation: fullStrobe 0.1s steps(2) infinite; }
-        @keyframes fullStrobe { 0%, 49% { background: #fff; color: #000; } 50%, 99% { background: #000; color: #fff; } 100% { background: #fff; color: #000; } }
-        #lightbox { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); display: none; justify-content: center; align-items: center; z-index: 10000; padding: 40px; }
+
+        @keyframes fullStrobe {
+            0%, 49% { background: #fff; color: #000; }
+            50%, 99% { background: #000; color: #fff; }
+            100% { background: #fff; color: #000; }
+        }
+
+        /* LIGHTBOX SYSTEM */
+        #lightbox {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.95);
+            display: none; justify-content: center; align-items: center;
+            z-index: 10000; padding: 40px;
+        }
         #lightbox.active { display: flex; }
         #lightbox img { max-width: 100%; max-height: 90vh; object-fit: contain; }
         .close-lightbox { position: absolute; top: 40px; right: 40px; font-size: 3rem; color: #fff; line-height: 1; }
 
-        /* COLLABORATORS */
+        /* COLLABORATORS SECTION */
         #collaborators { padding: 80px; background: #000; overflow: hidden; }
         .collab-container { display: flex; overflow: hidden; user-select: none; gap: 40px; }
-        .collab-list { display: flex; flex-shrink: 0; gap: 40px; align-items: center; min-width: 100%; animation: scroll 200s linear infinite; }
+        .collab-list {
+            display: flex; flex-shrink: 0; gap: 40px; align-items: center;
+            min-width: 100%;
+            animation: scroll 200s linear infinite;
+        }
         .collab-container:hover .collab-list { animation-play-state: paused; }
-        .collab-item { font-size: 2rem; font-weight: 900; text-transform: uppercase; color: #444; white-space: nowrap; transition: color 0.2s ease; text-decoration: none; display: inline-block; }
+        
+        .collab-item {
+            font-size: 2rem; font-weight: 900; text-transform: uppercase;
+            color: #444; white-space: nowrap; transition: color 0.2s ease;
+            text-decoration: none; display: inline-block;
+        }
         .collab-item:hover { color: #fff; animation: strobeText 0.1s steps(2) infinite; }
-        @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(calc(-100% - 40px)); } }
+        
+        @keyframes scroll { 
+            from { transform: translateX(0); } 
+            to { transform: translateX(calc(-100% - 40px)); } 
+        }
 
+        /* MOBILE FIX */
         @media (max-width: 1100px) {
             .sidebar { position: relative; width: 100%; height: auto; }
             .content-wrapper { margin-left: 0; width: 100%; }
             .project-section, #gallery, #collaborators { padding: 40px; }
             .project-title { font-size: 2.5rem; }
+            .collab-item { font-size: 1.5rem; }
             .gallery-grid { grid-template-columns: 1fr; }
             .cursor-scope { display: none; }
             * { cursor: auto !important; }
+            .nav-btn { opacity: 1; width: 50px; }
         }
     </style>
 </head>
@@ -177,7 +246,7 @@
 
     <div class="content-wrapper">
         
-        <section class="project-section">
+        <section class="project-section" id="tramunfest">
             <div class="project-header">
                 <h2 class="project-title">TramunFest 2025</h2>
                 <p class="project-role">Creative Direction • Content Creation • VJ </p>
@@ -190,17 +259,14 @@
                     <div class="slide">
                         <video autoplay muted loop playsinline src="https://res.cloudinary.com/dgsufjhl9/video/upload/q_auto,f_auto/v1770747383/TRAMUN_TEASER_uiczn2.mp4"></video>
                     </div>
-                    <div class="slide">
-                        <img src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751965/UNLOCKED_XL-12_fzbt38.jpg" alt="Work 1">
                     </div>
-                </div>
                 <div class="slider-dots"></div>
             </div>
 
-            <p class="project-desc">Creative Direction and Video Operation for the Unlocked Stage. Designed visual atmospheres integrated with the stage's screens.</p>
+            <p class="project-desc">Creative Direction and Video Operation for the Unlocked Stage. Designed a variety of high-impact visual atmospheres that integrated seamlessly with the stage's screens.</p>
         </section>
 
-        <section class="project-section">
+        <section class="project-section" id="cyril-kamer">
             <div class="project-header">
                 <h2 class="project-title">Cyril Kamer Tour</h2>
                 <p class="project-role">Direction • Editing • VJ</p>
@@ -216,7 +282,45 @@
                 </div>
                 <div class="slider-dots"></div>
             </div>
-            <p class="project-desc">Direction & Editing of Tour Visuals for the 2025 Spanish Tour.</p>
+            <p class="project-desc">Direction & Editing of Tour Visuals for the 2025 Spanish Tour. Developed a versatile content package and operated video on-site for all major tour dates.</p>
+        </section>
+
+        <section class="project-section" id="sala-marte">
+            <div class="project-header">
+                <h2 class="project-title">Sala Marte</h2>
+                <p class="project-role">Technical Direction • Creative Coding</p>
+            </div>
+            
+            <div class="project-media-wrapper">
+                <button class="nav-btn prev-btn" onclick="moveSlider(this, -1)">←</button>
+                <button class="nav-btn next-btn" onclick="moveSlider(this, 1)">→</button>
+                <div class="slider-track">
+                    <div class="slide">
+                        <video autoplay muted loop playsinline src="https://res.cloudinary.com/dgsufjhl9/video/upload/q_auto,f_auto/v1770750159/Sala_Marte_Final_cht6ae.mp4"></video>
+                    </div>
+                </div>
+                <div class="slider-dots"></div>
+            </div>
+            <p class="project-desc">Permanent lighting installation in Sala Marte, Malaga. Created a generative audio-responsive system and a bespoke remote control interface for house technicians.</p>
+        </section>
+
+        <section class="project-section" id="postergen">
+            <div class="project-header">
+                <h2 class="project-title">Poster[GEN].v0</h2>
+                <p class="project-role">Interactive Installation • TouchDesigner</p>
+            </div>
+            
+            <div class="project-media-wrapper">
+                <button class="nav-btn prev-btn" onclick="moveSlider(this, -1)">←</button>
+                <button class="nav-btn next-btn" onclick="moveSlider(this, 1)">→</button>
+                <div class="slider-track">
+                    <div class="slide">
+                        <video autoplay muted loop playsinline src="https://res.cloudinary.com/dgsufjhl9/video/upload/q_auto,f_auto/v1770750908/Demo_Post_cut_jv83xc.mp4"></video>
+                    </div>
+                </div>
+                <div class="slider-dots"></div>
+            </div>
+            <p class="project-desc">Interactive installation developed for TouchDesigner Barcelona. Users manipulate a 3D scene in real-time to generate and print unique generative posters.</p>
         </section>
 
         <section id="gallery">
@@ -228,6 +332,24 @@
                 <div class="gallery-item" onclick="openLightbox(this)"><img data-src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751971/DSC08434-Mejorado-NR_kejjob.jpg" alt="Theo Work"></div>
                 <div class="gallery-item" onclick="openLightbox(this)"><img data-src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751972/ckss_im7ndy.png" alt="Cyril Kamer Stage"></div>
                 <div class="gallery-item" onclick="openLightbox(this)"><img data-src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751971/ckssjamesharden_mnzaga.png" alt="Tour Visuals"></div>
+                <div class="gallery-item" onclick="openLightbox(this)"><img data-src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751970/HR_Sottobosco_EKP_2025_-101179_jujggh.jpg" alt="Sottobosco Installation"></div>
+                <div class="gallery-item" onclick="openLightbox(this)"><img data-src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751970/HR_Sottobosco_EKP_2025_-101220_qd1b1z.jpg" alt="Sottobosco Installation Close-up"></div>
+                <div class="gallery-item" onclick="openLightbox(this)"><img data-src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751969/DSC07878-Mejorado-NR_lucsi6.jpg" alt="Live Visuals"></div>
+                <div class="gallery-item" onclick="openLightbox(this)"><img data-src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751970/HR_Sottobosco_EKP_2025_-101193_hz3hhd.jpg" alt="Light Mapping"></div>
+                <div class="gallery-item" onclick="openLightbox(this)"><img data-src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751970/HR_Sottobosco_EKP_2025_-101222_p0hcx9.jpg" alt="Generative Art"></div>
+                <div class="gallery-item" onclick="openLightbox(this)"><img data-src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751966/20240903_003532_efiaw9.jpg" alt="Technical Setup"></div>
+                <div class="gallery-item" onclick="openLightbox(this)"><img data-src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751966/20241221_221643_qjtm7k.jpg" alt="Live Event"></div>
+                <div class="gallery-item" onclick="openLightbox(this)"><img data-src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751966/UNLOCKED_XL-28_ulnja9.jpg" alt="Unlocked Stage"></div>
+                <div class="gallery-item" onclick="openLightbox(this)"><img data-src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751966/TDMeetupTest.1_mm9ta1.jpg" alt="TouchDesigner Meetup"></div>
+                <div class="gallery-item" onclick="openLightbox(this)"><img data-src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751965/UNLOCKED_XL-12_fzbt38.jpg" alt="Unlocked Crowd"></div>
+                <div class="gallery-item" onclick="openLightbox(this)"><img data-src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751965/UNLOCKED_XL-1_eybd5c.jpg" alt="Unlocked Visuals"></div>
+                <div class="gallery-item" onclick="openLightbox(this)"><img data-src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770751965/UNLOCKED_XL-55_uaulx0.jpg" alt="Unlocked Atmosphere"></div>
+                <div class="gallery-item" onclick="openLightbox(this)"><img data-src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770805229/unnamed_2_bdn6gw.png" alt="Visual Work Archive 1"></div>
+                <div class="gallery-item" onclick="openLightbox(this)"><img data-src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770805229/unnamed_1_luytuk.png" alt="Visual Work Archive 2"></div>
+                <div class="gallery-item" onclick="openLightbox(this)"><img data-src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770805228/unnamed_3_au8uqr.png" alt="Visual Work Archive 3"></div>
+                <div class="gallery-item" onclick="openLightbox(this)"><img data-src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770805228/unnamed_wmyxvi.png" alt="Visual Work Archive 4"></div>
+                <div class="gallery-item" onclick="openLightbox(this)"><img data-src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770805228/20250327_tramunfest_mbamrp.jpg" alt="Tramunfest 2025 Live"></div>
+                <div class="gallery-item" onclick="openLightbox(this)"><img data-src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770805228/unnamed_1_o0sfuw.jpg" alt="Visual Work Archive 5"></div>
             </div>
         </section>
 
@@ -255,14 +377,13 @@
                 const prevBtn = wrapper.querySelector('.prev-btn');
                 const nextBtn = wrapper.querySelector('.next-btn');
 
-                // Only show nav if more than 1 item
                 if (slides.length <= 1) {
                     prevBtn.style.display = 'none';
                     nextBtn.style.display = 'none';
                     return;
                 }
 
-                // Create dots
+                // Create dots for pagination
                 slides.forEach((_, i) => {
                     const dot = document.createElement('div');
                     dot.classList.add('dot');
@@ -277,6 +398,7 @@
                     dots.forEach((d, i) => d.classList.toggle('active', i === index));
                 });
             });
+            updateCursorTargets();
         }
 
         function moveSlider(btn, direction) {
@@ -285,7 +407,7 @@
             track.scrollBy({ left: direction * step, behavior: 'smooth' });
         }
 
-        /* --- ARCHIVE & COLLAB LOGIC (Your Original Scripts) --- */
+        /* --- ARCHIVE LOGIC --- */
         const grid = document.getElementById('archive-grid');
         const items = grid.querySelectorAll('.gallery-item');
         const btn = document.getElementById('expand-btn');
@@ -324,19 +446,36 @@
             updateCursorTargets(); 
         }
 
+        /* --- COLLABORATORS DATA LOGIC --- */
         async function loadCollaborators() {
             try {
-                // Mocking data for this example, replace with your fetch logic
-                const artists = [{name: "Sample Artist", url: "#"}]; 
+                const response = await fetch('artists.json');
+                if (!response.ok) throw new Error('Could not find artists.json');
+                
+                let artists = await response.json();
+                artists.sort((a, b) => a.name.localeCompare(b.name));
+
                 const list1 = document.getElementById('collab-list-1');
                 const list2 = document.getElementById('collab-list-2');
-                const htmlString = artists.map(a => `<a href="${a.url}" class="collab-item">${a.name}</a>`).join('');
+
+                const htmlString = artists.map(artist => {
+                    if (artist.url && artist.url.trim() !== "") {
+                        return `<a href="${artist.url}" target="_blank" rel="noopener" class="collab-item">${artist.name}</a>`;
+                    } else {
+                        return `<span class="collab-item">${artist.name}</span>`;
+                    }
+                }).join('');
+
                 list1.innerHTML = htmlString;
                 list2.innerHTML = htmlString;
                 updateCursorTargets();
-            } catch (err) { console.error(err); }
+            } catch (err) {
+                console.error("Collaborator load failed:", err);
+                document.getElementById('collab-list-1').innerHTML = `<span class="collab-item" style="opacity: 0.5;">Data Load Error</span>`;
+            }
         }
 
+        /* --- LIGHTBOX LOGIC --- */
         function openLightbox(element) {
             const lightbox = document.getElementById('lightbox');
             const content = document.getElementById('lightbox-content');
@@ -345,10 +484,17 @@
             content.innerHTML = `<img src="${img.src}" alt="${img.alt}">`;
         }
 
-        function closeLightbox() { document.getElementById('lightbox').classList.remove('active'); }
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+        }
+
+        document.getElementById('lightbox').onclick = function(e) {
+            if (e.target.id === 'lightbox') closeLightbox();
+        };
 
         /* --- CURSOR LOGIC --- */
         const cursor = document.querySelector('.cursor-scope');
+        
         document.addEventListener('mousemove', (e) => {
             cursor.style.left = e.clientX + 'px';
             cursor.style.top = e.clientY + 'px';
@@ -357,11 +503,17 @@
         function updateCursorTargets() {
             const targets = document.querySelectorAll('a, button, .gallery-item, .collab-item, .close-lightbox, .nav-btn');
             targets.forEach(el => {
-                el.addEventListener('mouseenter', () => cursor.classList.add('cursor-hover'));
-                el.addEventListener('mouseleave', () => cursor.classList.remove('cursor-hover'));
+                el.removeEventListener('mouseenter', addHover);
+                el.removeEventListener('mouseleave', removeHover);
+                el.addEventListener('mouseenter', addHover);
+                el.addEventListener('mouseleave', removeHover);
             });
         }
 
+        function addHover() { cursor.classList.add('cursor-hover'); }
+        function removeHover() { cursor.classList.remove('cursor-hover'); }
+
+        /* --- INITIALIZATION --- */
         window.addEventListener('DOMContentLoaded', () => {
             initSliders();
             initArchive();
