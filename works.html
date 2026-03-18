@@ -105,7 +105,9 @@
         .slide video, .slide img, .slide iframe {
             max-width: 100%;
             max-height: 100%;
-            object-fit: contain; /* Best fit for different ratios */
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
             display: block;
         }
 
@@ -141,8 +143,6 @@
         }
         .dot { width: 8px; height: 8px; border: 1px solid white; border-radius: 50%; transition: 0.3s; opacity: 0.5; }
         .dot.active { background: white; width: 20px; border-radius: 4px; opacity: 1; }
-
-        /* --- END SLIDER SYSTEM STYLES --- */
 
         .project-desc {
             max-width: 700px; font-size: 1.4rem; font-weight: 400;
@@ -212,7 +212,6 @@
             to { transform: translateX(calc(-100% - 40px)); } 
         }
 
-        /* MOBILE FIX */
         @media (max-width: 1100px) {
             .sidebar { position: relative; width: 100%; height: auto; }
             .content-wrapper { margin-left: 0; width: 100%; }
@@ -259,7 +258,10 @@
                     <div class="slide">
                         <video autoplay muted loop playsinline src="https://res.cloudinary.com/dgsufjhl9/video/upload/q_auto,f_auto/v1770747383/TRAMUN_TEASER_uiczn2.mp4"></video>
                     </div>
+                    <div class="slide">
+                        <iframe src="https://www.youtube.com/embed/zgjf_Ak0AzI?modestbranding=1&rel=0&showinfo=0" frameborder="0" allowfullscreen></iframe>
                     </div>
+                </div>
                 <div class="slider-dots"></div>
             </div>
 
@@ -383,7 +385,6 @@
                     return;
                 }
 
-                // Create dots for pagination
                 slides.forEach((_, i) => {
                     const dot = document.createElement('div');
                     dot.classList.add('dot');
@@ -391,7 +392,6 @@
                     dotsContainer.appendChild(dot);
                 });
 
-                // Update dots on scroll
                 track.addEventListener('scroll', () => {
                     const index = Math.round(track.scrollLeft / track.offsetWidth);
                     const dots = dotsContainer.querySelectorAll('.dot');
