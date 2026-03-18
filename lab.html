@@ -105,7 +105,7 @@
             display: block;
         }
 
-        /* Video play indicator */
+        /* Video play indicator — fades out on hover */
         .masonry-item.is-video::after {
             content: '▶';
             position: absolute;
@@ -114,6 +114,10 @@
             font-size: 0.75rem;
             color: rgba(255,255,255,0.6);
             pointer-events: none;
+            transition: opacity 0.2s ease;
+        }
+        .masonry-item.is-video:hover::after {
+            opacity: 0;
         }
 
         /* LIGHTBOX */
@@ -179,52 +183,46 @@
             <p>A stream of personal work: generative systems, digital experiments and visual research.</p>
         </div>
 
-    <div class="masonry-grid" id="masonry-grid">
-                <div class="masonry-item is-video" onclick="openLightbox(this)">
-                    <video autoplay muted loop playsinline src="https://res.cloudinary.com/dgsufjhl9/video/upload/v1773865498/fBM_Noise_jfbdwq.mp4"></video>
-                </div>
-                <div class="masonry-item is-video" onclick="openLightbox(this)">
-                    <video autoplay muted loop playsinline src="https://res.cloudinary.com/dgsufjhl9/video/upload/v1773865493/VectorHearts_Snow_frbmpg.mp4"></video>
-                </div>
-                <div class="masonry-item is-video" onclick="openLightbox(this)">
-                    <video autoplay muted loop playsinline src="https://res.cloudinary.com/dgsufjhl9/video/upload/v1773865483/SalaMarte_CollapsevDEFFullHD_o73goj.mp4"></video>
-                </div>
-                <div class="masonry-item is-video" onclick="openLightbox(this)">
-                    <video autoplay muted loop playsinline src="https://res.cloudinary.com/dgsufjhl9/video/upload/v1773865485/Eldritch_1_1_dh51q8.mp4"></video>
-                </div>
-                <div class="masonry-item is-video" onclick="openLightbox(this)">
-                    <video autoplay muted loop playsinline src="https://res.cloudinary.com/dgsufjhl9/video/upload/v1773865477/superestresao_resize_2_2_arqhft.mp4"></video>
-                </div>
-                <div class="masonry-item is-video" onclick="openLightbox(this)">
-                    <video autoplay muted loop playsinline src="https://res.cloudinary.com/dgsufjhl9/video/upload/v1773865473/TrussTramun_d1govl.mov"></video>
-                </div>
-                <div class="masonry-item is-video" onclick="openLightbox(this)">
-                    <video autoplay muted loop playsinline src="https://res.cloudinary.com/dgsufjhl9/video/upload/v1773865470/TreeBW2_yuo3dw.mp4"></video>
-                </div>
-                <div class="masonry-item is-video" onclick="openLightbox(this)">
-                    <video autoplay muted loop playsinline src="https://res.cloudinary.com/dgsufjhl9/video/upload/v1773865468/TreeBox_xshnow.mov"></video>
-                </div>
-                <div class="masonry-item is-video" onclick="openLightbox(this)">
-                    <video autoplay muted loop playsinline src="https://res.cloudinary.com/dgsufjhl9/video/upload/v1773865463/SynthsRaw_lpokkj.mov"></video>
-                </div>
-                <div class="masonry-item is-video" onclick="openLightbox(this)">
-                    <video autoplay muted loop playsinline src="https://res.cloudinary.com/dgsufjhl9/video/upload/v1773865462/QuadReprojectTree_ap4ekt.mp4"></video>
-                </div>
-                <div class="masonry-item is-video" onclick="openLightbox(this)">
-                    <video autoplay muted loop playsinline src="https://res.cloudinary.com/dgsufjhl9/video/upload/v1773865461/TreeNoise2_evz76s.mp4"></video>
-                </div>
-                <div class="masonry-item is-video" onclick="openLightbox(this)">
-                    <video autoplay muted loop playsinline src="https://res.cloudinary.com/dgsufjhl9/video/upload/v1773865462/TreeBW_gwcdq4.mov"></video>
-                </div>
-                <div class="masonry-item is-video" onclick="openLightbox(this)">
-                    <video autoplay muted loop playsinline src="https://res.cloudinary.com/dgsufjhl9/video/upload/v1773865455/Wordplay_qmxsnt.mov"></video>
-                </div>
-                <div class="masonry-item is-video" onclick="openLightbox(this)">
-                    <video autoplay muted loop playsinline src="https://res.cloudinary.com/dgsufjhl9/video/upload/v1773865450/textbased_vyezs7.mp4"></video>
-                </div>
+        <div class="masonry-grid" id="masonry-grid">
+            <div class="masonry-item is-video" onclick="openLightbox(this)">
+                <video muted loop playsinline src="https://res.cloudinary.com/dgsufjhl9/video/upload/v1773865498/fBM_Noise_jfbdwq.mp4"></video>
             </div>
-    
+            <div class="masonry-item is-video" onclick="openLightbox(this)">
+                <video muted loop playsinline src="https://res.cloudinary.com/dgsufjhl9/video/upload/v1773865493/VectorHearts_Snow_frbmpg.mp4"></video>
+            </div>
+            <div class="masonry-item is-video" onclick="openLightbox(this)">
+                <video muted loop playsinline src="https://res.cloudinary.com/dgsufjhl9/video/upload/v1773865483/SalaMarte_CollapsevDEFFullHD_o73goj.mp4"></video>
+            </div>
+            <div class="masonry-item is-video" onclick="openLightbox(this)">
+                <video muted loop playsinline src="https://res.cloudinary.com/dgsufjhl9/video/upload/v1773865485/Eldritch_1_1_dh51q8.mp4"></video>
+            </div>
+            <div class="masonry-item is-video" onclick="openLightbox(this)">
+                <video muted loop playsinline src="https://res.cloudinary.com/dgsufjhl9/video/upload/v1773865477/superestresao_resize_2_2_arqhft.mp4"></video>
+            </div>
+            <div class="masonry-item is-video" onclick="openLightbox(this)">
+                <video muted loop playsinline src="https://res.cloudinary.com/dgsufjhl9/video/upload/v1773865473/TrussTramun_d1govl.mov"></video>
+            </div>
+            <div class="masonry-item is-video" onclick="openLightbox(this)">
+                <video muted loop playsinline src="https://res.cloudinary.com/dgsufjhl9/video/upload/v1773865470/TreeBW2_yuo3dw.mp4"></video>
+            </div>
+            <div class="masonry-item is-video" onclick="openLightbox(this)">
+                <video muted loop playsinline src="https://res.cloudinary.com/dgsufjhl9/video/upload/v1773865468/TreeBox_xshnow.mov"></video>
+            </div>
+            <div class="masonry-item is-video" onclick="openLightbox(this)">
+                <video muted loop playsinline src="https://res.cloudinary.com/dgsufjhl9/video/upload/v1773865463/SynthsRaw_lpokkj.mov"></video>
+            </div>
+            <div class="masonry-item is-video" onclick="openLightbox(this)">
+                <video muted loop playsinline src="https://res.cloudinary.com/dgsufjhl9/video/upload/v1773865461/TreeNoise2_evz76s.mp4"></video>
+            </div>
+            <div class="masonry-item is-video" onclick="openLightbox(this)">
+                <video muted loop playsinline src="https://res.cloudinary.com/dgsufjhl9/video/upload/v1773865455/Wordplay_qmxsnt.mov"></video>
+            </div>
+            <div class="masonry-item is-video" onclick="openLightbox(this)">
+                <video muted loop playsinline src="https://res.cloudinary.com/dgsufjhl9/video/upload/v1773865450/textbased_vyezs7.mp4"></video>
+            </div>
         </div>
+
+    </div>
 
     <!-- LIGHTBOX -->
     <div id="lightbox">
@@ -258,6 +256,16 @@
             if (e.target.id === 'lightbox') closeLightbox();
         };
 
+        /* --- HOVER PLAY / PAUSE --- */
+        function initHoverPlay() {
+            document.querySelectorAll('.masonry-item.is-video').forEach(item => {
+                const video = item.querySelector('video');
+                if (!video) return;
+                item.addEventListener('mouseenter', () => video.play());
+                item.addEventListener('mouseleave', () => { video.pause(); video.currentTime = 0; });
+            });
+        }
+
         /* --- CURSOR --- */
         const cursor = document.querySelector('.cursor-scope');
 
@@ -280,6 +288,7 @@
         function removeHover() { cursor.classList.remove('cursor-hover'); }
 
         window.addEventListener('DOMContentLoaded', () => {
+            initHoverPlay();
             updateCursorTargets();
         });
     </script>
