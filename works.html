@@ -111,26 +111,42 @@
             display: block;
         }
 
+        /* BLOCKY NAV BUTTONS */
         .nav-btn {
             position: absolute;
             top: 0;
             height: 100%;
-            width: 80px;
+            width: 72px;
             background: rgba(0,0,0,0);
             color: #fff;
             border: none;
-            font-size: 2rem;
             display: flex;
             align-items: center;
             justify-content: center;
             z-index: 10;
             opacity: 0;
             transition: opacity 0.3s ease, background 0.3s ease;
+            padding: 0;
         }
         .project-media-wrapper:hover .nav-btn { opacity: 1; }
-        .nav-btn:hover { background: rgba(255,255,255,0.1); }
+        .nav-btn:hover { background: rgba(255,255,255,0.08); }
         .prev-btn { left: 0; }
         .next-btn { right: 0; }
+
+        /* Blocky arrow shapes via CSS clip-path */
+        .nav-btn .arrow-shape {
+            width: 28px;
+            height: 28px;
+            background: #fff;
+            display: block;
+            flex-shrink: 0;
+        }
+        .prev-btn .arrow-shape {
+            clip-path: polygon(100% 0%, 30% 50%, 100% 100%, 60% 100%, 0% 50%, 60% 0%);
+        }
+        .next-btn .arrow-shape {
+            clip-path: polygon(0% 0%, 70% 0%, 100% 50%, 70% 100%, 0% 100%, 40% 50%);
+        }
 
         .slider-dots {
             position: absolute;
@@ -252,8 +268,8 @@
             </div>
             
             <div class="project-media-wrapper">
-                <button class="nav-btn prev-btn" onclick="moveSlider(this, -1)">←</button>
-                <button class="nav-btn next-btn" onclick="moveSlider(this, 1)">→</button>
+                <button class="nav-btn prev-btn" aria-label="Previous"><span class="arrow-shape"></span></button>
+                <button class="nav-btn next-btn" aria-label="Next"><span class="arrow-shape"></span></button>
                 <div class="slider-track">
                     <div class="slide">
                         <video autoplay muted loop playsinline src="https://res.cloudinary.com/dgsufjhl9/video/upload/q_auto,f_auto/v1770747383/TRAMUN_TEASER_uiczn2.mp4"></video>
@@ -275,8 +291,8 @@
             </div>
             
             <div class="project-media-wrapper">
-                <button class="nav-btn prev-btn" onclick="moveSlider(this, -1)">←</button>
-                <button class="nav-btn next-btn" onclick="moveSlider(this, 1)">→</button>
+                <button class="nav-btn prev-btn" aria-label="Previous"><span class="arrow-shape"></span></button>
+                <button class="nav-btn next-btn" aria-label="Next"><span class="arrow-shape"></span></button>
                 <div class="slider-track">
                     <div class="slide">
                         <video autoplay muted loop playsinline src="https://res.cloudinary.com/dgsufjhl9/video/upload/q_auto,f_auto/v1770749368/CKweb_cut_jvh91d.mp4"></video>
@@ -294,8 +310,8 @@
             </div>
             
             <div class="project-media-wrapper">
-                <button class="nav-btn prev-btn" onclick="moveSlider(this, -1)">←</button>
-                <button class="nav-btn next-btn" onclick="moveSlider(this, 1)">→</button>
+                <button class="nav-btn prev-btn" aria-label="Previous"><span class="arrow-shape"></span></button>
+                <button class="nav-btn next-btn" aria-label="Next"><span class="arrow-shape"></span></button>
                 <div class="slider-track">
                     <div class="slide">
                         <video autoplay muted loop playsinline src="https://res.cloudinary.com/dgsufjhl9/video/upload/q_auto,f_auto/v1770750159/Sala_Marte_Final_cht6ae.mp4"></video>
@@ -313,8 +329,8 @@
             </div>
             
             <div class="project-media-wrapper">
-                <button class="nav-btn prev-btn" onclick="moveSlider(this, -1)">←</button>
-                <button class="nav-btn next-btn" onclick="moveSlider(this, 1)">→</button>
+                <button class="nav-btn prev-btn" aria-label="Previous"><span class="arrow-shape"></span></button>
+                <button class="nav-btn next-btn" aria-label="Next"><span class="arrow-shape"></span></button>
                 <div class="slider-track">
                     <div class="slide">
                         <video autoplay muted loop playsinline src="https://res.cloudinary.com/dgsufjhl9/video/upload/q_auto,f_auto/v1770750908/Demo_Post_cut_jv83xc.mp4"></video>
@@ -379,12 +395,14 @@
                 const prevBtn = wrapper.querySelector('.prev-btn');
                 const nextBtn = wrapper.querySelector('.next-btn');
 
+                // Hide both buttons if only 1 slide
                 if (slides.length <= 1) {
                     prevBtn.style.display = 'none';
                     nextBtn.style.display = 'none';
                     return;
                 }
 
+                // Build dots
                 slides.forEach((_, i) => {
                     const dot = document.createElement('div');
                     dot.classList.add('dot');
@@ -392,19 +410,25 @@
                     dotsContainer.appendChild(dot);
                 });
 
+                // Update dots on scroll
                 track.addEventListener('scroll', () => {
                     const index = Math.round(track.scrollLeft / track.offsetWidth);
                     const dots = dotsContainer.querySelectorAll('.dot');
                     dots.forEach((d, i) => d.classList.toggle('active', i === index));
                 });
+
+                // Wire up buttons with circular logic
+                prevBtn.addEventListener('click', () => moveSlider(track, slides.length, -1));
+                nextBtn.addEventListener('click', () => moveSlider(track, slides.length, 1));
             });
             updateCursorTargets();
         }
 
-        function moveSlider(btn, direction) {
-            const track = btn.parentElement.querySelector('.slider-track');
-            const step = track.offsetWidth;
-            track.scrollBy({ left: direction * step, behavior: 'smooth' });
+        function moveSlider(track, total, direction) {
+            const currentIndex = Math.round(track.scrollLeft / track.offsetWidth);
+            // Circular: wrap around
+            let nextIndex = (currentIndex + direction + total) % total;
+            track.scrollTo({ left: nextIndex * track.offsetWidth, behavior: 'smooth' });
         }
 
         /* --- ARCHIVE LOGIC --- */
