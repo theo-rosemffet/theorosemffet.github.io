@@ -220,6 +220,36 @@
             <div class="masonry-item is-video" onclick="openLightbox(this)">
                 <video muted loop playsinline src="https://res.cloudinary.com/dgsufjhl9/video/upload/v1773865450/textbased_vyezs7.mp4"></video>
             </div>
+            <div class="masonry-item is-video" onclick="openLightbox(this)">
+                <video muted loop playsinline src="https://res.cloudinary.com/dgsufjhl9/video/upload/v1773870177/Superlung_cpsteb.mp4"></video>
+            </div>
+            <div class="masonry-item" onclick="openLightbox(this)">
+                <img src="https://res.cloudinary.com/dgsufjhl9/image/upload/v1773870171/yo2_y0rprj.png" alt="yo2">
+            </div>
+            <div class="masonry-item" onclick="openLightbox(this)">
+                <img src="https://res.cloudinary.com/dgsufjhl9/image/upload/v1773870170/yo17_dcc8ku.png" alt="yo17">
+            </div>
+            <div class="masonry-item" onclick="openLightbox(this)">
+                <img src="https://res.cloudinary.com/dgsufjhl9/image/upload/v1773870170/yo11_yby7c9.png" alt="yo11">
+            </div>
+            <div class="masonry-item" onclick="openLightbox(this)">
+                <img src="https://res.cloudinary.com/dgsufjhl9/image/upload/v1773870170/VectorHearts_Snow.mov_snapshot_00.27.305_yo3gwv.png" alt="VectorHearts snapshot">
+            </div>
+            <div class="masonry-item" onclick="openLightbox(this)">
+                <img src="https://res.cloudinary.com/dgsufjhl9/image/upload/v1773870170/pergoquadproj_sbg5bq.png" alt="Pergo Quad Projection">
+            </div>
+            <div class="masonry-item" onclick="openLightbox(this)">
+                <img src="https://res.cloudinary.com/dgsufjhl9/image/upload/v1773870170/0581_lugggs.png" alt="0581">
+            </div>
+            <div class="masonry-item" onclick="openLightbox(this)">
+                <img src="https://res.cloudinary.com/dgsufjhl9/image/upload/v1773870170/aponoesis4_azh5jm.png" alt="Aponoesis 4">
+            </div>
+            <div class="masonry-item" onclick="openLightbox(this)">
+                <img src="https://res.cloudinary.com/dgsufjhl9/image/upload/v1773870169/387669553_1039415754160704_8546929623860577597_n_k7zxdj.jpg" alt="Archive 1">
+            </div>
+            <div class="masonry-item" onclick="openLightbox(this)">
+                <img src="https://res.cloudinary.com/dgsufjhl9/image/upload/v1773870169/387270728_2450259261820099_4729119663791051171_n_tepbc1.jpg" alt="Archive 2">
+            </div>
         </div>
 
     </div>
@@ -256,6 +286,14 @@
             if (e.target.id === 'lightbox') closeLightbox();
         };
 
+        /* --- SHUFFLE GRID --- */
+        function shuffleGrid() {
+            const grid = document.getElementById('masonry-grid');
+            const items = [...grid.querySelectorAll('.masonry-item')];
+            items.sort(() => Math.random() - 0.5);
+            items.forEach(item => grid.appendChild(item));
+        }
+
         /* --- HOVER PLAY / PAUSE --- */
         function initHoverPlay() {
             document.querySelectorAll('.masonry-item.is-video').forEach(item => {
@@ -288,6 +326,7 @@
         function removeHover() { cursor.classList.remove('cursor-hover'); }
 
         window.addEventListener('DOMContentLoaded', () => {
+            shuffleGrid();
             initHoverPlay();
             updateCursorTargets();
         });
