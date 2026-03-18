@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://res.cloudinary.com/dgsufjhl9/image/upload/v1770753640/favicon_xy57kz.png">
+    <title>Lab | Theo Rosemffet</title>
+    <style>
+        /* 1. CORE STYLES */
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none !important; }
+        html, body { 
+            background: #000; color: #fff; 
+            font-family: 'Helvetica', 'Arial', sans-serif; font-weight: 900;
+            scroll-behavior: smooth; overflow-x: hidden;
+        }
+
+        /* CUSTOM SCOPE CURSOR */
+        .cursor-scope {
+            width: 32px; height: 32px;
+            border: 2px solid white;
+            border-radius: 2px;
+            position: fixed; top: 0; left: 0;
+            pointer-events: none; z-index: 10001;
+            mix-blend-mode: difference;
+            display: flex; align-items: center; justify-content: center;
+            transform: translate(-50%, -50%) rotate(0deg);
+            transition: width 0.3s ease, height 0.3s ease, transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .cursor-scope::after {
+            content: ''; width: 4px; height: 4px;
+            background: white; border-radius: 50%;
+        }
+        .cursor-hover {
+            width: 48px; height: 48px;
+            transform: translate(-50%, -50%) rotate(45deg);
+        }
+
+        /* 2. SIDEBAR */
+        .sidebar {
+            position: fixed; top: 0; left: 0;
+            height: 100vh; width: 400px;
+            padding: 40px; background: #000; z-index: 100;
+        }
+        header { margin-bottom: 60px; }
+        h1 { font-size: 2.5rem; text-transform: uppercase; line-height: 1; letter-spacing: -1px; }
+        header a { text-decoration: none; color: inherit; }
+        .tagline { font-size: 1.2rem; text-transform: none; font-weight: 400; color: #eee; margin-top: 5px; }
+        nav ul { list-style: none; }
+        nav li { margin-bottom: 20px; }
+        nav a { color: #fff; text-decoration: none; font-size: 2.5rem; text-transform: uppercase; display: inline-block; }
+        nav a:hover { animation: strobeText 0.1s steps(2) infinite; padding-left: 10px; }
+        nav a.active { text-decoration: underline; text-underline-offset: 6px; }
+
+        @keyframes strobeText {
+            0%, 49% { color: #fff; }
+            50%, 99% { color: #000; }
+            100% { color: #fff; }
+        }
+
+        /* 3. CONTENT WRAPPER */
+        .content-wrapper { 
+            margin-left: 400px; 
+            width: calc(100% - 400px); 
+            padding: 80px;
+        }
+
+        /* INTRO */
+        .lab-intro {
+            margin-bottom: 60px;
+            border-bottom: 1px solid #222;
+            padding-bottom: 60px;
+        }
+        .lab-intro h2 {
+            font-size: 4rem; text-transform: uppercase; line-height: 0.9; margin-bottom: 20px;
+        }
+        .lab-intro p {
+            font-size: 1.4rem; font-weight: 400; color: #ccc; max-width: 600px; line-height: 1.5;
+        }
+
+        /* 4. MASONRY GRID */
+        .masonry-grid {
+            columns: 3;
+            column-gap: 16px;
+        }
+
+        .masonry-item {
+            break-inside: avoid;
+            margin-bottom: 16px;
+            overflow: hidden;
+            background: #111;
+            position: relative;
+            transition: filter 0.3s ease, transform 0.3s ease;
+        }
+
+        .masonry-item:hover {
+            filter: brightness(1.15);
+            transform: scale(1.01);
+            z-index: 2;
+        }
+
+        .masonry-item img,
+        .masonry-item video {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Video play indicator */
+        .masonry-item.is-video::after {
+            content: '▶';
+            position: absolute;
+            bottom: 12px;
+            right: 12px;
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.6);
+            pointer-events: none;
+        }
+
+        /* LIGHTBOX */
+        #lightbox {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.95);
+            display: none; justify-content: center; align-items: center;
+            z-index: 10000; padding: 40px;
+        }
+        #lightbox.active { display: flex; }
+        #lightbox-content img,
+        #lightbox-content video {
+            max-width: 100%; max-height: 90vh; object-fit: contain; display: block;
+        }
+        .close-lightbox { 
+            position: absolute; top: 40px; right: 40px; 
+            font-size: 3rem; color: #fff; line-height: 1; 
+        }
+
+        @keyframes fullStrobe {
+            0%, 49% { background: #fff; color: #000; }
+            50%, 99% { background: #000; color: #fff; }
+            100% { background: #fff; color: #000; }
+        }
+
+        @media (max-width: 1100px) {
+            .sidebar { position: relative; width: 100%; height: auto; }
+            .content-wrapper { margin-left: 0; width: 100%; padding: 40px; }
+            .masonry-grid { columns: 2; }
+            .cursor-scope { display: none; }
+            * { cursor: auto !important; }
+        }
+
+        @media (max-width: 600px) {
+            .masonry-grid { columns: 1; }
+            .lab-intro h2 { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="cursor-scope"></div>
+
+    <div class="sidebar">
+        <header>
+            <a href="index.html"><h1>Theo Rosemffet</h1></a>
+            <p class="tagline">Visual & Technical Artist</p>
+        </header>
+        <nav>
+            <ul>
+                <li><a href="bio.html">BIO</a></li>
+                <li><a href="works.html">WORKS</a></li>
+                <li><a href="lab.html" class="active">LAB</a></li>
+                <li><a href="contact.html">CONTACT</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="content-wrapper">
+
+        <div class="lab-intro">
+            <h2>Lab</h2>
+            <p>A stream of personal work: generative systems, digital experiments and visual research.</p>
+        </div>
+
+    <div class="masonry-grid" id="masonry-grid">
+                <div class="masonry-item is-video" onclick="openLightbox(this)">
+                    <video autoplay muted loop playsinline src="https://res.cloudinary.com/dgsufjhl9/video/upload/v1773865498/fBM_Noise_jfbdwq.mp4"></video>
+                </div>
+                <div class="masonry-item is-video" onclick="openLightbox(this)">
+                    <video autoplay muted loop playsinline src="https://res.cloudinary.com/dgsufjhl9/video/upload/v1773865493/VectorHearts_Snow_frbmpg.mp4"></video>
+                </div>
+                <div class="masonry-item is-video" onclick="openLightbox(this)">
+                    <video autoplay muted loop playsinline src="https://res.cloudinary.com/dgsufjhl9/video/upload/v1773865483/SalaMarte_CollapsevDEFFullHD_o73goj.mp4"></video>
+                </div>
+                <div class="masonry-item is-video" onclick="openLightbox(this)">
+                    <video autoplay muted loop playsinline src="https://res.cloudinary.com/dgsufjhl9/video/upload/v1773865485/Eldritch_1_1_dh51q8.mp4"></video>
+                </div>
+                <div class="masonry-item is-video" onclick="openLightbox(this)">
+                    <video autoplay muted loop playsinline src="https://res.cloudinary.com/dgsufjhl9/video/upload/v1773865477/superestresao_resize_2_2_arqhft.mp4"></video>
+                </div>
+                <div class="masonry-item is-video" onclick="openLightbox(this)">
+                    <video autoplay muted loop playsinline src="https://res.cloudinary.com/dgsufjhl9/video/upload/v1773865473/TrussTramun_d1govl.mov"></video>
+                </div>
+                <div class="masonry-item is-video" onclick="openLightbox(this)">
+                    <video autoplay muted loop playsinline src="https://res.cloudinary.com/dgsufjhl9/video/upload/v1773865470/TreeBW2_yuo3dw.mp4"></video>
+                </div>
+                <div class="masonry-item is-video" onclick="openLightbox(this)">
+                    <video autoplay muted loop playsinline src="https://res.cloudinary.com/dgsufjhl9/video/upload/v1773865468/TreeBox_xshnow.mov"></video>
+                </div>
+                <div class="masonry-item is-video" onclick="openLightbox(this)">
+                    <video autoplay muted loop playsinline src="https://res.cloudinary.com/dgsufjhl9/video/upload/v1773865463/SynthsRaw_lpokkj.mov"></video>
+                </div>
+                <div class="masonry-item is-video" onclick="openLightbox(this)">
+                    <video autoplay muted loop playsinline src="https://res.cloudinary.com/dgsufjhl9/video/upload/v1773865462/QuadReprojectTree_ap4ekt.mp4"></video>
+                </div>
+                <div class="masonry-item is-video" onclick="openLightbox(this)">
+                    <video autoplay muted loop playsinline src="https://res.cloudinary.com/dgsufjhl9/video/upload/v1773865461/TreeNoise2_evz76s.mp4"></video>
+                </div>
+                <div class="masonry-item is-video" onclick="openLightbox(this)">
+                    <video autoplay muted loop playsinline src="https://res.cloudinary.com/dgsufjhl9/video/upload/v1773865462/TreeBW_gwcdq4.mov"></video>
+                </div>
+                <div class="masonry-item is-video" onclick="openLightbox(this)">
+                    <video autoplay muted loop playsinline src="https://res.cloudinary.com/dgsufjhl9/video/upload/v1773865455/Wordplay_qmxsnt.mov"></video>
+                </div>
+                <div class="masonry-item is-video" onclick="openLightbox(this)">
+                    <video autoplay muted loop playsinline src="https://res.cloudinary.com/dgsufjhl9/video/upload/v1773865450/textbased_vyezs7.mp4"></video>
+                </div>
+            </div>
+    
+        </div>
+
+    <!-- LIGHTBOX -->
+    <div id="lightbox">
+        <span class="close-lightbox" onclick="closeLightbox()">&times;</span>
+        <div id="lightbox-content"></div>
+    </div>
+
+    <script>
+        /* --- LIGHTBOX --- */
+        function openLightbox(element) {
+            const lightbox = document.getElementById('lightbox');
+            const content = document.getElementById('lightbox-content');
+            lightbox.classList.add('active');
+
+            const video = element.querySelector('video');
+            const img = element.querySelector('img');
+
+            if (video) {
+                content.innerHTML = `<video src="${video.src}" autoplay muted loop playsinline controls></video>`;
+            } else if (img) {
+                content.innerHTML = `<img src="${img.src}" alt="${img.alt}">`;
+            }
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+            document.getElementById('lightbox-content').innerHTML = '';
+        }
+
+        document.getElementById('lightbox').onclick = function(e) {
+            if (e.target.id === 'lightbox') closeLightbox();
+        };
+
+        /* --- CURSOR --- */
+        const cursor = document.querySelector('.cursor-scope');
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        function updateCursorTargets() {
+            const targets = document.querySelectorAll('a, .masonry-item, .close-lightbox');
+            targets.forEach(el => {
+                el.removeEventListener('mouseenter', addHover);
+                el.removeEventListener('mouseleave', removeHover);
+                el.addEventListener('mouseenter', addHover);
+                el.addEventListener('mouseleave', removeHover);
+            });
+        }
+
+        function addHover() { cursor.classList.add('cursor-hover'); }
+        function removeHover() { cursor.classList.remove('cursor-hover'); }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            updateCursorTargets();
+        });
+    </script>
+</body>
+</html>
