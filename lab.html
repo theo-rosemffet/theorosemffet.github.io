@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="https://res.cloudinary.com/dgsufjhl9/image/upload/v1770753640/favicon_xy57kz.png">
+    <link rel="icon" type="image/png" href="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1770753640/favicon_xy57kz.png">
     <title>Lab | Theo Rosemffet</title>
     <style>
         /* 1. CORE STYLES */
@@ -87,7 +87,7 @@
             break-inside: avoid;
             margin-bottom: 16px;
             overflow: hidden;
-            background: #000;
+            background: #111;
             position: relative;
             transition: filter 0.3s ease, transform 0.3s ease;
         }
@@ -103,6 +103,18 @@
             width: 100%;
             height: auto;
             display: block;
+        }
+
+        /* Placeholder shown while video hasn't loaded yet */
+        .masonry-item.is-video .video-placeholder {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background: #111;
+            display: block;
+        }
+        /* Hide placeholder once video src is set */
+        .masonry-item.is-video.loaded .video-placeholder {
+            display: none;
         }
 
         /* Video play indicator — fades out on hover */
@@ -135,12 +147,6 @@
         .close-lightbox { 
             position: absolute; top: 40px; right: 40px; 
             font-size: 3rem; color: #fff; line-height: 1; 
-        }
-
-        @keyframes fullStrobe {
-            0%, 49% { background: #fff; color: #000; }
-            50%, 99% { background: #000; color: #fff; }
-            100% { background: #fff; color: #000; }
         }
 
         @media (max-width: 1100px) {
@@ -183,75 +189,101 @@
             <p>A stream of personal work: generative systems, digital experiments and visual research.</p>
         </div>
 
+        <!--
+            BANDWIDTH OPTIMIZATIONS APPLIED:
+            - All video URLs now include q_auto,f_auto
+            - Videos use data-src + preload="none": src is only injected when the
+              item scrolls into the viewport (IntersectionObserver), so zero videos
+              download on page load.
+            - Videos play on hover, pause+reset on mouseleave (unchanged behaviour).
+            - Lightbox opens using data-src as fallback if src not yet set.
+            - All image URLs now include f_auto,q_auto.
+            - Images use data-src for lazy loading too.
+        -->
         <div class="masonry-grid" id="masonry-grid">
-            <div class="masonry-item is-video" onclick="openLightbox(this)">
-                <video muted loop playsinline src="https://res.cloudinary.com/dgsufjhl9/video/upload/v1773865498/fBM_Noise_jfbdwq.mp4"></video>
-            </div>
-            <div class="masonry-item is-video" onclick="openLightbox(this)">
-                <video muted loop playsinline src="https://res.cloudinary.com/dgsufjhl9/video/upload/v1773865493/VectorHearts_Snow_frbmpg.mp4"></video>
-            </div>
-            <div class="masonry-item is-video" onclick="openLightbox(this)">
-                <video muted loop playsinline src="https://res.cloudinary.com/dgsufjhl9/video/upload/v1773865483/SalaMarte_CollapsevDEFFullHD_o73goj.mp4"></video>
-            </div>
-            <div class="masonry-item is-video" onclick="openLightbox(this)">
-                <video muted loop playsinline src="https://res.cloudinary.com/dgsufjhl9/video/upload/v1773865485/Eldritch_1_1_dh51q8.mp4"></video>
-            </div>
-            <div class="masonry-item is-video" onclick="openLightbox(this)">
-                <video muted loop playsinline src="https://res.cloudinary.com/dgsufjhl9/video/upload/v1773865477/superestresao_resize_2_2_arqhft.mp4"></video>
-            </div>
-            <div class="masonry-item is-video" onclick="openLightbox(this)">
-                <video muted loop playsinline src="https://res.cloudinary.com/dgsufjhl9/video/upload/v1773865473/TrussTramun_d1govl.mov"></video>
-            </div>
-            <div class="masonry-item is-video" onclick="openLightbox(this)">
-                <video muted loop playsinline src="https://res.cloudinary.com/dgsufjhl9/video/upload/v1773865470/TreeBW2_yuo3dw.mp4"></video>
-            </div>
-            <div class="masonry-item is-video" onclick="openLightbox(this)">
-                <video muted loop playsinline src="https://res.cloudinary.com/dgsufjhl9/video/upload/v1773865468/TreeBox_xshnow.mov"></video>
-            </div>
-            <div class="masonry-item is-video" onclick="openLightbox(this)">
-                <video muted loop playsinline src="https://res.cloudinary.com/dgsufjhl9/video/upload/v1773865463/SynthsRaw_lpokkj.mov"></video>
-            </div>
-            <div class="masonry-item is-video" onclick="openLightbox(this)">
-                <video muted loop playsinline src="https://res.cloudinary.com/dgsufjhl9/video/upload/v1773865461/TreeNoise2_evz76s.mp4"></video>
-            </div>
-            <div class="masonry-item is-video" onclick="openLightbox(this)">
-                <video muted loop playsinline src="https://res.cloudinary.com/dgsufjhl9/video/upload/v1773865455/Wordplay_qmxsnt.mov"></video>
-            </div>
-            <div class="masonry-item is-video" onclick="openLightbox(this)">
-                <video muted loop playsinline src="https://res.cloudinary.com/dgsufjhl9/video/upload/v1773865450/textbased_vyezs7.mp4"></video>
-            </div>
-            <div class="masonry-item is-video" onclick="openLightbox(this)">
-                <video muted loop playsinline src="https://res.cloudinary.com/dgsufjhl9/video/upload/v1773870177/Superlung_cpsteb.mp4"></video>
-            </div>
-            <div class="masonry-item" onclick="openLightbox(this)">
-                <img src="https://res.cloudinary.com/dgsufjhl9/image/upload/v1773870171/yo2_y0rprj.png" alt="yo2">
-            </div>
-            <div class="masonry-item" onclick="openLightbox(this)">
-                <img src="https://res.cloudinary.com/dgsufjhl9/image/upload/v1773870170/yo17_dcc8ku.png" alt="yo17">
-            </div>
-            <div class="masonry-item" onclick="openLightbox(this)">
-                <img src="https://res.cloudinary.com/dgsufjhl9/image/upload/v1773870170/yo11_yby7c9.png" alt="yo11">
-            </div>
-            <div class="masonry-item" onclick="openLightbox(this)">
-                <img src="https://res.cloudinary.com/dgsufjhl9/image/upload/v1773870170/VectorHearts_Snow.mov_snapshot_00.27.305_yo3gwv.png" alt="VectorHearts snapshot">
-            </div>
-            <div class="masonry-item" onclick="openLightbox(this)">
-                <img src="https://res.cloudinary.com/dgsufjhl9/image/upload/v1773870170/pergoquadproj_sbg5bq.png" alt="Pergo Quad Projection">
-            </div>
-            <div class="masonry-item" onclick="openLightbox(this)">
-                <img src="https://res.cloudinary.com/dgsufjhl9/image/upload/v1773870170/0581_lugggs.png" alt="0581">
-            </div>
-            <div class="masonry-item" onclick="openLightbox(this)">
-                <img src="https://res.cloudinary.com/dgsufjhl9/image/upload/v1773870170/aponoesis4_azh5jm.png" alt="Aponoesis 4">
-            </div>
-            <div class="masonry-item" onclick="openLightbox(this)">
-                <img src="https://res.cloudinary.com/dgsufjhl9/image/upload/v1773870169/387669553_1039415754160704_8546929623860577597_n_k7zxdj.jpg" alt="Archive 1">
-            </div>
-            <div class="masonry-item" onclick="openLightbox(this)">
-                <img src="https://res.cloudinary.com/dgsufjhl9/image/upload/v1773870169/387270728_2450259261820099_4729119663791051171_n_tepbc1.jpg" alt="Archive 2">
-            </div>
-        </div>
 
+            <div class="masonry-item is-video" onclick="openLightbox(this)">
+                <div class="video-placeholder"></div>
+                <video preload="none" muted loop playsinline data-src="https://res.cloudinary.com/dgsufjhl9/video/upload/q_auto,f_auto/v1773865498/fBM_Noise_jfbdwq.mp4"></video>
+            </div>
+            <div class="masonry-item is-video" onclick="openLightbox(this)">
+                <div class="video-placeholder"></div>
+                <video preload="none" muted loop playsinline data-src="https://res.cloudinary.com/dgsufjhl9/video/upload/q_auto,f_auto/v1773865493/VectorHearts_Snow_frbmpg.mp4"></video>
+            </div>
+            <div class="masonry-item is-video" onclick="openLightbox(this)">
+                <div class="video-placeholder"></div>
+                <video preload="none" muted loop playsinline data-src="https://res.cloudinary.com/dgsufjhl9/video/upload/q_auto,f_auto/v1773865483/SalaMarte_CollapsevDEFFullHD_o73goj.mp4"></video>
+            </div>
+            <div class="masonry-item is-video" onclick="openLightbox(this)">
+                <div class="video-placeholder"></div>
+                <video preload="none" muted loop playsinline data-src="https://res.cloudinary.com/dgsufjhl9/video/upload/q_auto,f_auto/v1773865485/Eldritch_1_1_dh51q8.mp4"></video>
+            </div>
+            <div class="masonry-item is-video" onclick="openLightbox(this)">
+                <div class="video-placeholder"></div>
+                <video preload="none" muted loop playsinline data-src="https://res.cloudinary.com/dgsufjhl9/video/upload/q_auto,f_auto/v1773865477/superestresao_resize_2_2_arqhft.mp4"></video>
+            </div>
+            <div class="masonry-item is-video" onclick="openLightbox(this)">
+                <div class="video-placeholder"></div>
+                <video preload="none" muted loop playsinline data-src="https://res.cloudinary.com/dgsufjhl9/video/upload/q_auto,f_auto/v1773865473/TrussTramun_d1govl.mov"></video>
+            </div>
+            <div class="masonry-item is-video" onclick="openLightbox(this)">
+                <div class="video-placeholder"></div>
+                <video preload="none" muted loop playsinline data-src="https://res.cloudinary.com/dgsufjhl9/video/upload/q_auto,f_auto/v1773865470/TreeBW2_yuo3dw.mp4"></video>
+            </div>
+            <div class="masonry-item is-video" onclick="openLightbox(this)">
+                <div class="video-placeholder"></div>
+                <video preload="none" muted loop playsinline data-src="https://res.cloudinary.com/dgsufjhl9/video/upload/q_auto,f_auto/v1773865468/TreeBox_xshnow.mov"></video>
+            </div>
+            <div class="masonry-item is-video" onclick="openLightbox(this)">
+                <div class="video-placeholder"></div>
+                <video preload="none" muted loop playsinline data-src="https://res.cloudinary.com/dgsufjhl9/video/upload/q_auto,f_auto/v1773865463/SynthsRaw_lpokkj.mov"></video>
+            </div>
+            <div class="masonry-item is-video" onclick="openLightbox(this)">
+                <div class="video-placeholder"></div>
+                <video preload="none" muted loop playsinline data-src="https://res.cloudinary.com/dgsufjhl9/video/upload/q_auto,f_auto/v1773865461/TreeNoise2_evz76s.mp4"></video>
+            </div>
+            <div class="masonry-item is-video" onclick="openLightbox(this)">
+                <div class="video-placeholder"></div>
+                <video preload="none" muted loop playsinline data-src="https://res.cloudinary.com/dgsufjhl9/video/upload/q_auto,f_auto/v1773865455/Wordplay_qmxsnt.mov"></video>
+            </div>
+            <div class="masonry-item is-video" onclick="openLightbox(this)">
+                <div class="video-placeholder"></div>
+                <video preload="none" muted loop playsinline data-src="https://res.cloudinary.com/dgsufjhl9/video/upload/q_auto,f_auto/v1773865450/textbased_vyezs7.mp4"></video>
+            </div>
+            <div class="masonry-item is-video" onclick="openLightbox(this)">
+                <div class="video-placeholder"></div>
+                <video preload="none" muted loop playsinline data-src="https://res.cloudinary.com/dgsufjhl9/video/upload/q_auto,f_auto/v1773870177/Superlung_cpsteb.mp4"></video>
+            </div>
+
+            <div class="masonry-item" onclick="openLightbox(this)">
+                <img data-src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1773870171/yo2_y0rprj.png" alt="yo2">
+            </div>
+            <div class="masonry-item" onclick="openLightbox(this)">
+                <img data-src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1773870170/yo17_dcc8ku.png" alt="yo17">
+            </div>
+            <div class="masonry-item" onclick="openLightbox(this)">
+                <img data-src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1773870170/yo11_yby7c9.png" alt="yo11">
+            </div>
+            <div class="masonry-item" onclick="openLightbox(this)">
+                <img data-src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1773870170/VectorHearts_Snow.mov_snapshot_00.27.305_yo3gwv.png" alt="VectorHearts snapshot">
+            </div>
+            <div class="masonry-item" onclick="openLightbox(this)">
+                <img data-src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1773870170/pergoquadproj_sbg5bq.png" alt="Pergo Quad Projection">
+            </div>
+            <div class="masonry-item" onclick="openLightbox(this)">
+                <img data-src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1773870170/0581_lugggs.png" alt="0581">
+            </div>
+            <div class="masonry-item" onclick="openLightbox(this)">
+                <img data-src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1773870170/aponoesis4_azh5jm.png" alt="Aponoesis 4">
+            </div>
+            <div class="masonry-item" onclick="openLightbox(this)">
+                <img data-src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1773870169/387669553_1039415754160704_8546929623860577597_n_k7zxdj.jpg" alt="Archive 1">
+            </div>
+            <div class="masonry-item" onclick="openLightbox(this)">
+                <img data-src="https://res.cloudinary.com/dgsufjhl9/image/upload/f_auto,q_auto/v1773870169/387270728_2450259261820099_4729119663791051171_n_tepbc1.jpg" alt="Archive 2">
+            </div>
+
+        </div>
     </div>
 
     <!-- LIGHTBOX -->
@@ -261,7 +293,38 @@
     </div>
 
     <script>
-        /* --- LIGHTBOX --- */
+        /* --- LAZY LOAD: videos and images ---
+           Items enter the viewport → src is injected → item marked as loaded.
+           Videos do NOT autoplay on scroll-in; they only play on hover.
+           This means zero network requests until the item is visible. */
+        function initLazyMedia() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting) return;
+                    const item = entry.target;
+
+                    // Lazy video
+                    const video = item.querySelector('video[data-src]');
+                    if (video && !video.src) {
+                        video.src = video.dataset.src;
+                        item.classList.add('loaded'); // hides the placeholder
+                    }
+
+                    // Lazy image
+                    const img = item.querySelector('img[data-src]');
+                    if (img && !img.src) {
+                        img.src = img.dataset.src;
+                    }
+
+                    observer.unobserve(item);
+                });
+            }, { rootMargin: '200px 0px' }); // start loading slightly before visible
+
+            document.querySelectorAll('.masonry-item').forEach(item => observer.observe(item));
+        }
+
+        /* --- LIGHTBOX ---
+           Uses video.src if already loaded, falls back to data-src. */
         function openLightbox(element) {
             const lightbox = document.getElementById('lightbox');
             const content = document.getElementById('lightbox-content');
@@ -271,9 +334,11 @@
             const img = element.querySelector('img');
 
             if (video) {
-                content.innerHTML = `<video src="${video.src}" autoplay muted loop playsinline controls></video>`;
+                const src = video.src || video.dataset.src;
+                content.innerHTML = `<video src="${src}" autoplay muted loop playsinline controls></video>`;
             } else if (img) {
-                content.innerHTML = `<img src="${img.src}" alt="${img.alt}">`;
+                const src = img.src || img.dataset.src;
+                content.innerHTML = `<img src="${src}" alt="${img.alt}">`;
             }
         }
 
@@ -294,13 +359,21 @@
             items.forEach(item => grid.appendChild(item));
         }
 
-        /* --- HOVER PLAY / PAUSE --- */
+        /* --- HOVER PLAY / PAUSE ---
+           Only fires if the video has a src (i.e. it's been lazy-loaded).
+           If the user hovers before it loads, the load will have already been
+           triggered by IntersectionObserver (rootMargin: 200px ahead). */
         function initHoverPlay() {
             document.querySelectorAll('.masonry-item.is-video').forEach(item => {
                 const video = item.querySelector('video');
                 if (!video) return;
-                item.addEventListener('mouseenter', () => video.play());
-                item.addEventListener('mouseleave', () => { video.pause(); video.currentTime = 0; });
+                item.addEventListener('mouseenter', () => {
+                    if (video.src) video.play();
+                });
+                item.addEventListener('mouseleave', () => {
+                    video.pause();
+                    video.currentTime = 0;
+                });
             });
         }
 
@@ -327,6 +400,7 @@
 
         window.addEventListener('DOMContentLoaded', () => {
             shuffleGrid();
+            initLazyMedia();
             initHoverPlay();
             updateCursorTargets();
         });
